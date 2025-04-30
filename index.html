@@ -47,10 +47,62 @@
                 <div class="badge-list" id="user-badges"></div>
             </div>
 
+            <!-- Leaderboard -->
+            <div class="leaderboard">
+                <h3>Xhosa Brain of the Day</h3>
+                <p id="leaderboard-text">No scores yet! Take a quiz to become the top brain!</p>
+            </div>
+
             <!-- Fun Fact Popup -->
             <div class="fun-fact-popup" id="fun-fact-popup">
                 <p id="fun-fact-text"></p>
                 <button onclick="closeFunFact()">Close</button>
+            </div>
+
+            <!-- Nickname Popup -->
+            <div class="nickname-popup" id="nickname-popup">
+                <h3>Great Job!</h3>
+                <p>Enter your nickname to join the leaderboard:</p>
+                <input type="text" id="nickname-input" placeholder="Your Nickname">
+                <button onclick="submitNickname()">Submit</button>
+                <button onclick="closeNicknamePopup()">Skip</button>
+            </div>
+
+            <!-- Quick Test Popup -->
+            <div class="quick-test-popup" id="quick-test-popup">
+                <div class="quick-test-container">
+                    <h2 data-translate="how_well_do_you_know_xhosa">How Well Do You Know Xhosa?</h2>
+                    <div class="intro-content">
+                        <p data-translate="test_your_xhosa_knowledge">Test your Xhosa knowledge with Sazi and his family before diving into our fun, interactive lessons! Choose your level, answer a few questions, or reveal the answers to start learning now.</p>
+                        <button class="read-more" onclick="toggleContent()" data-translate="read_more">Read More</button>
+                    </div>
+                    <div class="full-content">
+                        <p data-translate="test_your_xhosa_knowledge_full">Test your Xhosa knowledge with Sazi and his family before diving into our fun, interactive lessons! At <em>Saz’ isiXhosa, no Sapho</em>, we invite learners of all ages to explore the beauty of the Xhosa language and culture. Choose your level—beginner, intermediate, or expert/native speaker—and answer a few questions to gauge your skills. You can also reveal the answers to start learning immediately.</p>
+                        <p data-translate="our_site_offers">Our site offers a warm, engaging space to learn through vocabulary, phrases, numbers, grammar, and cultural insights. From the joy of <em>Ukuxoxa Iintsomi</em> (telling folk tales) to practical language skills, we blend heritage with modern learning. Explore our <a href="culture.html">Culture</a> section for tales of Transkei or try our <a href="activities.html">Activities</a> to make learning fun. Let’s keep Xhosa thriving together!</p>
+                        <button class="read-more" onclick="toggleContent()" data-translate="read_less">Read Less</button>
+                    </div>
+                    <div class="level-selection">
+                        <select id="knowledge-level">
+                            <option value="" data-translate="select_your_xhosa_level">Select your Xhosa level</option>
+                            <option value="beginner" data-translate="beginner_no_or_basic_knowledge">Beginner (No or Basic Knowledge)</option>
+                            <option value="intermediate" data-translate="intermediate">Intermediate</option>
+                            <option value="expert" data-translate="expert_native_speaker">Expert/Native Speaker</option>
+                        </select>
+                        <button onclick="startQuickTest()" data-translate="take_quick_test">Take Quick Test</button>
+                    </div>
+                    <div class="test-section" id="testSection" style="display:none;">
+                        <div id="testQuestions"></div>
+                        <div class="test-actions">
+                            <button onclick="revealAllAnswers()" data-translate="reveal_all_answers">Reveal All Answers</button>
+                            <a href="age-levels.html" class="start-learning" id="startLearning" data-translate="start_learning_now">Start Learning Now</a>
+                        </div>
+                    </div>
+                    <div class="score-display" id="quick-test-score" style="display: none;">
+                        <p id="quick-test-score-text"></p>
+                        <p id="quick-test-message"></p>
+                    </div>
+                </div>
+                <button onclick="closeQuickTestPopup()">Close</button>
             </div>
 
             <!-- Clock Popup -->
@@ -69,13 +121,33 @@
                 <button onclick="closeClockPopup()">Close</button>
             </div>
 
+            <!-- Timeline Popup -->
+            <div class="timeline-popup" id="timeline-popup">
+                <div class="timeline-quiz-container">
+                    <h3 id="timeline-month"></h3>
+                    <p id="timeline-info"></p>
+                    <div class="timeline-quiz">
+                        <span id="timeline-question"></span>
+                        <input type="text" id="timeline-answer" placeholder="Type your answer">
+                        <button onclick="checkTimelineAnswer()">Check</button>
+                        <button onclick="revealTimelineAnswer()">Reveal</button>
+                        <div id="timeline-feedback" class="test-feedback"></div>
+                    </div>
+                    <div class="score-display" id="timeline-score" style="display: none;">
+                        <p id="timeline-score-text"></p>
+                        <p id="timeline-message"></p>
+                    </div>
+                </div>
+                <button onclick="closeTimelinePopup()">Close</button>
+            </div>
+
             <!-- Dashboards -->
             <div class="dashboard-grid">
                 <!-- Quick Test Dashboard -->
                 <div class="dashboard-card" id="quick-test-card">
                     <h2 data-translate="how_well_do_you_know_xhosa">How Well Do You Know Xhosa?</h2>
                     <p data-translate="test_your_xhosa_knowledge">Test your Xhosa knowledge with Sazi and his family before diving into our fun, interactive lessons! Choose your level, answer a few questions, or reveal the answers to start learning now.</p>
-                    <button class="expand-button" onclick="expandDashboard('quick-test')">Explore</button>
+                    <button class="expand-button" onclick="openQuickTestPopup()">Explore</button>
                 </div>
 
                 <!-- Clock Dashboard -->
@@ -93,76 +165,46 @@
                 </div>
             </div>
 
-            <!-- Expanded Quick Test Content -->
-            <div class="expanded-content" id="quick-test-expanded" style="display: none;">
-                <div class="intro-content">
-                    <p data-translate="test_your_xhosa_knowledge">Test your Xhosa knowledge with Sazi and his family before diving into our fun, interactive lessons! Choose your level, answer a few questions, or reveal the answers to start learning now.</p>
-                    <button class="read-more" onclick="toggleContent()" data-translate="read_more">Read More</button>
-                </div>
-                <div class="full-content">
-                    <p data-translate="test_your_xhosa_knowledge_full">Test your Xhosa knowledge with Sazi and his family before diving into our fun, interactive lessons! At <em>Saz’ isiXhosa, no Sapho</em>, we invite learners of all ages to explore the beauty of the Xhosa language and culture. Choose your level—beginner, intermediate, or expert/native speaker—and answer a few questions to gauge your skills. You can also reveal the answers to start learning immediately.</p>
-                    <p data-translate="our_site_offers">Our site offers a warm, engaging space to learn through vocabulary, phrases, numbers, grammar, and cultural insights. From the joy of <em>Ukuxoxa Iintsomi</em> (telling folk tales) to practical language skills, we blend heritage with modern learning. Explore our <a href="culture.html">Culture</a> section for tales of Transkei or try our <a href="activities.html">Activities</a> to make learning fun. Let’s keep Xhosa thriving together!</p>
-                    <button class="read-more" onclick="toggleContent()" data-translate="read_less">Read Less</button>
-                </div>
-                <div class="level-selection">
-                    <select id="knowledge-level">
-                        <option value="" data-translate="select_your_xhosa_level">Select your Xhosa level</option>
-                        <option value="beginner" data-translate="beginner_no_or_basic_knowledge">Beginner (No or Basic Knowledge)</option>
-                        <option value="intermediate" data-translate="intermediate">Intermediate</option>
-                        <option value="expert" data-translate="expert_native_speaker">Expert/Native Speaker</option>
-                    </select>
-                    <button onclick="startQuickTest()" data-translate="take_quick_test">Take Quick Test</button>
-                </div>
-                <div class="test-section" id="testSection" style="display:none;">
-                    <div id="testQuestions"></div>
-                    <div class="test-actions">
-                        <button onclick="revealAllAnswers()" data-translate="reveal_all_answers">Reveal All Answers</button>
-                        <a href="age-levels.html" class="start-learning" id="startLearning" data-translate="start_learning_now">Start Learning Now</a>
-                    </div>
-                </div>
-                <button class="collapse-button" onclick="collapseDashboard('quick-test')">Collapse</button>
-            </div>
-
             <!-- Timeline (at the bottom) -->
             <div class="timeline-container">
                 <h2 data-translate="timeline">Timeline</h2>
                 <div class="timeline-carousel">
                     <div class="timeline">
                         <div class="timeline-item" data-month="january">
-                            <p>January<br>EyoMqungu</p>
+                            <p>January</p>
                         </div>
                         <div class="timeline-item" data-month="february">
-                            <p>February<br>EyoMdumba</p>
+                            <p>February</p>
                         </div>
                         <div class="timeline-item" data-month="march">
-                            <p>March<br>EyoKwindla</p>
+                            <p>March</p>
                         </div>
                         <div class="timeline-item" data-month="april">
-                            <p>April<br>uTshaz'iimpuzi</p>
+                            <p>April</p>
                         </div>
                         <div class="timeline-item" data-month="may">
-                            <p>May<br>EyeCanzibe</p>
+                            <p>May</p>
                         </div>
                         <div class="timeline-item" data-month="june">
-                            <p>June<br>EyeSilimela</p>
+                            <p>June</p>
                         </div>
                         <div class="timeline-item" data-month="july">
-                            <p>July<br>EyeKhala</p>
+                            <p>July</p>
                         </div>
                         <div class="timeline-item" data-month="august">
-                            <p>August<br>EyeThupha</p>
+                            <p>August</p>
                         </div>
                         <div class="timeline-item" data-month="september">
-                            <p>September<br>EyoMsintsi</p>
+                            <p>September</p>
                         </div>
                         <div class="timeline-item" data-month="october">
-                            <p>October<br>EyeDwarha</p>
+                            <p>October</p>
                         </div>
                         <div class="timeline-item" data-month="november">
-                            <p>November<br>EyeNkanga</p>
+                            <p>November</p>
                         </div>
                         <div class="timeline-item" data-month="december">
-                            <p>December<br>EyoMnga</p>
+                            <p>December</p>
                         </div>
                     </div>
                     <button class="carousel-button prev" onclick="moveTimeline(-1)">❮</button>
