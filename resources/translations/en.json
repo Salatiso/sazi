@@ -48,19 +48,12 @@
     "winter": "Winter",
     "spring": "Spring",
     "time_is": "The time is {{time}}",
-    "stages_of_growth": "Stages of Growth",
-    "select_character": "Select a Character",
-    "person": "Person",
-    "dog": "Dog",
-    "child": "Child",
-    "boy": "Boy",
-    "girl": "Girl",
-    "initiates": "Initiates",
-    "puppy": "Puppy",
-    "adult_dog": "Adult Dog",
     "timeline": "Timeline",
     "all": "All",
     "xhosa": "Xhosa",
     "zulu": "Zulu",
-    "afrikaans": "Afrikaans"
+    "afrikaans": "Afrikaans",
+    "french": "French",
+    "translate": "Translate",
+    "english": "English"
 }
