@@ -104,25 +104,9 @@ header nav ul li a:hover {
 .content {
     flex: 1;
     padding: 2rem;
-    position: relative;
     background: url('/img/Sazi_Grandma.jpg') no-repeat center center;
     background-size: cover;
-}
-
-.content::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Dark overlay to fade the background image */
-    z-index: 1;
-}
-
-.content > * {
-    position: relative;
-    z-index: 2;
+    background-opacity: 0.1;
 }
 
 @media (max-width: 768px) {
@@ -331,7 +315,49 @@ footer {
     display: none;
 }
 
-/* Styles for Login Page */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.form-group textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.form-group button {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.form-group button:hover {
+    background-color: #e6b800;
+}
+
+/* New Styles for Login Page */
 .tabs {
     display: flex;
     gap: 1rem;
