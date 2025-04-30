@@ -166,20 +166,6 @@ const timelineData = {
     }
 };
 
-// Stages of Growth Data
-const stagesData = {
-    person: [
-        { stage: "child", xhosa: "Umtwana", image: "/sazi/img/stages/person_umntwana.jpg", info: { en: "Loves playing umdlalo (games).", xh: "Uyathanda ukudlala umdlalo (imidlalo)." } },
-        { stage: "boy", xhosa: "Inkwenkwe", image: "/sazi/img/stages/person_inkwenkwe.jpg", info: { en: "Enjoys ukudanisa (dancing).", xh: "Uyathanda ukudanisa (ukudanisa)." } },
-        { stage: "girl", xhosa: "Intombazana", image: "/sazi/img/stages/person_intombazana.jpg", info: { en: "Learns ukuxoxa iintsomi (storytelling).", xh: "Ufundisa ukuxoxa iintsomi (ukubalisa iintsomi)." } },
-        { stage: "initiates", xhosa: "Umkhwetha", image: "/sazi/img/stages/person_umkhwetha.jpg", info: { en: "Undergoes Ulwaluko, learns respect (Intlonipho).", xh: "Uya kuLwaluko, ufundisa intlonipho (Intlonipho)." } }
-    ],
-    dog: [
-        { stage: "puppy", xhosa: "Injana", image: "/sazi/img/stages/dog_injana.jpg", info: { en: "Playful and curious.", xh: "Uyadlala kwaye unomdla." } },
-        { stage: "adult_dog", xhosa: "Inja", image: "/sazi/img/stages/dog_inja.jpg", info: { en: "Loyal and protective.", xh: "Uthembekile kwaye ukhusela." } }
-    ]
-};
-
 // Fun Facts
 const funFacts = [
     { en: "Xhosa beadwork uses colors to convey messages, like white for purity!", xh: "Ukuluka kwamaXhosa kusebenzisa imibala ukudlulisela imiyalezo, njengombala omhlophe wokucoceka!" },
@@ -196,8 +182,6 @@ const numbersInXhosa = [
 ];
 
 let timelineIndex = 0;
-let stagesIndex = 0;
-let selectedCharacter = null;
 
 async function loadTranslations(lang) {
     try {
@@ -234,7 +218,6 @@ function applyTranslations() {
 
     updateGamificationDisplay();
     updateTimelineDetails();
-    updateStagesDetails();
     updateClockText();
 }
 
@@ -283,6 +266,16 @@ function closeFunFact() {
     document.getElementById('fun-fact-popup').style.display = 'none';
 }
 
+function expandDashboard(section) {
+    document.getElementById(`${section}-card`).style.display = 'none';
+    document.getElementById(`${section}-expanded`).style.display = 'block';
+}
+
+function collapseDashboard(section) {
+    document.getElementById(`${section}-card`).style.display = 'flex';
+    document.getElementById(`${section}-expanded`).style.display = 'none';
+}
+
 function moveTimeline(direction) {
     timelineIndex += direction;
     const items = document.querySelectorAll('.timeline-item');
@@ -309,55 +302,12 @@ function updateTimelineDetails() {
     }
 }
 
-function selectCharacter(character) {
-    selectedCharacter = character;
-    const stagesItems = document.getElementById('stages-items');
-    stagesItems.innerHTML = '';
-    stagesIndex = 0;
-
-    stagesData[character].forEach(stage => {
-        const div = document.createElement('div');
-        div.className = 'stage-item';
-        div.dataset.stage = stage.stage;
-        div.innerHTML = `
-            <img src="${stage.image}" alt="${stage.stage}">
-            <p>${currentLanguage === 'en' ? stage.stage : stage.xhosa}</p>
-        `;
-        div.addEventListener('click', () => updateStagesDetails(stage.stage));
-        stagesItems.appendChild(div);
-    });
-
-    document.getElementById('stages-carousel').style.display = 'block';
-    moveStages(0);
+function openClockPopup() {
+    document.getElementById('clock-popup').style.display = 'block';
 }
 
-function moveStages(direction) {
-    if (!selectedCharacter) return;
-
-    const stages = stagesData[selectedCharacter];
-    stagesIndex += direction;
-    const totalItems = stages.length;
-
-    if (stagesIndex < 0) {
-        stagesIndex = totalItems - 3;
-    } else if (stagesIndex > totalItems - 3) {
-        stagesIndex = 0;
-    }
-
-    const offset = -stagesIndex * (100 / 3);
-    document.getElementById('stages-items').style.transform = `translateX(${offset}%)`;
-    updateStagesDetails(stages[stagesIndex].stage);
-}
-
-function updateStagesDetails(stageName) {
-    if (!selectedCharacter) return;
-
-    const stage = stagesData[selectedCharacter].find(s => s.stage === stageName);
-    if (stage) {
-        document.getElementById('stage-name').textContent = currentLanguage === 'en' ? stage.stage : stage.xhosa;
-        document.getElementById('stage-info').textContent = currentLanguage === 'en' ? stage.info.en : stage.info.xh;
-        document.getElementById('stages-details').style.display = 'block';
-    }
+function closeClockPopup() {
+    document.getElementById('clock-popup').style.display = 'none';
 }
 
 function updateClock() {
@@ -366,18 +316,37 @@ function updateClock() {
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
 
-    // Analogue Clock
+    // Analogue Clock (Main and Preview)
     const hourDeg = (hours % 12) * 30 + (minutes / 60) * 30;
     const minuteDeg = minutes * 6 + (seconds / 60) * 6;
     const secondDeg = seconds * 6;
 
-    document.getElementById('hour-hand').style.transform = `rotate(${hourDeg}deg)`;
-    document.getElementById('minute-hand').style.transform = `rotate(${minuteDeg}deg)`;
-    document.getElementById('second-hand').style.transform = `rotate(${secondDeg}deg)`;
+    // Main Clock
+    const hourHand = document.getElementById('hour-hand');
+    const minuteHand = document.getElementById('minute-hand');
+    const secondHand = document.getElementById('second-hand');
+    if (hourHand && minuteHand && secondHand) {
+        hourHand.style.transform = `rotate(${hourDeg}deg)`;
+        minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+        secondHand.style.transform = `rotate(${secondDeg}deg)`;
+    }
+
+    // Preview Clock
+    const hourHandPreview = document.getElementById('hour-hand-preview');
+    const minuteHandPreview = document.getElementById('minute-hand-preview');
+    const secondHandPreview = document.getElementById('second-hand-preview');
+    if (hourHandPreview && minuteHandPreview && secondHandPreview) {
+        hourHandPreview.style.transform = `rotate(${hourDeg}deg)`;
+        minuteHandPreview.style.transform = `rotate(${minuteDeg}deg)`;
+        secondHandPreview.style.transform = `rotate(${secondDeg}deg)`;
+    }
 
     // Digital Clock
     const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    document.getElementById('clock-digital').textContent = timeString;
+    const digitalClock = document.getElementById('clock-digital');
+    if (digitalClock) {
+        digitalClock.textContent = timeString;
+    }
 
     // Time in Words
     let timeInWords = '';
@@ -395,8 +364,18 @@ function updateClock() {
         }
     }
     const clockText = document.getElementById('clock-text');
-    clockText.dataset.translateParams = JSON.stringify({ time: timeInWords });
-    clockText.textContent = (translations['time_is'] || 'The time is {{time}}').replace('{{time}}', timeInWords);
+    if (clockText) {
+        clockText.dataset.translateParams = JSON.stringify({ time: timeInWords });
+        clockText.textContent = (translations['time_is'] || 'The time is {{time}}').replace('{{time}}', timeInWords);
+    }
+}
+
+function updateClockText() {
+    const clockText = document.getElementById('clock-text');
+    if (clockText && clockText.dataset.translateParams) {
+        const params = JSON.parse(clockText.dataset.translateParams);
+        clockText.textContent = (translations['time_is'] || 'The time is {{time}}').replace('{{time}}', params.time);
+    }
 }
 
 function toggleContent() {
