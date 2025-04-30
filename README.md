@@ -1,1 +1,1 @@
-# sazi
+# sazi-isixhosa

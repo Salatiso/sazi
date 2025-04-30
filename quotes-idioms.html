@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saz' isiXhosa, no Sapho - Quotes and Idioms</title>
+    <style>
+        :root {
+            --primary-bg: #444;
+            --primary-color: white;
+            --secondary-bg: #f4f4f4;
+            --secondary-color: #333;
+            --hover-bg: #555;
+            --accent-color: #ffcc80;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            background-color: var(--secondary-bg);
+            color: var(--secondary-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 2rem;
+        }
+
+        header nav ul li a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            flex: 0 0 200px;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .sidebar h1 {
+            font-size: 1.5rem;
+            margin: 1rem;
+            text-align: center;
+        }
+
+        .sidebar ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--hover-bg);
+        }
+
+        .sidebar ul li a:hover {
+            background: var(--hover-bg);
+        }
+
+        .sidebar ul li a.active {
+            background: var(--hover-bg);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main-container {
+                flex-direction: column;
+            }
+        }
+
+        .content {
+            flex: 1;
+            padding: 2rem;
+            background: url('images/Sazi_Grandma.jpg') no-repeat center center;
+            background-size: cover;
+            background-opacity: 0.1;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 1rem;
+            }
+        }
+
+        .section {
+            padding: 2rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: var(--secondary-color);
+        }
+
+        .category-filter {
+            margin-bottom: 1rem;
+        }
+
+        .category-filter select {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+        }
+
+        .xhosa-cell {
+            display: none;
+        }
+
+        .xhosa-cell.visible {
+            display: table-cell;
+        }
+
+        .feedback {
+            color: green;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .feedback.visible {
+            display: block;
+        }
+
+        .quiz-section {
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .quiz-question {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 0.5rem;
+        }
+
+        button:hover {
+            background-color: #e6b800;
+        }
+
+        input[type="text"] {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            header nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <h1>Saz' isiXhosa, no Sapho</h1>
+            <ul>
+                <li><a href="age-levels.html">Age Levels</a></li>
+                <li><a href="vocabulary.html">Vocabulary</a></li>
+                <li><a href="phrases.html">Phrases</a></li>
+                <li><a href="numbers.html">Numbers</a></li>
+                <li><a href="time.html">Time</a></li>
+                <li><a href="grammar.html">Grammar</a></li>
+                <li><a href="culture.html">Culture</a></li>
+                <li><a href="activities.html">Activities</a></li>
+                <li><a href="khokho.html">Khokho Asks</a></li>
+                <li><a href="quotes-idioms.html" class="active">Quotes and Idioms</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div id="quotes-idioms" class="section">
+                <h2>Quotes and Idioms</h2>
+                <p>Explore Xhosa proverbs, idioms, and riddles (*rayi rayi*) with Sazi and his family! Choose a category or try a mixed quiz to test your understanding.</p>
+                <div class="category-filter">
+                    <label for="category">Filter by Category: </label>
+                    <select id="category" onchange="filterCategory()">
+                        <option value="all">All</option>
+                        <option value="Proverbs">Proverbs</option>
+                        <option value="Idioms">Idioms</option>
+                        <option value="Riddles (Rayi Rayi)">Riddles (*Rayi Rayi*)</option>
+                    </select>
+                    <button onclick="startMixedQuiz()">Mixed Quiz</button>
+                </div>
+                <table id="quotesIdiomsTable">
+                    <thead>
+                        <tr>
+                            <th>English</th>
+                            <th>Xhosa</th>
+                            <th>Guess Meaning/Answer</th>
+                            <th>Pronunciation</th>
+                            <th>Explanation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-category="Proverbs">
+                            <td>A person is a person through other persons</td>
+                            <td>
+                                <input type="text" id="input-ubuntu" placeholder="Type Xhosa phrase">
+                                <span class="xhosa-cell" data-answer="Umntu ngumntu ngabantu">Umntu ngumntu ngabantu</span>
+                                <div class="feedback" id="feedback-ubuntu"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('ubuntu', 'Umntu ngumntu ngabantu')">Check</button>
+                                <button onclick="revealAnswer('ubuntu')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-ubuntu">
+                                    <source src="audio/quotes-idioms/all/umntu_ngumntu.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                            <td>Ubuntu philosophy emphasizing community.</td>
+                        </tr>
+                        <tr data-category="Idioms">
+                            <td>While the grass grows, the horse starves</td>
+                            <td>
+                                <input type="text" id="input-procrastination" placeholder="Type Xhosa phrase">
+                                <span class="xhosa-cell" data-answer="Itshona lingadlile">Itshona lingadlile</span>
+                                <div class="feedback" id="feedback-procrastination"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('procrastination', 'Itshona lingadlile')">Check</button>
+                                <button onclick="revealAnswer('procrastination')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-procrastination">
+                                    <source src="audio/quotes-idioms/all/itshona_lingadlile.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                            <td>Procrastination is dangerous.</td>
+                        </tr>
+                        <tr data-category="Riddles (Rayi Rayi)">
+                            <td>I have a thing that is round and round</td>
+                            <td>
+                                <input type="text" id="input-riddle-necklace" placeholder="Type answer (Xhosa)">
+                                <span class="xhosa-cell" data-answer="Umqala">Ndina rayi rayi ndinanto yam jikelele ngqu</span>
+                                <div class="feedback" id="feedback-riddle-necklace"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('riddle-necklace', 'Umqala')">Check</button>
+                                <button onclick="revealAnswer('riddle-necklace')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-riddle-necklace">
+                                    <source src="audio/quotes-idioms/all/jikelele_ngqu.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                            <td>Answer: Umqala (necklace). Fun family puzzle.</td>
+                        </tr>
+                        <!-- Add remaining ~27 items similarly -->
+                    </tbody>
+                </table>
+
+                <div class="quiz-section" id="quizSection" style="display:none;">
+                    <h3>Mixed Quiz</h3>
+                    <div id="quizQuestions"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Mdeni Family</p>
+    </footer>
+
+    <script>
+        const quotesIdioms = [
+            { category: 'Proverbs', english: 'A person is a person through other persons', xhosa: 'Umntu ngumntu ngabantu', id: 'ubuntu', answer: 'Umntu ngumntu ngabantu' },
+            { category: 'Idioms', english: 'While the grass grows, the horse starves', xhosa: 'Itshona lingadlile', id: 'procrastination', answer: 'Itshona lingadlile' },
+            { category: 'Riddles (Rayi Rayi)', english: 'I have a thing that is round and round', xhosa: 'Ndina rayi rayi ndinanto yam jikelele ngqu', id: 'riddle-necklace', answer: 'Umqala' },
+            // Add remaining items here
+        ];
+
+        function filterCategory() {
+            const category = document.getElementById('category').value;
+            const rows = document.querySelectorAll('#quotesIdiomsTable tbody tr');
+            rows.forEach(row => {
+                row.style.display = category === 'all' || row.dataset.category === category ? '' : 'none';
+            });
+        }
+
+        function startMixedQuiz() {
+            const quizSection = document.getElementById('quizSection');
+            const quizQuestions = document.getElementById('quizQuestions');
+            quizSection.style.display = 'block';
+            quizQuestions.innerHTML = '';
+
+            const shuffledItems = quotesIdioms.sort(() => 0.5 - Math.random()).slice(0, 5);
+            shuffledItems.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'quiz-question';
+                div.innerHTML = `
+                    <span>${item.category === 'Riddles (Rayi Rayi)' ? 'Guess the answer to: ' : 'What is the Xhosa for: '}"${item.english}"?</span>
+                    <input type="text" id="quiz-input-${index}" placeholder="Type ${item.category === 'Riddles (Rayi Rayi)' ? 'answer' : 'phrase'} (Xhosa)">
+                    <button onclick="checkQuizAnswer(${index}, '${item.answer}')">Check</button>
+                    <button onclick="revealQuizAnswer(${index}, '${item.answer}')">Reveal</button>
+                    <div id="quiz-feedback-${index}" class="feedback"></div>
+                    <audio controls style="display:none;" id="quiz-audio-${index}">
+                        <source src="audio/quotes-idioms/all/${item.id}.mp3" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                `;
+                quizQuestions.appendChild(div);
+            });
+        }
+
+        function checkAnswer(id, correctAnswer) {
+            const input = document.getElementById(`input-${id}`).value.trim();
+            const feedback = document.getElementById(`feedback-${ on: checkAnswer('ubuntu', 'Umntu ngumntu ngabantu')">Check</button>
+                                <button onclick="revealAnswer('ubuntu')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-ubuntu">
+                                    <source src="audio/quotes-idioms/all/umntu_ngumntu.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                            <td>Ubuntu philosophy emphasizing community.</td>
+                        </tr>
+                        <tr data-category="Idioms">
+                            <td>While the grass grows, the horse starves</td>
+                            <td>
+                                <input type="text" id="input-procrastination" placeholder="Type Xhosa phrase">
+                                <span class="xhosa-cell" data-answer="Itshona lingadlile">Itshona lingadlile</span>
+                                <div class="feedback" id="feedback-procrastination"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('procrastination', 'Itshona lingadlile')">Check</button>
+                                <button onclick="revealAnswer('procrastination')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-procrastination">
+                                    <source src="audio/quotes-idioms/all/itshona_lingadlile.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                            <td>Procrastination is dangerous.</td>
+                        </tr>
+                        <tr data-category="Riddles (Rayi Rayi)">
+                            <td>I have a thing that is round and round</td>
+                            <td>
+                                <input type="text" id="input-riddle-necklace" placeholder="Type answer (Xhosa)">
+                                <span class="xhosa-cell" data-answer="Umqala">Ndina rayi rayi ndinanto yam jikelele ngqu</span>
+                                <div class="feedback" id="feedback-riddle-necklace"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('riddle-necklace', 'Umqala')">Check</button>
+                                <button onclick="revealAnswer('riddle-necklace')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-riddle-necklace">
+                                    <source src="audio/quotes-idioms/all/jikelele_ngqu.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                            <td>Answer: Umqala (necklace). Fun family puzzle.</td>
+                        </tr>
+                        <tr data-category="Riddles (Rayi Rayi)">
+                            <td>I have a thing that is round and flat</td>
+                            <td>
+                                <input type="text" id="input-riddle-plate" placeholder="Type answer (Xhosa)">
+                                <span class="xhosa-cell" data-answer="Isitya">Ndina rayi rayi ndinanto yam jikelele tywa</span>
+                                <div class="feedback" id="feedback-riddle-plate"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('riddle-plate', 'Isitya')">Check</button>
+                                <button onclick="revealAnswer('riddle-plate')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-riddle-plate">
+                                    <source src="audio/quotes-idioms/all/jikelele_tywa.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                            <td>Answer: Isitya (plate). Fun

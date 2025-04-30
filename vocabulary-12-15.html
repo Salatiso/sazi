@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saz' isiXhosa, no Sapho - Vocabulary (Ages 12-15)</title>
+    <style>
+        :root {
+            --primary-bg: #444;
+            --primary-color: white;
+            --secondary-bg: #f4f4f4;
+            --secondary-color: #333;
+            --hover-bg: #555;
+            --accent-color: #ffcc80;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            background-color: var(--secondary-bg);
+            color: var(--secondary-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .site-title {
+            text-align: center;
+            padding: 1rem;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        header {
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 2rem;
+        }
+
+        header nav ul li a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            flex: 0 0 200px;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .sidebar ul {
+            padding: 0;
+            margin: 1rem 0;
+            list-style: none;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--hover-bg);
+        }
+
+        .sidebar ul li a:hover {
+            background: var(--hover-bg);
+        }
+
+        .sidebar ul li a.active {
+            background: var(--hover-bg);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main-container {
+                flex-direction: column;
+            }
+        }
+
+        .content {
+            flex: 1;
+            padding: 2rem;
+            background: url('/img/Sazi_Grandma.jpg') no-repeat center center;
+            background-size: cover;
+            background-opacity: 0.1;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 1rem;
+            }
+        }
+
+        .section {
+            padding: 2rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: var(--secondary-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+        }
+
+        img {
+            width: 60px;
+            height: auto;
+            display: block;
+            margin: 0.5rem 0;
+        }
+
+        .xhosa-cell {
+            display: none;
+        }
+
+        .xhosa-cell.visible {
+            display: table-cell;
+        }
+
+        .feedback {
+            color: green;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .feedback.visible {
+            display: block;
+        }
+
+        .quiz-section {
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .quiz-question {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 0.5rem;
+        }
+
+        button:hover {
+            background-color: #e6b800;
+        }
+
+        input[type="text"] {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            header nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            img {
+                width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="site-title">Saz' isiXhosa, no Sapho</h1>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="age-levels.html">Age Levels</a></li>
+                <li><a href="vocabulary.html">Vocabulary</a></li>
+                <li><a href="phrases.html">Phrases</a></li>
+                <li><a href="numbers.html">Numbers</a></li>
+                <li><a href="time.html">Time</a></li>
+                <li><a href="grammar.html">Grammar</a></li>
+                <li><a href="culture.html">Culture</a></li>
+                <li><a href="activities.html">Activities</a></li>
+                <li><a href="ask-khulu.html">Ask Khulu</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div id="vocabulary-12-15" class="section">
+                <h2>Vocabulary (Ages 12-15)</h2>
+                <p>Challenging Xhosa words for our teen learners! Type the word, check your answer, or reveal it to hear how it sounds.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>English</th>
+                            <th>Xhosa</th>
+                            <th>Action</th>
+                            <th>Pronunciation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Feelings -->
+                        <tr>
+                            <td>
+                                Happy
+                                <img src="https://via.placeholder.com/60?text=Happy" alt="Happy">
+                            </td>
+                            <td>
+                                <input type="text" id="input-happy" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Onwabile">Onwabile</span>
+                                <div class="feedback" id="feedback-happy"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('happy', 'Onwabile')">Check</button>
+                                <button onclick="revealAnswer('happy')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-happy">
+                                    <source src="/audio/vocabulary/all/onwabile.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Sad
+                                <img src="https://via.placeholder.com/60?text=Sad" alt="Sad">
+                            </td>
+                            <td>
+                                <input type="text" id="input-sad" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Lusizi">Lusizi</span>
+                                <div class="feedback" id="feedback-sad"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('sad', 'Lusizi')">Check</button>
+                                <button onclick="revealAnswer('sad')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-sad">
+                                    <source src="/audio/vocabulary/all/lusizi.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Angry
+                                <img src="https://via.placeholder.com/60?text=Angry" alt="Angry">
+                            </td>
+                            <td>
+                                <input type="text" id="input-angry" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Nomsindo">Nomsindo</span>
+                                <div class="feedback" id="feedback-angry"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('angry', 'Nomsindo')">Check</button>
+                                <button onclick="revealAnswer('angry')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-angry">
+                                    <source src="/audio/vocabulary/all/nomsindo.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Tired
+                                <img src="https://via.placeholder.com/60?text=Tired" alt="Tired">
+                            </td>
+                            <td>
+                                <input type="text" id="input-tired" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Dinwe">Dinwe</span>
+                                <div class="feedback" id="feedback-tired"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('tired', 'Dinwe')">Check</button>
+                                <button onclick="revealAnswer('tired')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-tired">
+                                    <source src="/audio/vocabulary/all/dinwe.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Scared
+                                <img src="https://via.placeholder.com/60?text=Scared" alt="Scared">
+                            </td>
+                            <td>
+                                <input type="text" id="input-scared" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Oyika">Oyika</span>
+                                <div class="feedback" id="feedback-scared"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('scared', 'Oyika')">Check</button>
+                                <button onclick="revealAnswer('scared')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-scared">
+                                    <source src="/audio/vocabulary/all/oyika.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <!-- Advanced -->
+                        <tr>
+                            <td>
+                                Love
+                                <img src="https://via.placeholder.com/60?text=Love" alt="Love">
+                            </td>
+                            <td>
+                                <input type="text" id="input-love" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Uthando">Uthando</span>
+                                <div class="feedback" id="feedback-love"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('love', 'Uthando')">Check</button>
+                                <button onclick="revealAnswer('love')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-love">
+                                    <source src="/audio/vocabulary/all/uthando.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Peace
+                                <img src="https://via.placeholder.com/60?text=Peace" alt="Peace">
+                            </td>
+                            <td>
+                                <input type="text" id="input-peace" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Uxolo">Uxolo</span>
+                                <div class="feedback" id="feedback-peace"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('peace', 'Uxolo')">Check</button>
+                                <button onclick="revealAnswer('peace')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-peace">
+                                    <source src="/audio/vocabulary/all/uxolo.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Ancestor
+                                <img src="https://via.placeholder.com/60?text=Ancestor" alt="Ancestor">
+                            </td>
+                            <td>
+                                <input type="text" id="input-ancestor" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Isinyanya">Isinyanya</span>
+                                <div class="feedback" id="feedback-ancestor"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('ancestor', 'Isinyanya')">Check</button>
+                                <button onclick="revealAnswer('ancestor')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-ancestor">
+                                    <source src="/audio/vocabulary/all/isinyanya.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Community
+                                <img src="https://via.placeholder.com/60?text=Community" alt="Community">
+                            </td>
+                            <td>
+                                <input type="text" id="input-community" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Uluntu">Uluntu</span>
+                                <div class="feedback" id="feedback-community"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('community', 'Uluntu')">Check</button>
+                                <button onclick="revealAnswer('community')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-community">
+                                    <source src="/audio/vocabulary/all/uluntu.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Respect
+                                <img src="https://via.placeholder.com/60?text=Respect" alt="Respect">
+                            </td>
+                            <td>
+                                <input type="text" id="input-respect" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Intlonipho">Intlonipho</span>
+                                <div class="feedback" id="feedback-respect"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('respect', 'Intlonipho')">Check</button>
+                                <button onclick="revealAnswer('respect')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-respect">
+                                    <source src="/audio/vocabulary/all/intlonipho.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Wisdom
+                                <img src="https://via.placeholder.com/60?text=Wisdom" alt="Wisdom">
+                            </td>
+                            <td>
+                                <input type="text" id="input-wisdom" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Ubulumko">Ubulumko</span>
+                                <div class="feedback" id="feedback-wisdom"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('wisdom', 'Ubulumko')">Check</button>
+                                <button onclick="revealAnswer('wisdom')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-wisdom">
+                                    <source src="/audio/vocabulary/all/ubulumko.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <!-- Actions -->
+                        <tr>
+                            <td>
+                                Study
+                                <img src="https://via.placeholder.com/60?text=Study" alt="Study">
+                            </td>
+                            <td>
+                                <input type="text" id="input-study" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Funda">Funda</span>
+                                <div class="feedback" id="feedback-study"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('study', 'Funda')">Check</button>
+                                <button onclick="revealAnswer('study')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-study">
+                                    <source src="/audio/vocabulary/all/funda.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Teach
+                                <img src="https://via.placeholder.com/60?text=Teach" alt="Teach">
+                            </td>
+                            <td>
+                                <input type="text" id="input-teach" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Fundisa">Fundisa</span>
+                                <div class="feedback" id="feedback-teach"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('teach', 'Fundisa')">Check</button>
+                                <button onclick="revealAnswer('teach')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-teach">
+                                    <source src="/audio/vocabulary/all/fundisa.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Learn
+                                <img src="https://via.placeholder.com/60?text=Learn" alt="Learn">
+                            </td>
+                            <td>
+                                <input type="text" id="input-learn" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Funda">Funda</span>
+                                <div class="feedback" id="feedback-learn"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('learn', 'Funda')">Check</button>
+                                <button onclick="revealAnswer('learn')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-learn">
+                                    <source src="/audio/vocabulary/all/funda.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Share
+                                <img src="https://via.placeholder.com/60?text=Share" alt="Share">
+                            </td>
+                            <td>
+                                <input type="text" id="input-share" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Abela">Abela</span>
+                                <div class="feedback" id="feedback-share"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('share', 'Abela')">Check</button>
+                                <button onclick="revealAnswer('share')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-share">
+                                    <source src="/audio/vocabulary/all/abela.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Help
+                                <img src="https://via.placeholder.com/60?text=Help" alt="Help">
+                            </td>
+                            <td>
+                                <input type="text" id="input-help" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Nceda">Nceda</span>
+                                <div class="feedback" id="feedback-help"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('help', 'Nceda')">Check</button>
+                                <button onclick="revealAnswer('help')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-help">
+                                    <source src="/audio/vocabulary/all/nceda.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Create
+                                <img src="https://via.placeholder.com/60?text=Create" alt="Create">
+                            </td>
+                            <td>
+                                <input type="text" id="input-create" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Dala">Dala</span>
+                                <div class="feedback" id="feedback-create"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('create', 'Dala')">Check</button>
+                                <button onclick="revealAnswer('create')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-create">
+                                    <source src="/audio/vocabulary/all/dala.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Think
+                                <img src="https://via.placeholder.com/60?text=Think" alt="Think">
+                            </td>
+                            <td>
+                                <input type="text" id="input-think" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Cinga">Cinga</span>
+                                <div class="feedback" id="feedback-think"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('think', 'Cinga')">Check</button>
+                                <button onclick="revealAnswer('think')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-think">
+                                    <source src="/audio/vocabulary/all/cinga.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Grow
+                                <img src="https://via.placeholder.com/60?text=Grow" alt="Grow">
+                            </td>
+                            <td>
+                                <input type="text" id="input-grow" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Khula">Khula</span>
+                                <div class="feedback" id="feedback-grow"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('grow', 'Khula')">Check</button>
+                                <button onclick="revealAnswer('grow')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-grow">
+                                    <source src="/audio/vocabulary/all/khula.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Dream
+                                <img src="https://via.placeholder.com/60?text=Dream" alt="Dream">
+                            </td>
+                            <td>
+                                <input type="text" id="input-dream" placeholder="Type Xhosa word">
+                                <span class="xhosa-cell" data-answer="Phupha">Phupha</span>
+                                <div class="feedback" id="feedback-dream"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('dream', 'Phupha')">Check</button>
+                                <button onclick="revealAnswer('dream')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-dream">
+                                    <source src="/audio/vocabulary/all/phupha.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="quiz-section">
+                    <h3>Quick Quiz</h3>
+                    <div class="quiz-question">
+                        <span>What is "Love" in Xhosa?</span>
+                        <input type="text" id="quiz-input-1" placeholder="Type Xhosa word">
+                        <button onclick="checkQuizAnswer(1, 'Uthando')">Check</button>
+                        <button onclick="revealQuizAnswer(1, 'Uthando', 'Love')">Reveal</button>
+                    </div>
+                    <div id="quiz-feedback-1" class="feedback"></div>
+                    <audio controls style="display:none;" id="quiz-audio-1">
+                        <source src="/audio/vocabulary/all/uthando.mp3" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <div class="quiz-question">
+                        <span>What is "Uxolo" in English?</span>
+                        <input type="text" id="quiz-input-2" placeholder="Type English word">
+                        <button onclick="checkQuizAnswer(2, 'Peace')">Check</button>
+                        <button onclick="revealQuizAnswer(2, 'Peace', 'Uxolo')">Reveal</button>
+                    </div>
+                    <div id="quiz-feedback-2" class="feedback"></div>
+                    <audio controls style="display:none;" id="quiz-audio-2">
+                        <source src="/audio/vocabulary/all/uxolo.mp3" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <div class="quiz-question">
+                        <span>How do you say "Study" in Xhosa?</span>
+                        <input type="text" id="quiz-input-3" placeholder="Type Xhosa word">
+                        <button onclick="checkQuizAnswer(3, 'Funda')">Check</button>
+                        <button onclick="revealQuizAnswer(3, 'Funda', 'Study')">Reveal</button>
+                    </div>
+                    <div id="quiz-feedback-3" class="feedback"></div>
+                    <audio controls style="display:none;" id="quiz-audio-3">
+                        <source src="/audio/vocabulary/all/funda.mp3" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Mdeni Family</p>
+    </footer>
+
+    <script>
+        function checkAnswer(id, correctAnswer) {
+            const input = document.getElementById(`input-${id}`).value.trim();
+            const feedback = document.getElementById(`feedback-${id}`);
+            const xhosaCell = document.querySelector(`#input-${id}`).parentElement.querySelector('.xhosa-cell');
+            const audio = document.getElementById(`audio-${id}`);
+
+            if (input.toLowerCase() === correctAnswer.toLowerCase()) {
+                feedback.textContent = "Congratulations!";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = `Nice try! The correct word is ${correctAnswer}.`;
+                feedback.style.color = "red";
+            }
+            feedback.classList.add('visible');
+            xhosaCell.classList.add('visible');
+            audio.style.display = 'block';
+        }
+
+        function revealAnswer(id) {
+            const xhosaCell = document.querySelector(`#input-${id}`).parentElement.querySelector('.xhosa-cell');
+            const audio = document.getElementById(`audio-${id}`);
+            xhosaCell.classList.add('visible');
+            audio.style.display = 'block';
+        }
+
+        function checkQuizAnswer(index, correctAnswer) {
+            const input = document.getElementById(`quiz-input-${index}`).value.trim();
+            const feedback = document.getElementById(`quiz-feedback-${index}`);
+            const audio = document.getElementById(`quiz-audio-${index}`);
+
+            if (input.toLowerCase() === correctAnswer.toLowerCase()) {
+                feedback.textContent = "Congratulations!";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = `Nice try! The correct answer is ${correctAnswer}.`;
+                feedback.style.color = "red";
+            }
+            feedback.classList.add('visible');
+            audio.style.display = 'block';
+        }
+
+        function revealQuizAnswer(index, correctAnswer, englishTranslation) {
+            const feedback = document.getElementById(`quiz-feedback-${index}`);
+            const audio = document.getElementById(`quiz-audio-${index}`);
+            feedback.textContent = `The correct answer is ${correctAnswer} (${englishTranslation}).`;
+            feedback.style.color = "blue";
+            feedback.classList.add('visible');
+            audio.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

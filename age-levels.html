@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saz' isiXhosa, no Sapho - Age Levels</title>
+    <style>
+        :root {
+            --primary-bg: #444;
+            --primary-color: white;
+            --secondary-bg: #f4f4f4;
+            --secondary-color: #333;
+            --hover-bg: #555;
+            --accent-color: #ffcc80;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            background-color: var(--secondary-bg);
+            color: var(--secondary-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .site-title {
+            text-align: center;
+            padding: 1rem;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        header {
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 2rem;
+        }
+
+        header nav ul li a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            flex: 0 0 200px;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .sidebar ul {
+            padding: 0;
+            margin: 1rem 0;
+            list-style: none;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--hover-bg);
+        }
+
+        .sidebar ul li a:hover {
+            background: var(--hover-bg);
+        }
+
+        .sidebar ul li a.active {
+            background: var(--hover-bg);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main-container {
+                flex-direction: column;
+            }
+        }
+
+        .content {
+            flex: 1;
+            padding: 2rem;
+            background: url('/img/Sazi_Grandma.jpg') no-repeat center center;
+            background-size: cover;
+            background-opacity: 0.1;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 1rem;
+            }
+        }
+
+        .section {
+            padding: 2rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: var(--secondary-color);
+        }
+
+        .age-groups {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .age-group-box {
+            flex: 1;
+            min-width: 200px;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            color: var(--secondary-color);
+        }
+
+        .age-group-box h3 {
+            font-size: 1.3rem;
+            margin-top: 0;
+            color: var(--secondary-color);
+        }
+
+        .age-group-box p {
+            margin: 0.5rem 0;
+        }
+
+        .age-group-box a {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .age-group-box a:hover {
+            background-color: #e6b800;
+        }
+
+        .age-group-box.age-3-7 {
+            background-color: #ffeb3b; /* Bright yellow for youngest */
+        }
+
+        .age-group-box.age-8-11 {
+            background-color: #ffcc80; /* Light orange */
+        }
+
+        .age-group-box.age-12-15 {
+            background-color: #90caf9; /* Soft blue */
+        }
+
+        .age-group-box.age-everyone {
+            background-color: #bdbdbd; /* Neutral gray for adults */
+        }
+
+        .quiz-section {
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .quiz-question {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 0.5rem;
+        }
+
+        button:hover {
+            background-color: #e6b800;
+        }
+
+        input[type="text"] {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .feedback {
+            color: green;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .feedback.visible {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            header nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .age-groups {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="site-title">Saz' isiXhosa, no Sapho</h1>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="age-levels.html" class="active">Age Levels</a></li>
+                <li><a href="vocabulary.html">Vocabulary</a></li>
+                <li><a href="phrases.html">Phrases</a></li>
+                <li><a href="numbers.html">Numbers</a></li>
+                <li><a href="time.html">Time</a></li>
+                <li><a href="grammar.html">Grammar</a></li>
+                <li><a href="culture.html">Culture</a></li>
+                <li><a href="activities.html">Activities</a></li>
+                <li><a href="ask-khulu.html">Ask Khulu</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div id="age-levels" class="section">
+                <h2>Age Levels</h2>
+                <p>Explore Xhosa learning tailored for different age groups! Whether you're a young learner, a teen, or an adult, find resources designed just for you, then test your skills with an endless quiz.</p>
+                <div class="age-groups">
+                    <div class="age-group-box age-3-7">
+                        <h3>Ages 3-7</h3>
+                        <p>Perfect for little ones like Sazi’s youngest cousins! Learn simple Xhosa words like <em>Mama</em> (Mother) and <em>Inja</em> (Dog) through fun visuals and sounds, building a love for the language early.</p>
+                        <a href="vocabulary-3-7.html">Start Learning</a>
+                    </div>
+                    <div class="age-group-box age-8-11">
+                        <h3>Ages 8-11</h3>
+                        <p>Great for growing learners! Dive into words like <em>Isikolo</em> (School) and <em>Baleka</em> (Run) with engaging activities to boost confidence in Xhosa.</p>
+                        <a href="vocabulary-8-11.html">Start Learning</a>
+                    </div>
+                    <div class="age-group-box age-12-15">
+                        <h3>Ages 12-15</h3>
+                        <p>Ideal for teens ready for deeper Xhosa! Explore concepts like <em>Uthando</em> (Love) and <em>Funda</em> (Study) to connect with culture and language meaningfully.</p>
+                        <a href="vocabulary-12-15.html">Start Learning</a>
+                    </div>
+                    <div class="age-group-box age-everyone">
+                        <h3>Everyone</h3>
+                        <p>For adults and learners of all ages! Choose a category to focus on or dive into a random quiz to explore the full range of Xhosa language and culture.</p>
+                        <a href="everyone.html">Start Learning</a>
+                    </div>
+                </div>
+
+                <div class="quiz-section">
+                    <h3>Endless Quiz Challenge</h3>
+                    <p>Test your knowledge across all age levels! Keep going to learn more and explore other categories.</p>
+                    <div id="quiz-questions"></div>
+                    <button id="more-questions" onclick="loadMoreQuestions()">More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Mdeni Family</p>
+    </footer>
+
+    <script>
+        const ageLevelQuestions = [
+            { question: 'What is "Mama" in English? (Ages 3-7)', answer: 'Mother', audio: '/audio/vocabulary/all/mama.mp3', english: 'Mother', difficulty: 1 },
+            { question: 'How do you say "School" in Xhosa? (Ages 8-11)', answer: 'Isikolo', audio: '/audio/vocabulary/all/isikolo.mp3', english: 'School', difficulty: 2 },
+            { question: 'What is "Uthando" in English? (Ages 12-15)', answer: 'Love', audio: '/audio/vocabulary/all/uthando.mp3', english: 'Love', difficulty: 3 },
+            { question: 'What is "Molo" in English? (Everyone)', answer: 'Hello', audio: '/audio/phrases/all/molo.mp3', english: 'Hello', difficulty: 2 },
+            { question: 'What is "Inja" in English? (Ages 3-7)', answer: 'Dog', audio: '/audio/vocabulary/all/inja.mp3', english: 'Dog', difficulty: 1 }
+        ];
+
+        const allQuestions = [
+            ...ageLevelQuestions,
+            // Vocabulary 3-7 (Easy)
+            { question: 'What is "Father" in Xhosa?', answer: 'Tata', audio: '/audio/vocabulary/all/tata.mp3', english: 'Father', difficulty: 1 },
+            { question: 'What is "Ikati" in English?', answer: 'Cat', audio: '/audio/vocabulary/all/ikati.mp3', english: 'Cat', difficulty: 1 },
+            // Vocabulary 8-11 (Medium)
+            { question: 'What is "Run" in Xhosa?', answer: 'Baleka', audio: '/audio/vocabulary/all/baleka.mp3', english: 'Run', difficulty: 2 },
+            { question: 'What is "Tya" in English?', answer: 'Eat', audio: '/audio/vocabulary/all/tya.mp3', english: 'Eat', difficulty: 2 },
+            // Vocabulary 12-15 (Hard)
+            { question: 'What is "Peace" in Xhosa?', answer: 'Uxolo', audio: '/audio/vocabulary/all/uxolo.mp3', english: 'Peace', difficulty: 3 },
+            { question: 'What is "Funda" in English?', answer: 'Study', audio: '/audio/vocabulary/all/funda.mp3', english: 'Study', difficulty: 3 },
+            // Phrases (Medium)
+            { question: 'What is "Ndiyakuthanda" in English?', answer: 'I love you', audio: '/audio/phrases/all/ndiyakuthanda.mp3', english: 'I love you', difficulty: 2 },
+            { question: 'How do you say "Thank you" in Xhosa?', answer: 'Enkosi', audio: '/audio/phrases/all/enkosi.mp3', english: 'Thank you', difficulty: 2 },
+            // Time (Easy)
+            { question: 'What is "Morning" in Xhosa?', answer: 'Ekuseni', audio: '/audio/time/ekuseni.mp3', english: 'Morning', difficulty: 1 },
+            { question: 'What is "Emva kwemini" in English?', answer: 'Afternoon', audio: '/audio/time/emva_kwemini.mp3', english: 'Afternoon', difficulty: 1 },
+            // Grammar (Hard)
+            { question: 'What is "I speak" in Xhosa?', answer: 'Ndithetha', audio: '/audio/grammar/all/ndithetha.mp3', english: 'I speak', difficulty: 3 },
+            { question: 'What is "Umntu" in English?', answer: 'Person', audio: '/audio/grammar/all/umntu.mp3', english: 'Person', difficulty: 3 },
+            // Activities (Medium)
+            { question: 'What is "Storytelling" in Xhosa?', answer: 'Ukubalisa Amabali', audio: '/audio/activities/ukubalisa_amabali.mp3', english: 'Storytelling', difficulty: 2 },
+            { question: 'What is "Umdlalo" in English?', answer: 'Game', audio: '/audio/activities/umdlalo.mp3', english: 'Game', difficulty: 2 },
+            // Culture (Hard)
+            { question: 'What is "Ubuntu" in English?', answer: 'Humanity', audio: '/audio/culture/ubuntu.mp3', english: 'Ubuntu', difficulty: 3 },
+            { question: 'What is "Imbeleko" in English?', answer: 'Newborn ceremony', audio: '/audio/culture/imbeleko.mp3', english: 'Imbeleko', difficulty: 3 }
+        ];
+
+        let currentQuestionIndex = 0;
+        const questionsPerPage = 5;
+        let currentCategoryQuestions = [...ageLevelQuestions];
+
+        function loadQuestions(startIndex) {
+            const quizContainer = document.getElementById('quiz-questions');
+            quizContainer.innerHTML = '';
+            const endIndex = Math.min(startIndex + questionsPerPage, currentCategoryQuestions.length);
+            for (let i = startIndex; i < endIndex; i++) {
+                const q = currentCategoryQuestions[i];
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'quiz-question';
+                questionDiv.innerHTML = `
+                    <span>${q.question}</span>
+                    <input type="text" id="quiz-input-${i}" placeholder="Type your answer">
+                    <button onclick="checkQuizAnswer(${i}, '${q.answer}')">Check</button>
+                    <button onclick="revealQuizAnswer(${i}, '${q.answer}', '${q.english}')">Reveal</button>
+                    <div id="quiz-feedback-${i}" class="feedback"></div>
+                    <audio controls style="display:none;" id="quiz-audio-${i}">
+                        <source src="${q.audio}" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                `;
+                quizContainer.appendChild(questionDiv);
+            }
+            document.getElementById('more-questions').style.display = startIndex + questionsPerPage >= currentCategoryQuestions.length ? 'none' : 'block';
+        }
+
+        function loadMoreQuestions() {
+            currentQuestionIndex += questionsPerPage;
+            if (currentQuestionIndex >= ageLevelQuestions.length) {
+                // Switch to other categories based on difficulty
+                const remainingQuestions = allQuestions.filter(q => !ageLevelQuestions.includes(q));
+                remainingQuestions.sort((a, b) => a.difficulty - b.difficulty);
+                currentCategoryQuestions = remainingQuestions;
+                currentQuestionIndex = 0;
+            }
+            loadQuestions(currentQuestionIndex);
+        }
+
+        function checkQuizAnswer(index, correctAnswer) {
+            const input = document.getElementById(`quiz-input-${index}`).value.trim();
+            const feedback = document.getElementById(`quiz-feedback-${index}`);
+            const audio = document.getElementById(`quiz-audio-${index}`);
+
+            if (input.toLowerCase() === correctAnswer.toLowerCase()) {
+                feedback.textContent = "Congratulations!";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = `Nice try! The correct answer is ${correctAnswer}.`;
+                feedback.style.color = "red";
+            }
+            feedback.classList.add('visible');
+            audio.style.display = 'block';
+        }
+
+        function revealQuizAnswer(index, correctAnswer, englishTranslation) {
+            const feedback = document.getElementById(`quiz-feedback-${index}`);
+            const audio = document.getElementById(`quiz-audio-${index}`);
+            feedback.textContent = `The correct answer is ${correctAnswer} (${englishTranslation}).`;
+            feedback.style.color = "blue";
+            feedback.classList.add('visible');
+            audio.style.display = 'block';
+        }
+
+        // Initial load
+        loadQuestions(currentQuestionIndex);
+    </script>
+</body>
+</html>

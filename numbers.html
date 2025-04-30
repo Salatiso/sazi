@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saz' isiXhosa, no Sapho - Numbers</title>
+    <style>
+        :root {
+            --primary-bg: #444;
+            --primary-color: white;
+            --secondary-bg: #f4f4f4;
+            --secondary-color: #333;
+            --hover-bg: #555;
+            --accent-color: #ffcc80;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            background-color: var(--secondary-bg);
+            color: var(--secondary-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .site-title {
+            text-align: center;
+            padding: 1rem;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        header {
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 2rem;
+        }
+
+        header nav ul li a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            flex: 0 0 200px;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .sidebar ul {
+            padding: 0;
+            margin: 1rem 0;
+            list-style: none;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--hover-bg);
+        }
+
+        .sidebar ul li a:hover {
+            background: var(--hover-bg);
+        }
+
+        .sidebar ul li a.active {
+            background: var(--hover-bg);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main-container {
+                flex-direction: column;
+            }
+        }
+
+        .content {
+            flex: 1;
+            padding: 2rem;
+            background: url('/img/Sazi_Grandma.jpg') no-repeat center center;
+            background-size: cover;
+            background-opacity: 0.1;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 1rem;
+            }
+        }
+
+        .section {
+            padding: 2rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: var(--secondary-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+        }
+
+        .xhosa-cell {
+            display: none;
+        }
+
+        .xhosa-cell.visible {
+            display: table-cell;
+        }
+
+        .feedback {
+            color: green;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .feedback.visible {
+            display: block;
+        }
+
+        .quiz-section {
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .quiz-question {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 0.5rem;
+        }
+
+        button:hover {
+            background-color: #e6b800;
+        }
+
+        input[type="text"] {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            header nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="site-title">Saz' isiXhosa, no Sapho</h1>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="age-levels.html">Age Levels</a></li>
+                <li><a href="vocabulary.html">Vocabulary</a></li>
+                <li><a href="phrases.html">Phrases</a></li>
+                <li><a href="numbers.html" class="active">Numbers</a></li>
+                <li><a href="time.html">Time</a></li>
+                <li><a href="grammar.html">Grammar</a></li>
+                <li><a href="culture.html">Culture</a></li>
+                <li><a href="activities.html">Activities</a></li>
+                <li><a href="ask-khulu.html">Ask Khulu</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div id="numbers" class="section">
+                <h2>Numbers</h2>
+                <p>Count with Sazi and his cousins in Xhosa! Type the number, check your answer, or reveal it to hear how it sounds.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>English</th>
+                            <th>Xhosa</th>
+                            <th>Action</th>
+                            <th>Pronunciation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>One</td>
+                            <td>
+                                <input type="text" id="input-one" placeholder="Type Xhosa number">
+                                <span class="xhosa-cell" data-answer="Nye">Nye</span>
+                                <div class="feedback" id="feedback-one"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('one', 'Nye')">Check</button>
+                                <button onclick="revealAnswer('one')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-one">
+                                    <source src="/audio/numbers/all/nye.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Two</td>
+                            <td>
+                                <input type="text" id="input-two" placeholder="Type Xhosa number">
+                                <span class="xhosa-cell" data-answer="Mbini">Mbini</span>
+                                <div class="feedback" id="feedback-two"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('two', 'Mbini')">Check</button>
+                                <button onclick="revealAnswer('two')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-two">
+                                    <source src="/audio/numbers/all/mbini.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Three</td>
+                            <td>
+                                <input type="text" id="input-three" placeholder="Type Xhosa number">
+                                <span class="xhosa-cell" data-answer="Thathu">Thathu</span>
+                                <div class="feedback" id="feedback-three"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('three', 'Thathu')">Check</button>
+                                <button onclick="revealAnswer('three')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-three">
+                                    <source src="/audio/numbers/all/thathu.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Four</td>
+                            <td>
+                                <input type="text" id="input-four" placeholder="Type Xhosa number">
+                                <span class="xhosa-cell" data-answer="Ne">Ne</span>
+                                <div class="feedback" id="feedback-four"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('four', 'Ne')">Check</button>
+                                <button onclick="revealAnswer('four')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-four">
+                                    <source src="/audio/numbers/all/ne.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Five</td>
+                            <td>
+                                <input type="text" id="input-five" placeholder="Type Xhosa number">
+                                <span class="xhosa-cell" data-answer="Hlanu">Hlanu</span>
+                                <div class="feedback" id="feedback-five"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('five', 'Hlanu')">Check</button>
+                                <button onclick="revealAnswer('five')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-five">
+                                    <source src="/audio/numbers/all/hlanu.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Six</td>
+                            <td>
+                                <input type="text" id="input-six" placeholder="Type Xhosa number">
+                                <span class="xhosa-cell" data-answer="Sithandathu">Sithandathu</span>
+                                <div class="feedback" id="feedback-six"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('six', 'Sithandathu')">Check</button>
+                                <button onclick="revealAnswer('six')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-six">
+                                    <source src="/audio/numbers/all/sithandathu.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Seven</td>
+                            <td>
+                                <input type="text" id="input-seven" placeholder="Type Xhosa number">
+                                <span class="xhosa-cell" data-answer="Isixhenxe">Isixhenxe</span>
+                                <div class="feedback" id="feedback-seven"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('seven', 'Isixhenxe')">Check</button>
+                                <button onclick="revealAnswer('seven')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-seven">
+                                    <source src="/audio/numbers/all/isixhenxe.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Eight</td>
+                            <td>
+                                <input type="text" id="input-eight" placeholder="Type Xhosa number">
+                                <span class="xhosa-cell" data-answer="Isibhozo">Isibhozo</span>
+                                <div class="feedback" id="feedback-eight"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('eight', 'Isibhozo')">Check</button>
+                                <button onclick="revealAnswer('eight')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-eight">
+                                    <source src="/audio/numbers/all/isibhozo.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Nine</td>
+                            <td>
+                                <input type="text" id="input-nine" placeholder="Type Xhosa number">
+                                <span class="xhosa-cell" data-answer="Isithoba">Isithoba</span>
+                                <div class="feedback" id="feedback-nine"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('nine', 'Isithoba')">Check</button>
+                                <button onclick="revealAnswer('nine')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-nine">
+                                    <source src="/audio/numbers/all/isithoba.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ten</td>
+                            <td>
+                                <input type="text" id="input-ten" placeholder="Type Xhosa number">
+                                <span class="xhosa-cell" data-answer="Ishumi">Ishumi</span>
+                                <div class="feedback" id="feedback-ten"></div>
+                            </td>
+                            <td>
+                                <button onclick="checkAnswer('ten', 'Ishumi')">Check</button>
+                                <button onclick="revealAnswer('ten')">Reveal</button>
+                            </td>
+                            <td>
+                                <audio controls style="display:none;" id="audio-ten">
+                                    <source src="/audio/numbers/all/ishumi.mp3" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="quiz-section">
+                    <h3>Quick Quiz</h3>
+                    <div class="quiz-question">
+                        <span>What is "Six" in Xhosa?</span>
+                        <input type="text" id="quiz-input-1" placeholder="Type Xhosa number">
+                        <button onclick="checkQuizAnswer(1, 'Sithandathu')">Check</button>
+                        <button onclick="revealQuizAnswer(1, 'Sithandathu', 'Six')">Reveal</button>
+                    </div>
+                    <div id="quiz-feedback-1" class="feedback"></div>
+                    <audio controls style="display:none;" id="quiz-audio-1">
+                        <source src="/audio/numbers/all/sithandathu.mp3" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <div class="quiz-question">
+                        <span>What is "Mbini" in English?</span>
+                        <input type="text" id="quiz-input-2" placeholder="Type English number">
+                        <button onclick="checkQuizAnswer(2, 'Two')">Check</button>
+                        <button onclick="revealQuizAnswer(2, 'Two', 'Mbini')">Reveal</button>
+                    </div>
+                    <div id="quiz-feedback-2" class="feedback"></div>
+                    <audio controls style="display:none;" id="quiz-audio-2">
+                        <source src="/audio/numbers/all/mbini.mp3" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <div class="quiz-question">
+                        <span>How do you say "Ten" in Xhosa?</span>
+                        <input type="text" id="quiz-input-3" placeholder="Type Xhosa number">
+                        <button onclick="checkQuizAnswer(3, 'Ishumi')">Check</button>
+                        <button onclick="revealQuizAnswer(3, 'Ishumi', 'Ten')">Reveal</button>
+                    </div>
+                    <div id="quiz-feedback-3" class="feedback"></div>
+                    <audio controls style="display:none;" id="quiz-audio-3">
+                        <source src="/audio/numbers/all/ishumi.mp3" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Mdeni Family</p>
+    </footer>
+
+    <script>
+        function checkAnswer(id, correctAnswer) {
+            const input = document.getElementById(`input-${id}`).value.trim();
+            const feedback = document.getElementById(`feedback-${id}`);
+            const xhosaCell = document.querySelector(`#input-${id}`).parentElement.querySelector('.xhosa-cell');
+            const audio = document.getElementById(`audio-${id}`);
+
+            if (input.toLowerCase() === correctAnswer.toLowerCase()) {
+                feedback.textContent = "Congratulations!";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = `Nice try! The correct number is ${correctAnswer}.`;
+                feedback.style.color = "red";
+            }
+            feedback.classList.add('visible');
+            xhosaCell.classList.add('visible');
+            audio.style.display = 'block';
+        }
+
+        function revealAnswer(id) {
+            const xhosaCell = document.querySelector(`#input-${id}`).parentElement.querySelector('.xhosa-cell');
+            const audio = document.getElementById(`audio-${id}`);
+            xhosaCell.classList.add('visible');
+            audio.style.display = 'block';
+        }
+
+        function checkQuizAnswer(index, correctAnswer) {
+            const input = document.getElementById(`quiz-input-${index}`).value.trim();
+            const feedback = document.getElementById(`quiz-feedback-${index}`);
+            const audio = document.getElementById(`quiz-audio-${index}`);
+
+            if (input.toLowerCase() === correctAnswer.toLowerCase()) {
+                feedback.textContent = "Congratulations!";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = `Nice try! The correct answer is ${correctAnswer}.`;
+                feedback.style.color = "red";
+            }
+            feedback.classList.add('visible');
+            audio.style.display = 'block';
+        }
+
+        function revealQuizAnswer(index, correctAnswer, englishTranslation) {
+            const feedback = document.getElementById(`quiz-feedback-${index}`);
+            const audio = document.getElementById(`quiz-audio-${index}`);
+            feedback.textContent = `The correct answer is ${correctAnswer} (${englishTranslation}).`;
+            feedback.style.color = "blue";
+            feedback.classList.add('visible');
+            audio.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

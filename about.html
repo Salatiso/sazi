@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saz' isiXhosa, no Sapho - About Us</title>
+    <style>
+        :root {
+            --primary-bg: #444;
+            --primary-color: white;
+            --secondary-bg: #f4f4f4;
+            --secondary-color: #333;
+            --hover-bg: #555;
+            --accent-color: #ffcc80;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            background-color: var(--secondary-bg);
+            color: var(--secondary-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .site-title {
+            text-align: center;
+            padding: 1rem;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        header {
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 2rem;
+        }
+
+        header nav ul li a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            flex: 0 0 200px;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .sidebar ul {
+            padding: 0;
+            margin: 1rem 0;
+            list-style: none;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--hover-bg);
+        }
+
+        .sidebar ul li a:hover {
+            background: var(--hover-bg);
+        }
+
+        .sidebar ul li a.active {
+            background: var(--hover-bg);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main-container {
+                flex-direction: column;
+            }
+        }
+
+        .content {
+            flex: 1;
+            padding: 2rem;
+            background: url('/img/Sazi_Grandma.jpg') no-repeat center center;
+            background-size: cover;
+            background-opacity: 0.1;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 1rem;
+            }
+        }
+
+        .section {
+            padding: 2rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: var(--secondary-color);
+        }
+
+        .section h3 {
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .section a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .section a:hover {
+            text-decoration: underline;
+        }
+
+        .intro-content {
+            display: block;
+        }
+
+        .full-content {
+            display: none;
+        }
+
+        .read-more {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        .read-more:hover {
+            background-color: #e6b800;
+        }
+
+        .carousel-container {
+            margin-top: 1rem;
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            flex: 0 0 33.33%;
+            box-sizing: border-box;
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .carousel-item p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .carousel-button.prev {
+            left: 10px;
+        }
+
+        .carousel-button.next {
+            right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-item {
+                flex: 0 0 50%;
+            }
+
+            .carousel-item img {
+                max-width: 150px;
+            }
+
+            .carousel-item p {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-item {
+                flex: 0 0 100%;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            header nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="site-title">Saz' isiXhosa, no Sapho</h1>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="age-levels.html">Age Levels</a></li>
+                <li><a href="vocabulary.html">Vocabulary</a></li>
+                <li><a href="phrases.html">Phrases</a></li>
+                <li><a href="numbers.html">Numbers</a></li>
+                <li><a href="time.html">Time</a></li>
+                <li><a href="grammar.html">Grammar</a></li>
+                <li><a href="culture.html">Culture</a></li>
+                <li><a href="activities.html">Activities</a></li>
+                <li><a href="ask-khulu.html">Ask Khulu</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div id="about" class="section">
+                <h2>About Us</h2>
+                <div class="intro-content">
+                    <p>I’m Salatiso, a proud son of Transkei, now the Eastern Cape, where the rolling hills and stories of my ancestors shaped me. As a father to my son, Sazi, and a father figure to my nephews and nieces, I created this website to share the unwritten Xhosa wisdom of our family with the world.</p>
+                    <button class="read-more" onclick="toggleContent()">Read More</button>
+                </div>
+                <div class="full-content">
+                    <p>I’m Salatiso, a proud son of Transkei, now the Eastern Cape, where the rolling hills and stories of my ancestors shaped me. I grew up surrounded by the warmth of a multigenerational family, where wisdom wasn’t written in books but shared around fires, in laughter, and through the gentle guidance of my parents, uncles, and elders. Today, I’m a devoted father to my son, Sazi, a father figure to my nephews and nieces, and a dutiful son to my mother and sisters, carrying forward the legacy of my father—a man whose wisdom saved me from mediocrity and set me on a path of purpose.</p>
+                    <p>My father’s lessons were my compass, teaching me resilience, respect, and the value of listening deeply. His voice still echoes in my choices, urging me to honor our roots while navigating a modern world. My mother, a nurturing force, poured love and strength into me, molding me into the man I am with her unwavering support. My uncles, always present, guided me through the rites of manhood, sharing stories and skills that no classroom could teach. Together, they showed me that family is more than a bond—it’s a living archive of knowledge, a tapestry of Xhosa culture woven through generations.</p>
+                    <p>When I left Transkei, I could have chased success alone, as many do, drawn by the promise of cities and formal systems—education, technology, structured justice. But I chose to bring my mother and sisters with me, for there’s no substitute for the wisdom and support of family. I learned the hard way that while formal education gave me tools, it couldn’t replace the unarticulated, informal ways of knowing passed down through our oral tradition. Those ways—stories of courage, proverbs whispered at dusk, the rhythm of Xhosa life—carry truths that logic alone can’t capture.</p>
+                    <p><em>Saz’ isiXhosa, no Sapho</em> was born from this realization. As families shift to nuclear units, the rich connections of our extended, multigenerational clans are fading. The unwritten wisdom that once flowed freely through aunts, uncles, and grandparents risks being lost. I created this website to codify that knowledge, to preserve the Xhosa language, culture, and stories for my son, my nephews and nieces, and all who seek to reconnect with our heritage. It’s a bridge between past and present, blending the convenience of technology with the depth of tradition.</p>
+                    <p>As educated as I am, I know formal systems—however logical or just—can’t fully replace the informal wisdom of our elders. A textbook can’t teach you the weight of <em>Intlonipho</em> (respect) or the joy of <em>Ukuxoxa Iintsomi</em> (telling folk tales) under a starry sky. Yet, I embrace both worlds, using technology to share what was once oral, ensuring our culture thrives for generations. This site is my tribute to my family, my father’s legacy, and the enduring power of Xhosa wisdom—because no matter how far we roam, our roots call us home.</p>
+                    <button class="read-more" onclick="toggleContent()">Read Less</button>
+                </div>
+
+                <h3>Explore Salatiso’s Books</h3>
+                <p>Discover my works including eBooks, Audiobooks and Paperbacks, available from Google Play Books, Apple Books, Takelot, eBay and many more, also available for free on my YouTube Channel from <a href="https://youtu.be/Pi8JWTGXj8g?si=QJI1axN3izdszO-U">Getting to know yourself as a South African, Unravelling Xhosa History</a> to <a href="https://youtu.be/xlKSQ3gFTWA?si=AZX1buwLj4cFmUNE">The Homeschooling Father </a>, where I share lived experiences and Xhosa wisdom for my son, Sazi, our family, and anyone seeking cultural connection. These books are my effort to codify the knowledge that shapes us. Stay tuned for promos and special pricing—<a href="contact.html">send us an inquiry</a> to learn more!</p>
+                <div class="carousel-container">
+                    <div class="carousel">
+                        <div class="carousel-item">
+                            <a href="https://play.google.com/books/reader?id=gZcNEQAAQBAJ&pg=GBS.PP1&hl=en_IE">
+                                <img src="/img/goliath.jpg" alt="Goliath's Reckoning">
+                                <p>Goliath's Reckoning</p>
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://play.google.com/books/reader?id=gZcNEQAAQBAJ&hl=en_IE">
+                                <img src="/img/Beyond_Redress.jpg" alt="Beyond Redress">
+                                <p>Beyond Redress</Vos>
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://play.google.com/books/reader?id=NscJEQAAQBAJ&pg=GBS.PP1.w.1.0.0&hl=en_IE">
+                                <img src="/img/homeschooling_father.jpg" alt="The Homeschooling Father">
+                                <p>The Homeschooling Father</p>
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://play.google.com/books/reader?id=CsoJEQAAQBAJ&pg=GBS.PA1&hl=en_GB">
+                                <img src="/img/Die_Tuisonderrig_Vader.jpg" alt="Die Tuisonderrig Vader">
+                                <p>Die Tuisonderrig Vader</p>
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://play.google.com/books/reader?id=MsoJEQAAQBAJ&pg=GBS.PA1&hl=en_GB">
+                                <img src="/img/Ntate.jpg" alt="Ntate ea rutang bana ba hae hae">
+                                <p>Ntate ea rutang...</p>
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://play.google.com/books/reader?id=X3ZDEQAAQBAJ&hl=en_IE">
+                                <img src="/img/Modern_Broke.jpg" alt="Modern, Broke, and Confused">
+                                <p>Modern, Broke, and Confused</p>
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://play.google.com/books/reader?id=VU__EAAAQBAJ&pg=GBS.PA50&hl=en_IE">
+                                <img src="/img/Unravelling_Xhosa_History.jpg" alt="Getting to Know Yourself as a South African">
+                                <p>Getting to Know Yourself...</p>
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://play.google.com/books/reader?id=JQAUEQAAQBAJ&pg=GBS.PA1923.w.0.0.0.2&hl=en_IE">
+                                <img src="/img/Beyond_the_Grave.jpg" alt="Beyond the Grave">
+                                <p>Beyond the Grave</p>
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://play.google.com/books/reader?id=vscJEQAAQBAJ&pg=GBS.PA1&hl=en_IE">
+                                <img src="/img/SF_Career.jpg" alt="Safety First: Essentials for Your OHS Career">
+                                <p>Safety First: OHS Career</p>
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://play.google.com/books/reader?id=psgJEQAAQBAJ&pg=GBS.PA1&hl=en_IE">
+                                <img src="/img/SF_Plans.jpg" alt="Safety First: The Essentials of OHS Plans">
+                                <p>Safety First: OHS Plans</p>
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://play.google.com/books/reader?id=s51DEQAAQBAJ&pg=GBS.PA1&hl=en_IE">
+                                <img src="/img/Rise_of_Q.jpg" alt="The Perfect Cage: Isivumo Legacy">
+                                <p>The Perfect Cage: Isivumo</p>
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://play.google.com/books/reader?id=RdU8EQAAQBAJ&pg=GBS.PA1&hl=en_GB">
+                                <img src="/img/The_Perfect_Cage1.jpg" alt="The Perfect Cage: Dystopian Struggle">
+                                <p>The Perfect Cage: Dystopian</p>
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://play.google.com/books/reader?id=GIQ9EQAAQBAJ&pg=GBS.PP1&hl=en_GB">
+                                <img src="/img/The_Perfect_Cage2.jpg" alt="The Perfect Cage: Secrets of the Inner Earth">
+                                <p>The Perfect Cage: Inner Earth</p>
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://play.google.com/books/reader?id=7fE9EQAAQBAJ&pg=GBS.PP1&hl=en_GB">
+                                <img src="/img/The_Perfect_Cage3.jpg" alt="The Perfect Cage: Journey Beyond the Horizon">
+                                <p>The Perfect Cage: Horizon</p>
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://play.google.com/books/reader?id=9sgJEQAAQBAJ&pg=GBS.PP1&hl=en_GB">
+                                <img src="/img/Zazi_Mzantsi_Afrika.jpg" alt="Zazi Mzantsi Afrika">
+                                <p>Zazi Mzantsi Afrika</p>
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://play.google.com/books/reader?id=wMkJEQAAQBAJ&pg=GBS.PP1&hl=en_GB">
+                                <img src="/img/Utata_Ozifundiselayo.jpg" alt="Utata ozifundiselayo ekhayeni">
+                                <p>Utata ozifundiselayo...</p>
+                            </a>
+                        </div>
+                    </div>
+                    <button class="carousel-button prev" onclick="moveCarousel(-1)">❮</button>
+                    <button class="carousel-button next" onclick="moveCarousel(1)">❯</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Mdeni Family</p>
+    </footer>
+
+    <script>
+        function toggleContent() {
+            const intro = document.querySelector('.intro-content');
+            const full = document.querySelector('.full-content');
+            const button = document.querySelector('.read-more');
+            if (full.style.display === 'none' || full.style.display === '') {
+                intro.style.display = 'none';
+                full.style.display = 'block';
+                button.textContent = 'Read Less';
+            } else {
+                intro.style.display = 'block';
+                full.style.display = 'none';
+                button.textContent = 'Read More';
+            }
+        }
+
+        let currentIndex = 0;
+        const items = document.querySelectorAll('.carousel-item');
+        const totalItems = items.length;
+
+        function moveCarousel(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) {
+                currentIndex = totalItems - 3; // Adjust for 3 items displayed
+            } else if (currentIndex > totalItems - 3) {
+                currentIndex = 0;
+            }
+            const offset = -currentIndex * (100 / 3);
+            document.querySelector('.carousel').style.transform = `translateX(${offset}%)`;
+        }
+
+        setInterval(() => moveCarousel(1), 5000);
+    </script>
+</body>
+</html>
