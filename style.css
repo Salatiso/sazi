@@ -191,7 +191,27 @@ header nav ul li a.active {
     100% { transform: scale(1); }
 }
 
-.fun-fact-popup, .clock-popup {
+.leaderboard {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 2px solid var(--fun-yellow);
+    text-align: center;
+}
+
+.leaderboard h3 {
+    font-size: 1.5rem;
+    color: var(--fun-red);
+    margin-bottom: 0.5rem;
+}
+
+.leaderboard p {
+    font-size: 1.1rem;
+    color: var(--fun-blue);
+}
+
+.fun-fact-popup, .clock-popup, .quick-test-popup, .timeline-popup, .nickname-popup {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -205,15 +225,17 @@ header nav ul li a.active {
     display: none;
     z-index: 1000;
     animation: popupFadeIn 0.5s ease;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
-.fun-fact-popup p {
+.fun-fact-popup p, .nickname-popup p {
     font-size: 1.2rem;
     color: var(--secondary-color);
     margin-bottom: 1rem;
 }
 
-.fun-fact-popup button, .clock-popup button {
+.fun-fact-popup button, .clock-popup button, .quick-test-popup button, .timeline-popup button, .nickname-popup button {
     background: var(--fun-blue);
     color: white;
     border: none;
@@ -221,10 +243,19 @@ header nav ul li a.active {
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
+    margin: 0.5rem;
 }
 
-.fun-fact-popup button:hover, .clock-popup button:hover {
+.fun-fact-popup button:hover, .clock-popup button:hover, .quick-test-popup button:hover, .timeline-popup button:hover, .nickname-popup button:hover {
     background: #1c86ee;
+}
+
+.nickname-popup input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    width: 80%;
 }
 
 @keyframes popupFadeIn {
@@ -284,32 +315,6 @@ header nav ul li a.active {
 
 .expand-button:hover {
     background-color: #1c86ee;
-}
-
-.expanded-content {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    border: 2px solid var(--fun-blue);
-    position: relative;
-}
-
-.collapse-button {
-    background-color: var(--fun-red);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 1rem;
-    display: block;
-    margin-left: auto;
-}
-
-.collapse-button:hover {
-    background-color: #e04e2c;
 }
 
 .timeline-container {
@@ -395,6 +400,39 @@ header nav ul li a.active {
 .timeline-details p {
     font-size: 1.1rem;
     color: var(--secondary-color);
+}
+
+.timeline-quiz {
+    margin-top: 1rem;
+}
+
+.timeline-quiz span {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.timeline-quiz input {
+    width: 80%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.score-display {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    border: 1px solid var(--fun-blue);
+    text-align: center;
+}
+
+.score-display p {
+    font-size: 1.1rem;
+    color: var(--fun-blue);
 }
 
 .clock-preview {
@@ -841,7 +879,7 @@ footer {
         font-size: 0.9rem;
     }
 
-    .expanded-content {
+    .quick-test-popup, .timeline-popup {
         padding: 1rem;
     }
 
