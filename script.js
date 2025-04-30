@@ -30,7 +30,39 @@ function showTab(tabId) {
     document.querySelector(`button[onclick="showTab('${tabId}')"]`).classList.add('active');
 }
 
-// New: Login Form Handling
+function toggleContent() {
+    const intro = document.querySelector('.intro-content');
+    const full = document.querySelector('.full-content');
+    const button = document.querySelector('.read-more');
+    if (full.style.display === 'none' || full.style.display === '') {
+        intro.style.display = 'none';
+        full.style.display = 'block';
+        button.textContent = 'Read Less';
+    } else {
+        intro.style.display = 'block';
+        full.style.display = 'none';
+        button.textContent = 'Read More';
+    }
+}
+
+let currentIndex = 0;
+const items = document.querySelectorAll('.carousel-item');
+const totalItems = items.length;
+
+function moveCarousel(direction) {
+    currentIndex += direction;
+    if (currentIndex < 0) {
+        currentIndex = totalItems - 3; // Adjust for 3 items displayed
+    } else if (currentIndex > totalItems - 3) {
+        currentIndex = 0;
+    }
+    const offset = -currentIndex * (100 / 3);
+    document.querySelector('.carousel').style.transform = `translateX(${offset}%)`;
+}
+
+setInterval(() => moveCarousel(1), 5000);
+
+// Login Form Handling
 document.addEventListener('DOMContentLoaded', () => {
     const studentForm = document.getElementById('student-login-form');
     const userForm = document.getElementById('user-login-form');
