@@ -12,6 +12,8 @@
             --secondary-color: #333;
             --hover-bg: #555;
             --accent-color: #ffcc80;
+            --secondary-accent: #a7c4a7;
+            --tertiary-accent: #80cbc4;
         }
 
         body {
@@ -111,7 +113,7 @@
         .content {
             flex: 1;
             padding: 2rem;
-            background: url('/sazi/img/Sazi_Grandma.jpg') no-repeat center center;
+            background: url('/sazi/img/My_Boys.jpg') no-repeat center center;
             background-size: cover;
         }
 
@@ -121,32 +123,26 @@
             }
         }
 
-        .section {
-            padding: 2rem;
+        .hero {
+            padding: 4rem 2rem;
+            text-align: center;
             border-radius: 10px;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in;
             background: rgba(255, 255, 255, 0.9);
-            margin-bottom: 1rem;
         }
 
-        .section h2 {
-            font-size: 1.5rem;
-            margin-top: 0;
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
             color: var(--secondary-color);
         }
 
-        .section a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        .section a:hover {
-            text-decoration: underline;
-        }
-
-        .section img {
-            max-width: 100%;
-            border-radius: 10px;
-            margin-top: 1rem;
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
         }
 
         .intro-content {
@@ -172,6 +168,111 @@
             background-color: #e6b800;
         }
 
+        .level-selection {
+            margin-bottom: 2rem;
+        }
+
+        .level-selection select {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 1rem;
+        }
+
+        .level-selection button {
+            padding: 0.5rem 1rem;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .level-selection button:hover {
+            background-color: #e6b800;
+        }
+
+        .test-section {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .test-question {
+            margin-bottom: 1rem;
+        }
+
+        .test-question span {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .test-question input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .test-question button {
+            margin-right: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .test-question button:hover {
+            background-color: #e6b800;
+        }
+
+        .test-feedback {
+            color: green;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .test-feedback.visible {
+            display: block;
+        }
+
+        .test-actions {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .start-learning {
+            display: none;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        .start-learning.visible {
+            display: inline-block;
+        }
+
+        .start-learning:hover {
+            background-color: #e6b800;
+        }
+
+        .hero img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
         footer {
             text-align: center;
             padding: 1rem 0;
@@ -180,7 +281,20 @@
             width: 100%;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
             header nav ul {
                 flex-direction: column;
                 gap: 1rem;
@@ -196,7 +310,6 @@
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
-                <li><a href="login.html">Login</a></li>
             </ul>
         </nav>
     </header>
@@ -217,16 +330,32 @@
         </div>
 
         <div class="content">
-            <div id="home" class="section">
-                <h2>Welcome to Saz’ isiXhosa, no Sapho</h2>
+            <div class="hero">
+                <h2>How Well Do You Know Xhosa?</h2>
                 <div class="intro-content">
-                    <p>Join Sazi and his cousins to learn Xhosa, the language of the Eastern Cape! Explore our lessons, activities, and cultural insights designed for learners of all ages.</p>
+                    <p>Test your Xhosa knowledge with Sazi and his family before diving into our fun, interactive lessons! Choose your level, answer a few questions, or reveal the answers to start learning now.</p>
                     <button class="read-more" onclick="toggleContent()">Read More</button>
                 </div>
                 <div class="full-content">
-                    <p>Join Sazi and his cousins on a vibrant journey to learn Xhosa, the heart language of the Eastern Cape! At <em>Saz’ isiXhosa, no Sapho</em>, we invite learners of all ages to dive into our interactive lessons, engaging activities, and rich cultural insights. Whether you're a child discovering the rhythm of Xhosa words, a parent sharing traditions with your family, or an adult reconnecting with your roots, our site is a warm, welcoming space to explore.</p>
-                    <p>Discover the beauty of Xhosa through vocabulary, phrases, numbers, and grammar, all woven with stories and traditions from our multigenerational family. From the joy of <em>Ukuxoxa Iintsomi</em> (telling folk tales) to practical language skills, we blend heritage with modern learning. Explore our <a href="culture.html">Culture</a> section for tales of Transkei or try our <a href="activities.html">Activities</a> to make learning fun. Let’s keep Xhosa thriving together!</p>
+                    <p>Test your Xhosa knowledge with Sazi and his family before diving into our fun, interactive lessons! At <em>Saz’ isiXhosa, no Sapho</em>, we invite learners of all ages to explore the beauty of the Xhosa language and culture. Choose your level—beginner, intermediate, or expert/native speaker—and answer a few questions to gauge your skills. You can also reveal the answers to start learning immediately.</p>
+                    <p>Our site offers a warm, engaging space to learn through vocabulary, phrases, numbers, grammar, and cultural insights. From the joy of <em>Ukuxoxa Iintsomi</em> (telling folk tales) to practical language skills, we blend heritage with modern learning. Explore our <a href="culture.html">Culture</a> section for tales of Transkei or try our <a href="activities.html">Activities</a> to make learning fun. Let’s keep Xhosa thriving together!</p>
                     <button class="read-more" onclick="toggleContent()">Read Less</button>
+                </div>
+                <div class="level-selection">
+                    <select id="knowledge-level">
+                        <option value="">Select your Xhosa level</option>
+                        <option value="beginner">Beginner (No or Basic Knowledge)</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="expert">Expert/Native Speaker</option>
+                    </select>
+                    <button onclick="startQuickTest()">Take Quick Test</button>
+                </div>
+                <div class="test-section" id="testSection" style="display:none;">
+                    <div id="testQuestions"></div>
+                    <div class="test-actions">
+                        <button onclick="revealAllAnswers()">Reveal All Answers</button>
+                        <a href="age-levels.html" class="start-learning" id="startLearning">Start Learning Now</a>
+                    </div>
                 </div>
                 <img src="/sazi/img/Zazi_Mzantsi_Afrika.jpg" alt="Sazi and Family">
             </div>
@@ -238,6 +367,32 @@
     </footer>
 
     <script>
+        const beginnerQuestions = [
+            { english: 'Hello', xhosa: 'Molo', source: 'vocabulary', id: 'molo' },
+            { english: 'Dog', xhosa: 'Inja', source: 'vocabulary', id: 'inja' },
+            { english: 'One', xhosa: 'Nye', source: 'numbers', id: 'nye' },
+            { english: 'Two', xhosa: 'Mbini', source: 'numbers', id: 'mbini' },
+            { english: 'Cat', xhosa: 'Ikati', source: 'vocabulary', id: 'ikati' },
+        ];
+
+        const intermediateQuestions = [
+            { english: 'I love you', xhosa: 'Ndiyakuthanda', source: 'phrases', id: 'ndiyakuthanda' },
+            { english: 'How are you?', xhosa: 'Unjani?', source: 'phrases', id: 'unjani' },
+            { english: 'I’m hungry', xhosa: 'Ndilambile', source: 'phrases', id: 'ndilambile' },
+            { english: 'Goodbye', xhosa: 'Sala kakuhle', source: 'phrases', id: 'sala_kakuhle' },
+            { english: 'Come', xhosa: 'Yiza', source: 'phrases', id: 'yiza' },
+        ];
+
+        const expertQuestions = [
+            { english: 'Telling Folk Tales', xhosa: 'Ukuxoxa Iintsomi', source: 'activities', id: 'ukuxoxa_iintsomi' },
+            { english: 'Welcoming a Newborn', xhosa: 'Imbeleko', source: 'culture', id: 'imbeleko' },
+            { english: 'Skipping Rope', xhosa: 'Umgusha', source: 'activities', id: 'umgusha' },
+            { english: 'Respect', xhosa: 'Intlonipho', source: 'culture', id: 'intlonipho' },
+            { english: 'Mourning', xhosa: 'Ukuzila', source: 'culture', id: 'ukuzila' },
+        ];
+
+        let currentQuestions = [];
+
         function toggleContent() {
             const intro = document.querySelector('.intro-content');
             const full = document.querySelector('.full-content');
@@ -250,6 +405,97 @@
                 intro.style.display = 'block';
                 full.style.display = 'none';
                 button.textContent = 'Read More';
+            }
+        }
+
+        function startQuickTest() {
+            const level = document.getElementById('knowledge-level').value;
+            if (!level) {
+                alert('Please select your Xhosa level!');
+                return;
+            }
+
+            const testSection = document.getElementById('testSection');
+            const testQuestions = document.getElementById('testQuestions');
+            testSection.style.display = 'block';
+            testQuestions.innerHTML = '';
+
+            const questionPool = level === 'beginner' ? beginnerQuestions :
+                                level === 'intermediate' ? intermediateQuestions :
+                                expertQuestions;
+
+            currentQuestions = questionPool.sort(() => 0.5 - Math.random()).slice(0, 5);
+
+            currentQuestions.forEach((question, index) => {
+                const div = document.createElement('div');
+                div.className = 'test-question';
+                div.innerHTML = `
+                    <span>What is "${question.english}" in Xhosa?</span>
+                    <input type="text" id="test-input-${index}" placeholder="Type Xhosa answer">
+                    <button onclick="checkTestAnswer(${index}, '${question.xhosa}')">Check</button>
+                    <button onclick="revealTestAnswer(${index}, '${question.xhosa}')">Reveal</button>
+                    <div id="test-feedback-${index}" class="test-feedback"></div>
+                    <audio controls style="display:none;" id="test-audio-${index}">
+                        <source src="/sazi/audio/${question.source}/all/${question.id}.mp3" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                `;
+                testQuestions.appendChild(div);
+            });
+
+            document.getElementById('startLearning').classList.remove('visible');
+        }
+
+        function checkTestAnswer(index, correctAnswer) {
+            const input = document.getElementById(`test-input-${index}`).value.trim();
+            const feedback = document.getElementById(`test-feedback-${index}`);
+            const audio = document.getElementById(`test-audio-${index}`);
+
+            if (input.toLowerCase() === correctAnswer.toLowerCase()) {
+                feedback.textContent = "Congratulations!";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = `Nice try! The correct answer is ${correctAnswer}.`;
+                feedback.style.color = "red";
+            }
+            feedback.classList.add('visible');
+            audio.style.display = 'block';
+
+            checkAllAnswered();
+        }
+
+        function revealTestAnswer(index, correctAnswer) {
+            const feedback = document.getElementById(`test-feedback-${index}`);
+            const audio = document.getElementById(`test-audio-${index}`);
+            feedback.textContent = `The correct answer is ${correctAnswer}.`;
+            feedback.style.color = "blue";
+            feedback.classList.add('visible');
+            audio.style.display = 'block';
+
+            checkAllAnswered();
+        }
+
+        function revealAllAnswers() {
+            currentQuestions.forEach((question, index) => {
+                const input = document.getElementById(`test-input-${index}`);
+                const feedback = document.getElementById(`test-feedback-${index}`);
+                const audio = document.getElementById(`test-audio-${index}`);
+                input.value = question.xhosa;
+                feedback.textContent = `The correct answer is ${question.xhosa}.`;
+                feedback.style.color = "blue";
+                feedback.classList.add('visible');
+                audio.style.display = 'block';
+            });
+            document.getElementById('startLearning').classList.add('visible');
+        }
+
+        function checkAllAnswered() {
+            const allAnswered = currentQuestions.every((_, index) => {
+                const feedback = document.getElementById(`test-feedback-${index}`);
+                return feedback.classList.contains('visible');
+            });
+            if (allAnswered) {
+                document.getElementById('startLearning').classList.add('visible');
             }
         }
     </script>
