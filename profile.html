@@ -1,1 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saz' isiXhosa, no Sapho - Profile</title>
+    <link rel="stylesheet" href="/sazi/style.css">
+</head>
+<body>
+    <h1 class="site-title">Saz' isiXhosa, no Sapho</h1>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+        <select class="language-toggle">
+            <option value="en">English</option>
+            <option value="xh">Xhosa</option>
+        </select>
+    </header>
 
+    <div class="main-container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="age-levels.html">Age Levels</a></li>
+                <li><a href="vocabulary.html">Vocabulary</a></li>
+                <li><a href="phrases.html">Phrases</a></li>
+                <li><a href="numbers.html">Numbers</a></li>
+                <li><a href="time.html">Time</a></li>
+                <li><a href="grammar.html">Grammar</a></li>
+                <li><a href="culture.html">Culture</a></li>
+                <li><a href="activities.html">Activities</a></li>
+                <li><a href="ask-khulu.html">Ask Khulu</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="profile">
+                <h2>My Profile</h2>
+                <!-- Student Profile -->
+                <div id="student-profile" style="display: none;">
+                    <div class="avatar-selection">
+                        <div class="avatar-option" data-avatar="umngqusho.jpg">
+                            <img src="/sazi/img/avatars/umngqusho.jpg" alt="Umngqusho">
+                        </div>
+                        <div class="avatar-option" data-avatar="beaded_necklace.jpg">
+                            <img src="/sazi/img/avatars/beaded_necklace.jpg" alt="Beaded Necklace">
+                        </div>
+                        <div class="avatar-option" data-avatar="inyanga.jpg">
+                            <img src="/sazi/img/avatars/inyanga.jpg" alt="Inyanga">
+                        </div>
+                        <div class="avatar-option" data-avatar="goat.jpg">
+                            <img src="/sazi/img/avatars/goat.jpg" alt="Goat">
+                        </div>
+                        <div class="avatar-option" data-avatar="kente_cloth.jpg">
+                            <img src="/sazi/img/avatars/kente_cloth.jpg" alt="Kente Cloth">
+                        </div>
+                        <div class="avatar-option" data-avatar="baobab_tree.jpg">
+                            <img src="/sazi/img/avatars/baobab_tree.jpg" alt="Baobab Tree">
+                        </div>
+                        <div class="avatar-option" data-avatar="springbok.jpg">
+                            <img src="/sazi/img/avatars/springbok.jpg" alt="Springbok">
+                        </div>
+                        <div class="avatar-option" data-avatar="lion.jpg">
+                            <img src="/sazi/img/avatars/lion.jpg" alt="Lion">
+                        </div>
+                        <div class="avatar-option" data-avatar="elephant.jpg">
+                            <img src="/sazi/img/avatars/elephant.jpg" alt="Elephant">
+                        </div>
+                        <div class="avatar-option" data-avatar="leopard.jpg">
+                            <img src="/sazi/img/avatars/leopard.jpg" alt="Leopard">
+                        </div>
+                        <div class="avatar-option" data-avatar="rhino.jpg">
+                            <img src="/sazi/img/avatars/rhino.jpg" alt="Rhinoceros">
+                        </div>
+                        <div class="avatar-option" data-avatar="buffalo.jpg">
+                            <img src="/sazi/img/avatars/buffalo.jpg" alt="Buffalo">
+                        </div>
+                        <div class="avatar-option" data-avatar="meerkat.jpg">
+                            <img src="/sazi/img/avatars/meerkat.jpg" alt="Meerkat">
+                        </div>
+                        <div class="avatar-option" data-avatar="sangoma_staff.jpg">
+                            <img src="/sazi/img/avatars/sangoma_staff.jpg" alt="Sangoma Staff">
+                        </div>
+                        <div class="avatar-option" data-avatar="ancestral_mask.jpg">
+                            <img src="/sazi/img/avatars/ancestral_mask.jpg" alt="Ancestral Mask">
+                        </div>
+                        <div class="avatar-option" data-avatar="tokoloshe.jpg">
+                            <img src="/sazi/img/avatars/tokoloshe.jpg" alt="Tokoloshe">
+                        </div>
+                    </div>
+                    <div class="profile-details">
+                        <img src="/sazi/img/avatars/goat.jpg" alt="Avatar" class="avatar-img">
+                        <p><strong>Name:</strong> Sazi</p>
+                        <p><strong>Hobbies:</strong> Reading, Soccer</p>
+                        <p><strong>Favorite Animal:</strong> Lion</p>
+                        <p><strong>Favorite Color:</strong> Blue</p>
+                        <p><strong>Fun Fact:</strong> I love telling Xhosa folk tales!</p>
+                    </div>
+                </div>
+
+                <!-- Teacher Profile -->
+                <div id="teacher-profile" style="display: none;">
+                    <div class="profile-details">
+                        <img src="/sazi/img/teacher.jpg" alt="Teacher Picture" class="avatar-img">
+                        <p><strong>Name:</strong> Mr. Mdeni</p>
+                        <p><strong>Subjects Taught:</strong> Xhosa Language</p>
+                        <p><strong>Teaching Philosophy:</strong> Inspire through culture and connection.</p>
+                        <p><strong>Aspirations:</strong> To help students embrace their Xhosa heritage.</p>
+                        <p><strong>Fun Fact:</strong> I play the traditional Xhosa drum!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Mdeni Family</p>
+    </footer>
+
+    <script src="/sazi/script.js"></script>
+    <script>
+        // Determine user role and show appropriate profile section
+        const userRole = 'student'; // Replace with actual role from token
+        document.getElementById(`${userRole}-profile`).style.display = 'block';
+    </script>
+</body>
+</html>
