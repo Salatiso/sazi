@@ -1,1 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saz' isiXhosa, no Sapho - Dashboard</title>
+    <link rel="stylesheet" href="/sazi/style.css">
+</head>
+<body>
+    <h1 class="site-title">Saz' isiXhosa, no Sapho</h1>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+        <select class="language-toggle">
+            <option value="en">English</option>
+            <option value="xh">Xhosa</option>
+        </select>
+    </header>
 
+    <div class="main-container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="age-levels.html">Age Levels</a></li>
+                <li><a href="vocabulary.html">Vocabulary</a></li>
+                <li><a href="phrases.html">Phrases</a></li>
+                <li><a href="numbers.html">Numbers</a></li>
+                <li><a href="time.html">Time</a></li>
+                <li><a href="grammar.html">Grammar</a></li>
+                <li><a href="culture.html">Culture</a></li>
+                <li><a href="activities.html">Activities</a></li>
+                <li><a href="ask-khulu.html">Ask Khulu</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="dashboard">
+                <h2>Dashboard</h2>
+                <!-- Student Dashboard -->
+                <div id="student-dashboard" class="dashboard-section" style="display: none;">
+                    <h3>My Lessons</h3>
+                    <p>View your assigned lessons and track your progress.</p>
+                    <a href="lessons.html" class="start-learning">Go to Lessons</a>
+
+                    <h3>Class Leaderboard</h3>
+                    <p>Check your rank and earn more points!</p>
+                    <!-- Placeholder for leaderboard data -->
+
+                    <h3>Group Chat</h3>
+                    <p>Join the class chat with your teacher.</p>
+                    <a href="chat.html" class="start-learning">Open Chat</a>
+                </div>
+
+                <!-- Teacher Dashboard -->
+                <div id="teacher-dashboard" class="dashboard-section" style="display: none;">
+                    <h3>My Classes</h3>
+                    <p>Manage your classes and students.</p>
+                    <a href="class.html" class="start-learning">Manage Classes</a>
+
+                    <h3>Assign Lessons</h3>
+                    <p>Assign new lessons to your students.</p>
+                    <a href="lessons.html" class="start-learning">Assign Lessons</a>
+                </div>
+
+                <!-- Parent Dashboard -->
+                <div id="parent-dashboard" class="dashboard-section" style="display: none;">
+                    <h3>My Child's Progress</h3>
+                    <p>View your child's quiz scores, badges, and activity.</p>
+                    <!-- Placeholder for progress data -->
+
+                    <h3>Observe Class</h3>
+                    <p>Join a live class session (rotational schedule).</p>
+                    <a href="live-class.html" class="start-learning">Join Live Class</a>
+                </div>
+
+                <!-- Admin Dashboard -->
+                <div id="admin-dashboard" class="dashboard-section" style="display: none;">
+                    <h3>Platform Management</h3>
+                    <p>Assign teachers and students to classes.</p>
+                    <a href="class.html" class="start-learning">Manage Classes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Mdeni Family</p>
+    </footer>
+
+    <script src="/sazi/script.js"></script>
+    <script>
+        // Determine user role and show appropriate dashboard section
+        // This would typically be fetched from the backend
+        const userRole = 'student'; // Replace with actual role from token
+        document.getElementById(`${userRole}-dashboard`).style.display = 'block';
+    </script>
+</body>
+</html>
