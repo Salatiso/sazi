@@ -216,6 +216,100 @@ footer {
     }
 }
 
+.carousel-container {
+    margin-top: 1rem;
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    flex: 0 0 33.33%;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.carousel-item img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.carousel-item p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+@media (max-width: 768px) {
+    .carousel-item {
+        flex: 0 0 50%;
+    }
+
+    .carousel-item img {
+        max-width: 150px;
+    }
+
+    .carousel-item p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-item {
+        flex: 0 0 100%;
+    }
+}
+
+.read-more {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.read-more:hover {
+    background-color: #e6b800;
+}
+
+.intro-content {
+    display: block;
+}
+
+.full-content {
+    display: none;
+}
+
 /* New Styles for Login Page */
 .tabs {
     display: flex;
