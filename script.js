@@ -107,39 +107,4 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch('/api/login/user', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
-                });
-                const data = await response.json();
-
-                if (response.ok) {
-                    localStorage.setItem('token', data.token);
-                    window.location.href = 'index.html'; // Redirect to homepage after login
-                } else {
-                    errorElement.textContent = data.message || 'Invalid email or password';
-                    errorElement.style.display = 'block';
-                }
-            } catch (error) {
-                errorElement.textContent = 'An error occurred. Please try again.';
-                errorElement.style.display = 'block';
-            }
-        });
-    }
-});
-
-function requestPasswordReset() {
-    const email = prompt('Enter your email to receive a password reset link:');
-    if (email) {
-        fetch('/api/reset-password', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email })
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message || 'If your email is registered, you will receive a reset link.');
-        })
-        .catch(error => {
-            alert('An error occurred. Please try again.');
-        });
-    }
-}
+                    body ⎕
