@@ -1,0 +1,263 @@
+{
+  "categories": [
+    {
+      "name": "Vocabulary",
+      "subcategories": [
+        {
+          "name": "Family",
+          "entries": [
+            {
+              "id": "vocabulary_mama",
+              "english": "Mother",
+              "xhosa": "Mama",
+              "description": "A female parent, central to family life.",
+              "source": "Zazi Mzantsi Afrika"
+            },
+            {
+              "id": "vocabulary_tata",
+              "english": "Father",
+              "xhosa": "Tata",
+              "description": "A male parent, often a teacher in the family.",
+              "source": "The Homeschooling Father"
+            }
+            // Add ~20 more family terms (e.g., Usisi, Utatomkhulu)
+          ]
+        },
+        {
+          "name": "Animals",
+          "entries": [
+            {
+              "id": "vocabulary_inja",
+              "english": "Dog",
+              "xhosa": "Inja",
+              "description": "A common household animal.",
+              "source": "Zazi Mzantsi Afrika"
+            },
+            {
+              "id": "vocabulary_ikati",
+              "english": "Cat",
+              "xhosa": "Ikati",
+              "description": "A small domestic animal.",
+              "source": "Zazi Mzantsi Afrika"
+            }
+            // Add ~20 more animal terms (e.g., Inkomo, Intaka)
+          ]
+        }
+        // Add subcategories: Daily Life, Seasons, Feelings, Actions, Transportation, Advanced
+      ]
+    },
+    {
+      "name": "Phrases",
+      "subcategories": [
+        {
+          "name": "Greetings and Introductions",
+          "entries": [
+            {
+              "id": "phrases_molo",
+              "english": "Hello",
+              "xhosa": "Molo",
+              "description": "Used to greet friends and family.",
+              "source": "Zazi Mzantsi Afrika"
+            },
+            {
+              "id": "phrases_unjani",
+              "english": "How are you?",
+              "xhosa": "Unjani?",
+              "description": "A question to ask about someone’s well-being.",
+              "source": "The Homeschooling Father"
+            }
+            // Add ~15 more greetings (e.g., Sala kakuhle, Molo Tata)
+          ]
+        },
+        {
+          "name": "Months and Seasons",
+          "entries": [
+            {
+              "id": "phrases_eyomqungu",
+              "english": "January",
+              "xhosa": "EyoMqungu",
+              "description": "Month of the Tambuki Grass, marking the start of the year.",
+              "when_used": "First month of the year.",
+              "source": "Zazi Mzantsi Afrika"
+            },
+            {
+              "id": "phrases_eyokwindla",
+              "english": "March",
+              "xhosa": "EyoKwindla",
+              "description": "Month of the first fruits, a time for harvests.",
+              "when_used": "Third month of the year.",
+              "source": "Zazi Mzantsi Afrika"
+            }
+            // Add remaining months (EyoMdumba, uTshaz’iimpuzi, etc.)
+          ]
+        }
+        // Add subcategories: Needs and Feelings, Affection, Directives, Descriptions, Actions
+      ]
+    },
+    {
+      "name": "Numbers",
+      "entries": [
+        {
+          "id": "numbers_nye",
+          "english": "One",
+          "xhosa": "Nye",
+          "description": "The first number, used in counting.",
+          "source": "Zazi Mzantsi Afrika"
+        },
+        {
+          "id": "numbers_mbini",
+          "english": "Two",
+          "xhosa": "Mbini",
+          "description": "The second number, used in counting.",
+          "source": "Zazi Mzantsi Afrika"
+        }
+        // Add remaining numbers (Thathu, Ne, Hlanu, Sithandathu, Isixhenxe, Isibhozo, Isithoba, Ishumi)
+      ]
+    },
+    {
+      "name": "Time",
+      "entries": [
+        {
+          "id": "time_eyomqungu",
+          "english": "January",
+          "xhosa": "EyoMqungu",
+          "description": "Month of the Tambuki Grass, marking the start of the year.",
+          "when_used": "First month of the year.",
+          "source": "Zazi Mzantsi Afrika"
+        },
+        {
+          "id": "time_kusasa",
+          "english": "Morning",
+          "xhosa": "Kusasa",
+          "description": "The start of the day, when the sun rises.",
+          "when_used": "Early part of the day.",
+          "source": "The Homeschooling Father"
+        }
+        // Add remaining time terms (EyoMdumba, EyoKwindla, UMvulo, Ihlobo, etc.)
+      ]
+    },
+    {
+      "name": "Grammar",
+      "subcategories": [
+        {
+          "name": "Sentence Structure",
+          "entries": [
+            {
+              "id": "grammar_ndithetha_isixhosa",
+              "english": "I speak Xhosa",
+              "xhosa": "Ndithetha isiXhosa",
+              "description": "Subject-Verb-Object order, present tense.",
+              "source": "Zazi Mzantsi Afrika"
+            },
+            {
+              "id": "grammar_umntwana_uyadla",
+              "english": "The child eats",
+              "xhosa": "Umntwana uyadla",
+              "description": "Subject-Verb order, present tense.",
+              "source": "The Homeschooling Father"
+            }
+            // Add ~10 more sentence structure examples
+          ]
+        },
+        {
+          "name": "Noun Classes",
+          "entries": [
+            {
+              "id": "grammar_umntu",
+              "english": "Person",
+              "xhosa": "Umntu",
+              "description": "Singular, Class 1 noun prefix um-.",
+              "source": "Zazi Mzantsi Afrika"
+            },
+            {
+              "id": "grammar_abantu",
+              "english": "People",
+              "xhosa": "Abantu",
+              "description": "Plural, Class 2 noun prefix aba-.",
+              "source": "Zazi Mzantsi Afrika"
+            }
+            // Add ~20 more noun class examples
+          ]
+        }
+        // Add subcategories: Verb Conjugation, Adjectives, Possessives, Demonstratives, Sentence Structures, Questions
+      ]
+    },
+    {
+      "name": "Culture",
+      "subcategories": [
+        {
+          "name": "Life Milestones",
+          "entries": [
+            {
+              "id": "culture_ukuzalwa_komntwana",
+              "english": "Birth of a Child",
+              "xhosa": "Ukuzalwa Komntwana",
+              "description": "A significant event for family and community, celebrating and naming the child.",
+              "when_performed": "After the birth of a child.",
+              "source": "Zazi Mzantsi Afrika"
+            },
+            {
+              "id": "culture_imbeleko",
+              "english": "Welcoming a Newborn",
+              "xhosa": "Imbeleko",
+              "description": "Protecting and formally introducing a newborn to the community.",
+              "when_performed": "In the first weeks or months of a child’s life.",
+              "source": "Zazi Mzantsi Afrika"
+            }
+            // Add remaining life milestones (Intonjane, Unkaluka, Umtshato, etc.)
+          ]
+        },
+        {
+          "name": "Daily Traditions",
+          "entries": [
+            {
+              "id": "culture_intlonipho",
+              "english": "Respect",
+              "xhosa": "Intlonipho",
+              "description": "Respecting elders is vital, shown through speech and actions.",
+              "when_performed": "Throughout life.",
+              "source": "Zazi Mzantsi Afrika"
+            }
+            // Add remaining daily traditions
+          ]
+        },
+        {
+          "name": "Spiritual and Mourning",
+          "entries": [
+            {
+              "id": "culture_ukuzila",
+              "english": "Mourning",
+              "xhosa": "Ukuzila",
+              "description": "When someone passes, the family and community mourn to show grief and respect.",
+              "when_performed": "After someone’s death.",
+              "source": "Zazi Mzantsi Afrika"
+            }
+            // Add remaining spiritual/mourning practices
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Activities",
+      "entries": [
+        {
+          "id": "activities_ukuxoxa_iintsomi",
+          "english": "Telling Folk Tales",
+          "xhosa": "Ukuxoxa Iintsomi",
+          "description": "Elders tell children stories to teach morals and pass down culture.",
+          "when_performed": "At night, after dinner.",
+          "source": "Zazi Mzantsi Afrika"
+        },
+        {
+          "id": "activities_umgusha",
+          "english": "Skipping Rope",
+          "xhosa": "Umgusha",
+          "description": "A game played with a long rope swung by two people, with one jumping over it.",
+          "when_performed": "During playtime in open spaces.",
+          "source": "The Homeschooling Father"
+        }
+        // Add remaining activities (Ukugijima Ngeqakala, Ukudlala Ngodongwe, etc.)
+      ]
+    }
+  ]
+}
