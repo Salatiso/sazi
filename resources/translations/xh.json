@@ -48,19 +48,12 @@
     "winter": "Ubusika",
     "spring": "Intwasahlobo",
     "time_is": "Ixesha yi-{{time}}",
-    "stages_of_growth": "Izigaba Zokukhula",
-    "select_character": "Khetha uMlinganiswa",
-    "person": "Umntu",
-    "dog": "Inja",
-    "child": "Umtwana",
-    "boy": "Inkwenkwe",
-    "girl": "Intombazana",
-    "initiates": "Umkhwetha",
-    "puppy": "Injana",
-    "adult_dog": "Inja",
     "timeline": "Umgca Wexesha",
     "all": "Zonke",
     "xhosa": "isiXhosa",
     "zulu": "isiZulu",
-    "afrikaans": "isiBhulu"
+    "afrikaans": "isiBhulu",
+    "french": "isiFrentshi",
+    "translate": "Guqulela",
+    "english": "isiNgesi"
 }
