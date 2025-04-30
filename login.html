@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saz' isiXhosa, no Sapho - Login</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style.css?v=1">
 </head>
 <body>
     <h1 class="site-title">Saz' isiXhosa, no Sapho</h1>
@@ -43,21 +43,33 @@
                 </div>
                 <div id="student-login" class="tab-content active">
                     <form id="student-login-form">
-                        <label for="student-username">Username (First Name):</label>
-                        <input type="text" id="student-username" placeholder="e.g., Sazi" required>
-                        <label for="student-code">4-Digit Code:</label>
-                        <input type="text" id="student-code" placeholder="e.g., 1234" maxlength="4" required>
-                        <button type="submit">Login</button>
+                        <div class="form-group">
+                            <label for="student-username">Username (First Name):</label>
+                            <input type="text" id="student-username" placeholder="e.g., Sazi" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="student-code">4-Digit Code:</label>
+                            <input type="text" id="student-code" placeholder="e.g., 1234" maxlength="4" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit">Login</button>
+                        </div>
                         <p id="student-error" class="error-message"></p>
                     </form>
                 </div>
                 <div id="user-login" class="tab-content">
                     <form id="user-login-form">
-                        <label for="user-email">Email:</label>
-                        <input type="email" id="user-email" placeholder="e.g., teacher@example.com" required>
-                        <label for="user-password">Password:</label>
-                        <input type="password" id="user-password" placeholder="Enter your password" required>
-                        <button type="submit">Login</button>
+                        <div class="form-group">
+                            <label for="user-email">Email:</label>
+                            <input type="email" id="user-email" placeholder="e.g., teacher@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-password">Password:</label>
+                            <input type="password" id="user-password" placeholder="Enter your password" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit">Login</button>
+                        </div>
                         <p><a href="#" onclick="requestPasswordReset()">Forgot Password?</a></p>
                         <p id="user-error" class="error-message"></p>
                     </form>
