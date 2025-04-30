@@ -4,7 +4,243 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saz' isiXhosa, no Sapho - Login</title>
-    <link rel="stylesheet" href="/style.css?v=1">
+    <style>
+        :root {
+            --primary-bg: #444;
+            --primary-color: white;
+            --secondary-bg: #f4f4f4;
+            --secondary-color: #333;
+            --hover-bg: #555;
+            --accent-color: #ffcc80;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            background-color: var(--secondary-bg);
+            color: var(--secondary-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .site-title {
+            text-align: center;
+            padding: 1rem;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        header {
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 2rem;
+        }
+
+        header nav ul li a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            flex: 0 0 200px;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .sidebar ul {
+            padding: 0;
+            margin: 1rem 0;
+            list-style: none;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--hover-bg);
+        }
+
+        .sidebar ul li a:hover {
+            background: var(--hover-bg);
+        }
+
+        .sidebar ul li a.active {
+            background: var(--hover-bg);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main-container {
+                flex-direction: column;
+            }
+        }
+
+        .content {
+            flex: 1;
+            padding: 2rem;
+            background: url('/sazi/img/Sazi_Grandma.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 1rem;
+            }
+        }
+
+        .section {
+            padding: 2rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: var(--secondary-color);
+        }
+
+        .section a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .section a:hover {
+            text-decoration: underline;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .tab-button {
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-bg);
+            color: var(--primary-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .tab-button.active {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+        }
+
+        .tab-button:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .form-group button {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .form-group button:hover {
+            background-color: #e6b800;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            header nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .tabs {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <h1 class="site-title">Saz' isiXhosa, no Sapho</h1>
@@ -42,37 +278,41 @@
                     <button class="tab-button" onclick="showTab('user-login')">Teacher/Parent/Admin Login</button>
                 </div>
                 <div id="student-login" class="tab-content active">
-                    <form id="student-login-form">
-                        <div class="form-group">
-                            <label for="student-username">Username (First Name):</label>
-                            <input type="text" id="student-username" placeholder="e.g., Sazi" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="student-code">4-Digit Code:</label>
-                            <input type="text" id="student-code" placeholder="e.g., 1234" maxlength="4" required>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit">Login</button>
-                        </div>
-                        <p id="student-error" class="error-message"></p>
-                    </form>
+                    <div class="contact-form">
+                        <form id="student-login-form">
+                            <div class="form-group">
+                                <label for="student-username">Username (First Name):</label>
+                                <input type="text" id="student-username" placeholder="e.g., Sazi" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="student-code">4-Digit Code:</label>
+                                <input type="text" id="student-code" placeholder="e.g., 1234" maxlength="4" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit">Login</button>
+                            </div>
+                            <p id="student-error" class="error-message"></p>
+                        </form>
+                    </div>
                 </div>
                 <div id="user-login" class="tab-content">
-                    <form id="user-login-form">
-                        <div class="form-group">
-                            <label for="user-email">Email:</label>
-                            <input type="email" id="user-email" placeholder="e.g., teacher@example.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="user-password">Password:</label>
-                            <input type="password" id="user-password" placeholder="Enter your password" required>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit">Login</button>
-                        </div>
-                        <p><a href="#" onclick="requestPasswordReset()">Forgot Password?</a></p>
-                        <p id="user-error" class="error-message"></p>
-                    </form>
+                    <div class="contact-form">
+                        <form id="user-login-form">
+                            <div class="form-group">
+                                <label for="user-email">Email:</label>
+                                <input type="email" id="user-email" placeholder="e.g., teacher@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="user-password">Password:</label>
+                                <input type="password" id="user-password" placeholder="Enter your password" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit">Login</button>
+                            </div>
+                            <p><a href="#" onclick="requestPasswordReset()">Forgot Password?</a></p>
+                            <p id="user-error" class="error-message"></p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -82,6 +322,94 @@
         <p>© 2025 Mdeni Family</p>
     </footer>
 
-    <script src="/script.js"></script>
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`button[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const studentForm = document.getElementById('student-login-form');
+            const userForm = document.getElementById('user-login-form');
+
+            if (studentForm) {
+                studentForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const username = document.getElementById('student-username').value.trim();
+                    const code = document.getElementById('student-code').value.trim();
+                    const errorElement = document.getElementById('student-error');
+
+                    try {
+                        const response = await fetch('/api/login/student', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ username, code })
+                        });
+                        const data = await response.json();
+
+                        if (response.ok) {
+                            localStorage.setItem('token', data.token);
+                            window.location.href = 'index.html';
+                        } else {
+                            errorElement.textContent = data.message || 'Invalid username or code';
+                            errorElement.style.display = 'block';
+                        }
+                    } catch (error) {
+                        errorElement.textContent = 'An error occurred. Please try again.';
+                        errorElement.style.display = 'block';
+                    }
+                });
+            }
+
+            if (userForm) {
+                userForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const email = document.getElementById('user-email').value.trim();
+                    const password = document.getElementById('user-password').value;
+                    const errorElement = document.getElementById('user-error');
+
+                    try {
+                        const response = await fetch('/api/login/user', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email, password })
+                        });
+                        const data = await response.json();
+
+                        if (response.ok) {
+                            localStorage.setItem('token', data.token);
+                            window.location.href = 'index.html';
+                        } else {
+                            errorElement.textContent = data.message || 'Invalid email or password';
+                            errorElement.style.display = 'block';
+                        }
+                    } catch (error) {
+                        errorElement.textContent = 'An error occurred. Please try again.';
+                        errorElement.style.display = 'block';
+                    }
+                });
+            }
+        });
+
+        function requestPasswordReset() {
+            const email = prompt('Enter your email to receive a password reset link:');
+            if (email) {
+                fetch('/api/reset-password', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message || 'If your email is registered, you will receive a reset link.');
+                })
+                .catch(error => {
+                    alert('An error occurred. Please try again.');
+                });
+            }
+        }
+    </script>
 </body>
 </html>
