@@ -5,6 +5,8 @@
     --secondary-color: #333;
     --hover-bg: #555;
     --accent-color: #ffcc80;
+    --secondary-accent: #a7c4a7;
+    --tertiary-accent: #80cbc4;
 }
 
 body {
@@ -33,6 +35,8 @@ header {
     padding: 1rem;
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 2rem;
 }
 
 header nav ul {
@@ -51,6 +55,20 @@ header nav ul li a {
 
 header nav ul li a:hover {
     text-decoration: underline;
+}
+
+header nav ul li a.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.language-toggle {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+    background: var(--hover-bg);
+    color: var(--primary-color);
 }
 
 .main-container {
@@ -104,192 +122,43 @@ header nav ul li a:hover {
 .content {
     flex: 1;
     padding: 2rem;
-    background: url('/img/Sazi_Grandma.jpg') no-repeat center center;
+}
+
+/* Index Page Styles */
+.content.index {
+    background: url('/sazi/img/My_Boys.jpg') no-repeat center center;
     background-size: cover;
-    background-opacity: 0.1;
 }
 
-@media (max-width: 768px) {
-    .content {
-        padding: 1rem;
-    }
-}
-
-.section {
+.hero {
     padding: 2rem;
+    text-align: center;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.9);
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+    color: var(--secondary-color);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease-in;
 }
 
-.section h2 {
-    font-size: 1.5rem;
+.hero h2 {
+    font-size: 2.5rem;
     margin-top: 0;
+    margin-bottom: 1rem;
     color: var(--secondary-color);
 }
 
-.section h3 {
-    font-size: 1.3rem;
-    margin-top: 2rem;
-    color: var(--secondary-color);
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
 }
 
-.section a {
-    color: var(--accent-color);
-    text-decoration: none;
-}
-
-.section a:hover {
-    text-decoration: underline;
-}
-
-.section img {
-    max-width: 100%;
-    border-radius: 10px;
-}
-
-.xhosa-cell {
-    display: none;
-}
-
-.xhosa-cell.visible {
-    display: table-cell;
-}
-
-.feedback {
-    color: green;
-    font-weight: bold;
-    margin-top: 0.5rem;
-    display: none;
-}
-
-.feedback.visible {
+.intro-content {
     display: block;
 }
 
-button {
-    padding: 0.5rem 1rem;
-    background-color: var(--accent-color);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 0 0.5rem;
-}
-
-button:hover {
-    background-color: #e6b800;
-}
-
-input[type="text"], input[type="email"], input[type="password"] {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 1rem;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-}
-
-th, td {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    text-align: left;
-}
-
-th {
-    background-color: var(--accent-color);
-    color: var(--secondary-color);
-}
-
-footer {
-    text-align: center;
-    padding: 1rem 0;
-    background: var(--primary-bg);
-    color: var(--primary-color);
-    width: 100%;
-}
-
-@media (max-width: 768px) {
-    header nav ul {
-        flex-direction: column;
-        gap: 1rem;
-    }
-}
-
-.carousel-container {
-    margin-top: 1rem;
-    position: relative;
-    max-width: 100%;
-    overflow: hidden;
-}
-
-.carousel {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel-item {
-    flex: 0 0 33.33%;
-    box-sizing: border-box;
-    text-align: center;
-    padding: 0.5rem;
-}
-
-.carousel-item img {
-    width: 100%;
-    max-width: 200px;
-    height: auto;
-    border-radius: 10px;
-}
-
-.carousel-item p {
-    margin: 0.5rem 0;
-    font-size: 0.9rem;
-}
-
-.carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 0.5rem;
-    cursor: pointer;
-    font-size: 1.5rem;
-}
-
-.carousel-button.prev {
-    left: 10px;
-}
-
-.carousel-button.next {
-    right: 10px;
-}
-
-@media (max-width: 768px) {
-    .carousel-item {
-        flex: 0 0 50%;
-    }
-
-    .carousel-item img {
-        max-width: 150px;
-    }
-
-    .carousel-item p {
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .carousel-item {
-        flex: 0 0 100%;
-    }
+.full-content {
+    display: none;
 }
 
 .read-more {
@@ -307,181 +176,376 @@ footer {
     background-color: #e6b800;
 }
 
-.intro-content {
-    display: block;
+.level-selection {
+    margin-bottom: 2rem;
 }
 
-.full-content {
-    display: none;
-}
-
-.contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.form-group {
-    margin-bottom: 1rem;
-}
-
-.form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-}
-
-.form-group input, .form-group textarea {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
+.level-selection select {
+    padding: 0.75rem;
+    font-size: 1.2rem;
     border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 1rem;
     font-family: 'Quicksand', sans-serif;
 }
 
-.form-group textarea {
-    height: 150px;
-    resize: vertical;
-}
-
-.form-group button {
+.level-selection button {
+    padding: 0.75rem 1.5rem;
     background-color: var(--accent-color);
     color: var(--secondary-color);
     border: none;
-    padding: 0.5rem 1rem;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
+    font-size: 1.2rem;
+    font-family: 'Quicksand', sans-serif;
 }
 
-.form-group button:hover {
+.level-selection button:hover {
     background-color: #e6b800;
 }
 
-/* New Styles for Login Page */
-.tabs {
-    display: flex;
-    gap: 1rem;
+.test-section {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.test-question {
     margin-bottom: 1rem;
 }
 
-.tab-button {
-    padding: 0.5rem 1rem;
-    background-color: var(--primary-bg);
-    color: var(--primary-color);
+.test-question span {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.test-question input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.test-question button {
+    margin-right: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
+    font-size: 1.2rem;
+    font-family: 'Quicksand', sans-serif;
 }
 
-.tab-button.active {
+.test-question button:hover {
+    background-color: #e6b800;
+}
+
+.test-feedback {
+    color: green;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    display: none;
+    font-size: 1.1rem;
+}
+
+.test-feedback.visible {
+    display: block;
+}
+
+.test-actions {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.start-learning {
+    display: none;
+    padding: 0.8rem 1.5rem;
     background-color: var(--accent-color);
     color: var(--secondary-color);
-}
-
-.tab-button:hover {
-    background-color: var(--hover-bg);
-}
-
-.tab-content {
-    display: none;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-#student-login form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 1rem;
-    background: rgba(255, 204, 128, 0.2); /* Light accent color background */
-    border-radius: 10px;
-    border: 2px solid #ff5733; /* Vibrant red border inspired by Transkei dress */
-}
-
-#student-login label {
-    font-size: 1.2rem;
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--secondary-color);
-}
-
-#student-login input {
-    font-size: 1.2rem;
-    padding: 0.75rem;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-}
-
-#student-login button {
-    font-size: 1.2rem;
-    padding: 0.75rem 1.5rem;
-    background-color: #ff5733; /* Vibrant red */
-    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
     margin-top: 1rem;
-    width: 100%;
+    font-size: 1.2rem;
 }
 
-#student-login button:hover {
-    background-color: #e64a19;
+.start-learning.visible {
+    display: inline-block;
 }
 
-#user-login form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 1rem;
-    background: rgba(68, 68, 68, 0.1); /* Muted gray background */
+.start-learning:hover {
+    background-color: #e6b800;
+}
+
+.hero img {
+    max-width: 200px;
     border-radius: 10px;
-    border: 2px solid #444; /* Dark gray border to match site theme */
-}
-
-#user-login label {
-    font-size: 1rem;
+    margin-top: 2rem;
     display: block;
-    margin-bottom: 0.5rem;
-    color: var(--secondary-color);
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#user-login input {
-    font-size: 1rem;
+/* Dashboard Styles */
+.dashboard {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+.dashboard h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.dashboard-section {
+    margin-bottom: 2rem;
+}
+
+.dashboard-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Profile Styles */
+.profile {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.profile h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.avatar-selection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.avatar-option {
+    cursor: pointer;
+    padding: 0.5rem;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    transition: border 0.3s ease;
+}
+
+.avatar-option:hover {
+    border: 2px solid var(--accent-color);
+}
+
+.avatar-option img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.profile-details {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.profile-details p {
+    margin: 0.5rem 0;
+}
+
+.profile-details .avatar-img {
+    display: block;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1rem;
+    border-radius: 10px;
+}
+
+/* Class Management Styles */
+.class-management {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+}
+
+.class-management h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.class-list, .student-list {
+    margin-bottom: 2rem;
+}
+
+.class-list h3, .student-list h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Lessons Styles */
+.lessons {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+}
+
+.lessons h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.lesson {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Chat Styles */
+.chat {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+}
+
+.chat h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.chat-messages {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.chat-message {
+    margin-bottom: 0.5rem;
+}
+
+.chat-input {
+    display: flex;
+    gap: 1rem;
+}
+
+.chat-input input {
+    flex: 1;
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-#user-login button {
-    font-size: 1rem;
+.chat-input button {
     padding: 0.5rem 1rem;
     background-color: var(--accent-color);
     color: var(--secondary-color);
-    margin-top: 1rem;
-    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-#user-login button:hover {
+.chat-input button:hover {
     background-color: #e6b800;
 }
 
-#user-login a {
-    display: block;
-    text-align: center;
-    margin-top: 0.5rem;
-    color: #ff5733;
-    font-size: 0.9rem;
+/* Live Class Styles */
+.live-class {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
 }
 
-.error-message {
-    color: red;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-    display: none;
+.live-class h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+#jitsi-container {
+    width: 100%;
+    height: 500px;
+    border-radius: 10px;
+}
+
+footer {
     text-align: center;
+    padding: 1rem 0;
+    background: var(--primary-bg);
+    color: var(--primary-color);
+    width: 100%;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @media (max-width: 768px) {
-    .tabs {
+    .content {
+        padding: 1rem;
+    }
+
+    .hero, .dashboard, .profile, .class-management, .lessons, .chat, .live-class {
+        padding: 1rem;
+    }
+
+    .hero h2, .dashboard h2, .profile h2, .class-management h2, .lessons h2, .chat h2, .live-class h2 {
+        font-size: 1.8rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .level-selection select,
+    .level-selection button,
+    .test-question input,
+    .test-question button,
+    .start-learning {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .hero img {
+        max-width: 150px;
+    }
+
+    .avatar-option img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .profile-details .avatar-img {
+        width: 120px;
+        height: 120px;
+    }
+
+    #jitsi-container {
+        height: 300px;
+    }
+
+    header {
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 1rem;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 1rem;
     }
 }
