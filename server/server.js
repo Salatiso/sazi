@@ -1,70 +1,74 @@
 const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const cors = require('cors');
-const app = express();
+const authRoutes = require('./routes/auth');
+const classRoutes = require('./routes/classes');
+const profileRoutes = require('./routes/profiles');
+const lessonRoutes = require('./routes/lessons');
+const chatRoutes = require('./routes/chat');
+const liveRoutes = require('./routes/live');
+const { rateLimitMiddleware } = require('./middleware/rateLimit');
+const { authenticateToken } = require('./middleware/auth');
+const { MONGODB_URI, PORT } = require('./config/env');
+const fs = require('fs');
+const path = require('path');
 
-app.use(cors());
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+
+// Middleware
 app.use(express.json());
+app.use(rateLimitMiddleware); // Rate limiting for login attempts
 
 // MongoDB Connection
-const connectDB = require('./config/db');
-connectDB();
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.error('MongoDB connection error:', err));
 
-// User Schema
-const userSchema = new mongoose.Schema({
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    role: { type: String, enum: ['teacher', 'admin', 'parent'], required: true },
-    classIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Class' }]
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/classes', authenticateToken, classRoutes);
+app.use('/api/profiles', authenticateToken, profileRoutes);
+app.use('/api/lessons', authenticateToken, lessonRoutes);
+app.use('/api/chat', authenticateToken, chatRoutes);
+app.use('/api/live', authenticateToken, liveRoutes);
+
+// Socket.IO for Chat
+io.on('connection', (socket) => {
+    console.log('User connected:', socket.id);
+
+    socket.on('joinClass', (classId) => {
+        socket.join(classId);
+        console.log(`User ${socket.id} joined class ${classId}`);
+    });
+
+    socket.on('chatMessage', async (data) => {
+        const { classId, senderId, message } = data;
+        // Log message to chat.log
+        const logMessage = `${new Date().toISOString()} - Class ${classId} - User ${senderId}: ${message}\n`;
+        fs.appendFileSync(path.join(__dirname, 'logs/chat.log'), logMessage);
+
+        // Save to MongoDB (chatMessages collection)
+        const ChatMessage = mongoose.model('ChatMessage', new mongoose.Schema({
+            classId: String,
+            senderId: String,
+            message: String,
+            timestamp: { type: Date, default: Date.now }
+        }));
+        await new ChatMessage({ classId, senderId, message }).save();
+
+        // Broadcast message to class
+        io.to(classId).emit('message', { senderId, message, timestamp: new Date() });
+    });
+
+    socket.on('disconnect', () => {
+        console.log('User disconnected:', socket.id);
+    });
 });
 
-const studentSchema = new mongoose.Schema({
-    username: { type: String, required: true },
-    code: { type: String, required: true, unique: true },
-    role: { type: String, default: 'student' },
-    classId: { type: mongoose.Schema.Types.ObjectId, ref: 'Class' },
-    parentId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+// Start Server
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
-
-const User = mongoose.model('User', userSchema);
-const Student = mongoose.model('Student', studentSchema);
-
-// Authentication Routes
-app.post('/api/login/student', async (req, res) => {
-    const { username, code } = req.body;
-    const student = await Student.findOne({ username, code });
-    if (!student) {
-        return res.status(401).json({ message: 'Invalid username or code' });
-    }
-    const token = jwt.sign({ id: student._id, role: student.role }, 'secret', { expiresIn: '1h' });
-    res.json({ token });
-});
-
-app.post('/api/login/user', async (req, res) => {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) {
-        return res.status(401).json({ message: 'Invalid email or password' });
-    }
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-        return res.status(401).json({ message: 'Invalid email or password' });
-    }
-    const token = jwt.sign({ id: user._id, role: user.role }, 'secret', { expiresIn: '1h' });
-    res.json({ token });
-});
-
-app.post('/api/reset-password', async (req, res) => {
-    const { email } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) {
-        return res.json({ message: 'If your email is registered, you will receive a reset link.' });
-    }
-    // In a real implementation, send an email with a reset link (mocked here)
-    res.json({ message: 'If your email is registered, you will receive a reset link.' });
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
