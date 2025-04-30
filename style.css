@@ -191,7 +191,7 @@ header nav ul li a.active {
     100% { transform: scale(1); }
 }
 
-.fun-fact-popup {
+.fun-fact-popup, .clock-popup {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -213,7 +213,7 @@ header nav ul li a.active {
     margin-bottom: 1rem;
 }
 
-.fun-fact-popup button {
+.fun-fact-popup button, .clock-popup button {
     background: var(--fun-blue);
     color: white;
     border: none;
@@ -223,7 +223,7 @@ header nav ul li a.active {
     font-weight: bold;
 }
 
-.fun-fact-popup button:hover {
+.fun-fact-popup button:hover, .clock-popup button:hover {
     background: #1c86ee;
 }
 
@@ -232,33 +232,112 @@ header nav ul li a.active {
     to { opacity: 1; transform: translate(-50%, -50%); }
 }
 
-.timeline-container, .stages-container, .clock-container {
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-card {
     background: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     padding: 1rem;
+    border: 2px solid var(--fun-blue);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+}
+
+.dashboard-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-card h2 {
+    font-size: 1.5rem;
+    color: var(--fun-red);
+    margin-bottom: 0.5rem;
+}
+
+.dashboard-card p {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.expand-button {
+    background-color: var(--fun-blue);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    align-self: center;
+}
+
+.expand-button:hover {
+    background-color: #1c86ee;
+}
+
+.expanded-content {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 2rem;
     margin-bottom: 2rem;
+    border: 2px solid var(--fun-blue);
+    position: relative;
+}
+
+.collapse-button {
+    background-color: var(--fun-red);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 1rem;
+    display: block;
+    margin-left: auto;
+}
+
+.collapse-button:hover {
+    background-color: #e04e2c;
+}
+
+.timeline-container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 1rem;
     border: 2px solid var(--fun-blue);
 }
 
-.timeline-container h2, .stages-container h2, .clock-container h2 {
+.timeline-container h2 {
     font-size: 1.8rem;
     margin-bottom: 1rem;
     color: var(--fun-red);
     text-align: center;
 }
 
-.timeline-carousel, .stages-carousel {
+.timeline-carousel {
     position: relative;
     max-width: 100%;
     overflow: hidden;
 }
 
-.timeline, .stages {
+.timeline {
     display: flex;
     transition: transform 0.5s ease-in-out;
 }
 
-.timeline-item, .stage-item {
+.timeline-item {
     flex: 0 0 33.33%;
     box-sizing: border-box;
     text-align: center;
@@ -268,21 +347,14 @@ header nav ul li a.active {
     transition: border 0.3s ease;
 }
 
-.timeline-item:hover, .stage-item:hover {
+.timeline-item:hover {
     border: 2px solid var(--fun-yellow);
 }
 
-.timeline-item p, .stage-item p {
+.timeline-item p {
     margin: 0.5rem 0;
     font-size: 1rem;
     color: var(--fun-blue);
-}
-
-.stage-item img {
-    width: 100px;
-    height: 100px;
-    border-radius: 10px;
-    margin-bottom: 0.5rem;
 }
 
 .carousel-button {
@@ -305,7 +377,7 @@ header nav ul li a.active {
     right: 10px;
 }
 
-.timeline-details, .stages-details {
+.timeline-details {
     margin-top: 1rem;
     padding: 1rem;
     background: rgba(255, 255, 255, 0.8);
@@ -314,36 +386,23 @@ header nav ul li a.active {
     text-align: center;
 }
 
-.timeline-details h3, .stages-details h3 {
+.timeline-details h3 {
     font-size: 1.5rem;
     color: var(--fun-red);
     margin-bottom: 0.5rem;
 }
 
-.timeline-details p, .stages-details p {
+.timeline-details p {
     font-size: 1.1rem;
     color: var(--secondary-color);
 }
 
-.character-selection {
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.character-selection button {
-    padding: 0.75rem 1.5rem;
-    background-color: var(--fun-blue);
-    color: white;
-    border: none;
-    border-radius: 5px;
+.clock-preview {
     cursor: pointer;
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin: 0 0.5rem;
-}
-
-.character-selection button:hover {
-    background-color: #1c86ee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
 }
 
 .clock-analogue {
@@ -352,8 +411,13 @@ header nav ul li a.active {
     border: 5px solid var(--fun-red);
     border-radius: 50%;
     position: relative;
-    margin: 0 auto 1rem;
     background: white;
+}
+
+.clock-analogue.small {
+    width: 100px;
+    height: 100px;
+    border-width: 3px;
 }
 
 .clock-analogue .hand {
@@ -370,16 +434,28 @@ header nav ul li a.active {
     background: var(--fun-blue);
 }
 
+.clock-analogue.small .hour {
+    height: 30px;
+}
+
 .clock-analogue .minute {
     width: 3px;
     height: 80px;
     background: var(--fun-red);
 }
 
+.clock-analogue.small .minute {
+    height: 40px;
+}
+
 .clock-analogue .second {
     width: 2px;
     height: 90px;
     background: var(--fun-yellow);
+}
+
+.clock-analogue.small .second {
+    height: 45px;
 }
 
 .clock-analogue .center {
@@ -393,6 +469,11 @@ header nav ul li a.active {
     transform: translate(-50%, -50%);
 }
 
+.clock-analogue.small .center {
+    width: 5px;
+    height: 5px;
+}
+
 .clock-digital {
     text-align: center;
     font-size: 1.5rem;
@@ -404,29 +485,6 @@ header nav ul li a.active {
     text-align: center;
     font-size: 1.2rem;
     color: var(--secondary-color);
-}
-
-.hero {
-    padding: 2rem;
-    text-align: center;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.9);
-    margin-bottom: 2rem;
-    color: var(--secondary-color);
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 1s ease-in;
-}
-
-.hero h2 {
-    font-size: 2.5rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
-    color: var(--secondary-color);
-}
-
-.hero p {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
 }
 
 .intro-content {
@@ -559,15 +617,6 @@ header nav ul li a.active {
 
 .start-learning:hover {
     background-color: #e6b800;
-}
-
-.hero img {
-    max-width: 200px;
-    border-radius: 10px;
-    margin-top: 2rem;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 /* Dashboard Styles */
@@ -776,60 +825,50 @@ footer {
         padding: 1rem;
     }
 
-    .hero, .dashboard, .profile, .class-management, .lessons, .chat, .live-class,
-    .timeline-container, .stages-container, .clock-container {
-        padding: 1rem;
+    .dashboard-grid {
+        grid-template-columns: 1fr;
     }
 
-    .hero h2, .dashboard h2, .profile h2, .class-management h2, .lessons h2, .chat h2,
-    .live-class h2, .timeline-container h2, .stages-container h2, .clock-container h2 {
-        font-size: 1.8rem;
+    .dashboard-card {
+        min-height: 150px;
     }
 
-    .hero p {
-        font-size: 1rem;
+    .dashboard-card h2 {
+        font-size: 1.3rem;
     }
 
-    .level-selection select,
-    .level-selection button,
-    .test-question input,
-    .test-question button,
-    .start-learning,
-    .character-selection button {
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-    }
-
-    .hero img {
-        max-width: 150px;
-    }
-
-    .avatar-option img {
-        width: 80px;
-        height: 80px;
-    }
-
-    .profile-details .avatar-img {
-        width: 120px;
-        height: 120px;
-    }
-
-    .timeline-item, .stage-item {
-        flex: 0 0 50%;
-    }
-
-    .timeline-item p, .stage-item p {
+    .dashboard-card p {
         font-size: 0.9rem;
     }
 
-    .stage-item img {
-        width: 80px;
-        height: 80px;
+    .expanded-content {
+        padding: 1rem;
+    }
+
+    .timeline-container {
+        padding: 1rem;
+    }
+
+    .timeline-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .timeline-item {
+        flex: 0 0 50%;
+    }
+
+    .timeline-item p {
+        font-size: 0.9rem;
     }
 
     .clock-analogue {
         width: 150px;
         height: 150px;
+    }
+
+    .clock-analogue.small {
+        width: 80px;
+        height: 80px;
     }
 
     .clock-digital {
