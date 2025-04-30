@@ -53,7 +53,77 @@
                 <button onclick="closeFunFact()">Close</button>
             </div>
 
-            <!-- Timeline Carousel -->
+            <!-- Clock Popup -->
+            <div class="clock-popup" id="clock-popup">
+                <div class="clock-container">
+                    <h2 data-translate="time">Time</h2>
+                    <div class="clock-analogue" id="clock-analogue">
+                        <div class="hand hour" id="hour-hand"></div>
+                        <div class="hand minute" id="minute-hand"></div>
+                        <div class="hand second" id="second-hand"></div>
+                        <div class="center"></div>
+                    </div>
+                    <div class="clock-digital" id="clock-digital"></div>
+                    <p id="clock-text" data-translate="time_is" data-translate-params='{"time":""}'>The time is</p>
+                </div>
+                <button onclick="closeClockPopup()">Close</button>
+            </div>
+
+            <!-- Dashboards -->
+            <div class="dashboard-grid">
+                <!-- Quick Test Dashboard -->
+                <div class="dashboard-card" id="quick-test-card">
+                    <h2 data-translate="how_well_do_you_know_xhosa">How Well Do You Know Xhosa?</h2>
+                    <p data-translate="test_your_xhosa_knowledge">Test your Xhosa knowledge with Sazi and his family before diving into our fun, interactive lessons! Choose your level, answer a few questions, or reveal the answers to start learning now.</p>
+                    <button class="expand-button" onclick="expandDashboard('quick-test')">Explore</button>
+                </div>
+
+                <!-- Clock Dashboard -->
+                <div class="dashboard-card" id="clock-card">
+                    <h2 data-translate="time">Time</h2>
+                    <div class="clock-preview" onclick="openClockPopup()">
+                        <div class="clock-analogue small" id="clock-analogue-preview">
+                            <div class="hand hour" id="hour-hand-preview"></div>
+                            <div class="hand minute" id="minute-hand-preview"></div>
+                            <div class="hand second" id="second-hand-preview"></div>
+                            <div class="center"></div>
+                        </div>
+                    </div>
+                    <button class="expand-button" onclick="openClockPopup()">Explore</button>
+                </div>
+            </div>
+
+            <!-- Expanded Quick Test Content -->
+            <div class="expanded-content" id="quick-test-expanded" style="display: none;">
+                <div class="intro-content">
+                    <p data-translate="test_your_xhosa_knowledge">Test your Xhosa knowledge with Sazi and his family before diving into our fun, interactive lessons! Choose your level, answer a few questions, or reveal the answers to start learning now.</p>
+                    <button class="read-more" onclick="toggleContent()" data-translate="read_more">Read More</button>
+                </div>
+                <div class="full-content">
+                    <p data-translate="test_your_xhosa_knowledge_full">Test your Xhosa knowledge with Sazi and his family before diving into our fun, interactive lessons! At <em>Saz’ isiXhosa, no Sapho</em>, we invite learners of all ages to explore the beauty of the Xhosa language and culture. Choose your level—beginner, intermediate, or expert/native speaker—and answer a few questions to gauge your skills. You can also reveal the answers to start learning immediately.</p>
+                    <p data-translate="our_site_offers">Our site offers a warm, engaging space to learn through vocabulary, phrases, numbers, grammar, and cultural insights. From the joy of <em>Ukuxoxa Iintsomi</em> (telling folk tales) to practical language skills, we blend heritage with modern learning. Explore our <a href="culture.html">Culture</a> section for tales of Transkei or try our <a href="activities.html">Activities</a> to make learning fun. Let’s keep Xhosa thriving together!</p>
+                    <button class="read-more" onclick="toggleContent()" data-translate="read_less">Read Less</button>
+                </div>
+                <div class="level-selection">
+                    <select id="knowledge-level">
+                        <option value="" data-translate="select_your_xhosa_level">Select your Xhosa level</option>
+                        <option value="beginner" data-translate="beginner_no_or_basic_knowledge">Beginner (No or Basic Knowledge)</option>
+                        <option value="intermediate" data-translate="intermediate">Intermediate</option>
+                        <option value="expert" data-translate="expert_native_speaker">Expert/Native Speaker</option>
+                    </select>
+                    <button onclick="startQuickTest()" data-translate="take_quick_test">Take Quick Test</button>
+                </div>
+                <div class="test-section" id="testSection" style="display:none;">
+                    <div id="testQuestions"></div>
+                    <div class="test-actions">
+                        <button onclick="revealAllAnswers()" data-translate="reveal_all_answers">Reveal All Answers</button>
+                        <a href="age-levels.html" class="start-learning" id="startLearning" data-translate="start_learning_now">Start Learning Now</a>
+                    </div>
+                </div>
+                <button class="collapse-button" onclick="collapseDashboard('quick-test')">Collapse</button>
+            </div>
+
+            <!-- Timeline (at the bottom) -->
             <div class="timeline-container">
                 <h2 data-translate="timeline">Timeline</h2>
                 <div class="timeline-carousel">
@@ -102,68 +172,6 @@
                     <h3 id="timeline-month"></h3>
                     <p id="timeline-info"></p>
                 </div>
-            </div>
-
-            <!-- Stages of Growth -->
-            <div class="stages-container">
-                <h2 data-translate="stages_of_growth">Stages of Growth</h2>
-                <div class="character-selection">
-                    <button onclick="selectCharacter('person')" data-translate="person">Person</button>
-                    <button onclick="selectCharacter('dog')" data-translate="dog">Dog</button>
-                </div>
-                <div class="stages-carousel" id="stages-carousel" style="display: none;">
-                    <div class="stages" id="stages-items"></div>
-                    <button class="carousel-button prev" onclick="moveStages(-1)">❮</button>
-                    <button class="carousel-button next" onclick="moveStages(1)">❯</button>
-                </div>
-                <div class="stages-details" id="stages-details" style="display: none;">
-                    <h3 id="stage-name"></h3>
-                    <p id="stage-info"></p>
-                </div>
-            </div>
-
-            <!-- Special Clock -->
-            <div class="clock-container">
-                <h2 data-translate="time">Time</h2>
-                <div class="clock-analogue" id="clock-analogue">
-                    <div class="hand hour" id="hour-hand"></div>
-                    <div class="hand minute" id="minute-hand"></div>
-                    <div class="hand second" id="second-hand"></div>
-                    <div class="center"></div>
-                </div>
-                <div class="clock-digital" id="clock-digital"></div>
-                <p id="clock-text" data-translate="time_is" data-translate-params='{"time":""}'>The time is</p>
-            </div>
-
-            <!-- Original Hero Content -->
-            <div class="hero">
-                <h2 data-translate="how_well_do_you_know_xhosa">How Well Do You Know Xhosa?</h2>
-                <div class="intro-content">
-                    <p data-translate="test_your_xhosa_knowledge">Test your Xhosa knowledge with Sazi and his family before diving into our fun, interactive lessons! Choose your level, answer a few questions, or reveal the answers to start learning now.</p>
-                    <button class="read-more" onclick="toggleContent()" data-translate="read_more">Read More</button>
-                </div>
-                <div class="full-content">
-                    <p data-translate="test_your_xhosa_knowledge_full">Test your Xhosa knowledge with Sazi and his family before diving into our fun, interactive lessons! At <em>Saz’ isiXhosa, no Sapho</em>, we invite learners of all ages to explore the beauty of the Xhosa language and culture. Choose your level—beginner, intermediate, or expert/native speaker—and answer a few questions to gauge your skills. You can also reveal the answers to start learning immediately.</p>
-                    <p data-translate="our_site_offers">Our site offers a warm, engaging space to learn through vocabulary, phrases, numbers, grammar, and cultural insights. From the joy of <em>Ukuxoxa Iintsomi</em> (telling folk tales) to practical language skills, we blend heritage with modern learning. Explore our <a href="culture.html">Culture</a> section for tales of Transkei or try our <a href="activities.html">Activities</a> to make learning fun. Let’s keep Xhosa thriving together!</p>
-                    <button class="read-more" onclick="toggleContent()" data-translate="read_less">Read Less</button>
-                </div>
-                <div class="level-selection">
-                    <select id="knowledge-level">
-                        <option value="" data-translate="select_your_xhosa_level">Select your Xhosa level</option>
-                        <option value="beginner" data-translate="beginner_no_or_basic_knowledge">Beginner (No or Basic Knowledge)</option>
-                        <option value="intermediate" data-translate="intermediate">Intermediate</option>
-                        <option value="expert" data-translate="expert_native_speaker">Expert/Native Speaker</option>
-                    </select>
-                    <button onclick="startQuickTest()" data-translate="take_quick_test">Take Quick Test</button>
-                </div>
-                <div class="test-section" id="testSection" style="display:none;">
-                    <div id="testQuestions"></div>
-                    <div class="test-actions">
-                        <button onclick="revealAllAnswers()" data-translate="reveal_all_answers">Reveal All Answers</button>
-                        <a href="age-levels.html" class="start-learning" id="startLearning" data-translate="start_learning_now">Start Learning Now</a>
-                    </div>
-                </div>
-                <img src="/sazi/img/Zazi_Mzantsi_Afrika.jpg" alt="Sazi and Family">
             </div>
         </div>
     </div>
