@@ -11,59 +11,156 @@
     <header>
         <nav>
             <ul>
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-                <li><a href="login.html">Login</a></li>
+                <li><a href="index.html" class="active" data-translate="home">Home</a></li>
+                <li><a href="about.html" data-translate="about_us">About Us</a></li>
+                <li><a href="contact.html" data-translate="contact_us">Contact Us</a></li>
+                <li><a href="login.html" data-translate="login">Login</a></li>
             </ul>
         </nav>
         <select class="language-toggle">
-            <option value="en">English</option>
-            <option value="xh">Xhosa</option>
+            <option value="en" data-translate-value="english">English</option>
+            <option value="xh" data-translate-value="xhosa">Xhosa</option>
         </select>
     </header>
 
     <div class="main-container">
         <div class="sidebar">
             <ul>
-                <li><a href="age-levels.html">Age Levels</a></li>
-                <li><a href="vocabulary.html">Vocabulary</a></li>
-                <li><a href="phrases.html">Phrases</a></li>
-                <li><a href="numbers.html">Numbers</a></li>
-                <li><a href="time.html">Time</a></li>
-                <li><a href="grammar.html">Grammar</a></li>
-                <li><a href="culture.html">Culture</a></li>
-                <li><a href="activities.html">Activities</a></li>
-                <li><a href="ask-khulu.html">Ask Khulu</a></li>
+                <li><a href="age-levels.html" data-translate="age_levels">Age Levels</a></li>
+                <li><a href="vocabulary.html" data-translate="vocabulary">Vocabulary</a></li>
+                <li><a href="phrases.html" data-translate="phrases">Phrases</a></li>
+                <li><a href="numbers.html" data-translate="numbers">Numbers</a></li>
+                <li><a href="time.html" data-translate="time">Time</a></li>
+                <li><a href="grammar.html" data-translate="grammar">Grammar</a></li>
+                <li><a href="culture.html" data-translate="culture">Culture</a></li>
+                <li><a href="activities.html" data-translate="activities">Activities</a></li>
+                <li><a href="ask-khulu.html" data-translate="ask_khulu">Ask Khulu</a></li>
             </ul>
         </div>
 
         <div class="content index">
+            <div class="gamification">
+                <p id="user-points">Points: 0</p>
+                <div class="points-progress">
+                    <div class="points-progress-bar"></div>
+                </div>
+                <div class="badge-list" id="user-badges"></div>
+            </div>
+
+            <!-- Fun Fact Popup -->
+            <div class="fun-fact-popup" id="fun-fact-popup">
+                <p id="fun-fact-text"></p>
+                <button onclick="closeFunFact()">Close</button>
+            </div>
+
+            <!-- Timeline Carousel -->
+            <div class="timeline-container">
+                <h2 data-translate="timeline">Timeline</h2>
+                <div class="timeline-carousel">
+                    <div class="timeline">
+                        <div class="timeline-item" data-month="january">
+                            <p>January<br>EyoMqungu</p>
+                        </div>
+                        <div class="timeline-item" data-month="february">
+                            <p>February<br>EyoMdumba</p>
+                        </div>
+                        <div class="timeline-item" data-month="march">
+                            <p>March<br>EyoKwindla</p>
+                        </div>
+                        <div class="timeline-item" data-month="april">
+                            <p>April<br>uTshaz'iimpuzi</p>
+                        </div>
+                        <div class="timeline-item" data-month="may">
+                            <p>May<br>EyeCanzibe</p>
+                        </div>
+                        <div class="timeline-item" data-month="june">
+                            <p>June<br>EyeSilimela</p>
+                        </div>
+                        <div class="timeline-item" data-month="july">
+                            <p>July<br>EyeKhala</p>
+                        </div>
+                        <div class="timeline-item" data-month="august">
+                            <p>August<br>EyeThupha</p>
+                        </div>
+                        <div class="timeline-item" data-month="september">
+                            <p>September<br>EyoMsintsi</p>
+                        </div>
+                        <div class="timeline-item" data-month="october">
+                            <p>October<br>EyeDwarha</p>
+                        </div>
+                        <div class="timeline-item" data-month="november">
+                            <p>November<br>EyeNkanga</p>
+                        </div>
+                        <div class="timeline-item" data-month="december">
+                            <p>December<br>EyoMnga</p>
+                        </div>
+                    </div>
+                    <button class="carousel-button prev" onclick="moveTimeline(-1)">❮</button>
+                    <button class="carousel-button next" onclick="moveTimeline(1)">❯</button>
+                </div>
+                <div class="timeline-details" id="timeline-details" style="display: none;">
+                    <h3 id="timeline-month"></h3>
+                    <p id="timeline-info"></p>
+                </div>
+            </div>
+
+            <!-- Stages of Growth -->
+            <div class="stages-container">
+                <h2 data-translate="stages_of_growth">Stages of Growth</h2>
+                <div class="character-selection">
+                    <button onclick="selectCharacter('person')" data-translate="person">Person</button>
+                    <button onclick="selectCharacter('dog')" data-translate="dog">Dog</button>
+                </div>
+                <div class="stages-carousel" id="stages-carousel" style="display: none;">
+                    <div class="stages" id="stages-items"></div>
+                    <button class="carousel-button prev" onclick="moveStages(-1)">❮</button>
+                    <button class="carousel-button next" onclick="moveStages(1)">❯</button>
+                </div>
+                <div class="stages-details" id="stages-details" style="display: none;">
+                    <h3 id="stage-name"></h3>
+                    <p id="stage-info"></p>
+                </div>
+            </div>
+
+            <!-- Special Clock -->
+            <div class="clock-container">
+                <h2 data-translate="time">Time</h2>
+                <div class="clock-analogue" id="clock-analogue">
+                    <div class="hand hour" id="hour-hand"></div>
+                    <div class="hand minute" id="minute-hand"></div>
+                    <div class="hand second" id="second-hand"></div>
+                    <div class="center"></div>
+                </div>
+                <div class="clock-digital" id="clock-digital"></div>
+                <p id="clock-text" data-translate="time_is" data-translate-params='{"time":""}'>The time is</p>
+            </div>
+
+            <!-- Original Hero Content -->
             <div class="hero">
-                <h2>How Well Do You Know Xhosa?</h2>
+                <h2 data-translate="how_well_do_you_know_xhosa">How Well Do You Know Xhosa?</h2>
                 <div class="intro-content">
-                    <p>Test your Xhosa knowledge with Sazi and his family before diving into our fun, interactive lessons! Choose your level, answer a few questions, or reveal the answers to start learning now.</p>
-                    <button class="read-more" onclick="toggleContent()">Read More</button>
+                    <p data-translate="test_your_xhosa_knowledge">Test your Xhosa knowledge with Sazi and his family before diving into our fun, interactive lessons! Choose your level, answer a few questions, or reveal the answers to start learning now.</p>
+                    <button class="read-more" onclick="toggleContent()" data-translate="read_more">Read More</button>
                 </div>
                 <div class="full-content">
-                    <p>Test your Xhosa knowledge with Sazi and his family before diving into our fun, interactive lessons! At <em>Saz’ isiXhosa, no Sapho</em>, we invite learners of all ages to explore the beauty of the Xhosa language and culture. Choose your level—beginner, intermediate, or expert/native speaker—and answer a few questions to gauge your skills. You can also reveal the answers to start learning immediately.</p>
-                    <p>Our site offers a warm, engaging space to learn through vocabulary, phrases, numbers, grammar, and cultural insights. From the joy of <em>Ukuxoxa Iintsomi</em> (telling folk tales) to practical language skills, we blend heritage with modern learning. Explore our <a href="culture.html">Culture</a> section for tales of Transkei or try our <a href="activities.html">Activities</a> to make learning fun. Let’s keep Xhosa thriving together!</p>
-                    <button class="read-more" onclick="toggleContent()">Read Less</button>
+                    <p data-translate="test_your_xhosa_knowledge_full">Test your Xhosa knowledge with Sazi and his family before diving into our fun, interactive lessons! At <em>Saz’ isiXhosa, no Sapho</em>, we invite learners of all ages to explore the beauty of the Xhosa language and culture. Choose your level—beginner, intermediate, or expert/native speaker—and answer a few questions to gauge your skills. You can also reveal the answers to start learning immediately.</p>
+                    <p data-translate="our_site_offers">Our site offers a warm, engaging space to learn through vocabulary, phrases, numbers, grammar, and cultural insights. From the joy of <em>Ukuxoxa Iintsomi</em> (telling folk tales) to practical language skills, we blend heritage with modern learning. Explore our <a href="culture.html">Culture</a> section for tales of Transkei or try our <a href="activities.html">Activities</a> to make learning fun. Let’s keep Xhosa thriving together!</p>
+                    <button class="read-more" onclick="toggleContent()" data-translate="read_less">Read Less</button>
                 </div>
                 <div class="level-selection">
                     <select id="knowledge-level">
-                        <option value="">Select your Xhosa level</option>
-                        <option value="beginner">Beginner (No or Basic Knowledge)</option>
-                        <option value="intermediate">Intermediate</option>
-                        <option value="expert">Expert/Native Speaker</option>
+                        <option value="" data-translate="select_your_xhosa_level">Select your Xhosa level</option>
+                        <option value="beginner" data-translate="beginner_no_or_basic_knowledge">Beginner (No or Basic Knowledge)</option>
+                        <option value="intermediate" data-translate="intermediate">Intermediate</option>
+                        <option value="expert" data-translate="expert_native_speaker">Expert/Native Speaker</option>
                     </select>
-                    <button onclick="startQuickTest()">Take Quick Test</button>
+                    <button onclick="startQuickTest()" data-translate="take_quick_test">Take Quick Test</button>
                 </div>
                 <div class="test-section" id="testSection" style="display:none;">
                     <div id="testQuestions"></div>
                     <div class="test-actions">
-                        <button onclick="revealAllAnswers()">Reveal All Answers</button>
-                        <a href="age-levels.html" class="start-learning" id="startLearning">Start Learning Now</a>
+                        <button onclick="revealAllAnswers()" data-translate="reveal_all_answers">Reveal All Answers</button>
+                        <a href="age-levels.html" class="start-learning" id="startLearning" data-translate="start_learning_now">Start Learning Now</a>
                     </div>
                 </div>
                 <img src="/sazi/img/Zazi_Mzantsi_Afrika.jpg" alt="Sazi and Family">
