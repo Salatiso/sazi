@@ -1,47 +1,113 @@
-function showAgeGroup(ageGroupId) {
-  if (!ageGroupId) {
-    console.error("No age group ID provided.");
-    return;
-  }
+function checkAnswer(id, correctAnswer) {
+    const input = document.getElementById(`input-${id}`).value.trim();
+    const feedback = document.getElementById(`feedback-${id}`);
+    const xhosaCell = document.querySelector(`#input-${id}`).parentElement.querySelector('.xhosa-cell');
+    const audio = document.getElementById(`audio-${id}`);
 
-  // Hide all age groups
-  const ageGroups = document.querySelectorAll('.age-group');
-  ageGroups.forEach(group => {
-    group.style.display = 'none';
-    group.setAttribute('aria-hidden', 'true'); // Accessibility improvement
-  });
-
-  // Show the selected age group
-  const selectedAgeGroup = document.getElementById(ageGroupId);
-  if (selectedAgeGroup) {
-    selectedAgeGroup.style.display = 'block';
-    selectedAgeGroup.setAttribute('aria-hidden', 'false'); // Accessibility improvement
-  } else {
-    console.error(`Age group with ID '${ageGroupId}' not found.`);
-  }
-
-  // Optional: Update active state of buttons (for styling)
-  const ageButtons = document.querySelectorAll('.age-buttons button');
-  ageButtons.forEach(button => {
-    button.classList.remove('active');
-  });
-  const button = document.querySelector(`button[data-age-group="${ageGroupId}"]`);
-  if (button) {
-    button.classList.add('active');
-  } else {
-    console.error(`Button corresponding to age group ID '${ageGroupId}' not found.`);
-  }
-
-  // Scroll to the top of the content area (optional)
-  const content = document.querySelector('.content');
-  if (content) {
-    content.scrollTo(0, 0);
-  }
+    if (input.toLowerCase() === correctAnswer.toLowerCase()) {
+        feedback.textContent = "Congratulations!";
+        feedback.style.color = "green";
+    } else {
+        feedback.textContent = `Nice try! The correct word is ${correctAnswer}.`;
+        feedback.style.color = "red";
+    }
+    feedback.classList.add('visible');
+    xhosaCell.classList.add('visible');
+    audio.style.display = 'block';
 }
 
-// Show the 'home' section by default (or the first age group, or whatever you prefer)
-if (document.getElementById('home')) {
-  showAgeGroup('home');
-} else {
-  console.error("Default section 'home' not found.");
+function revealAnswer(id) {
+    const xhosaCell = document.querySelector(`#input-${id}`).parentElement.querySelector('.xhosa-cell');
+    const audio = document.getElementById(`audio-${id}`);
+    xhosaCell.classList.add('visible');
+    audio.style.display = 'block';
+}
+
+function showTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`button[onclick="showTab('${tabId}')"]`).classList.add('active');
+}
+
+// New: Login Form Handling
+document.addEventListener('DOMContentLoaded', () => {
+    const studentForm = document.getElementById('student-login-form');
+    const userForm = document.getElementById('user-login-form');
+
+    if (studentForm) {
+        studentForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('student-username').value.trim();
+            const code = document.getElementById('student-code').value.trim();
+            const errorElement = document.getElementById('student-error');
+
+            try {
+                const response = await fetch('/api/login/student', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, code })
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('token', data.token);
+                    window.location.href = 'index.html'; // Redirect to homepage after login
+                } else {
+                    errorElement.textContent = data.message || 'Invalid username or code';
+                    errorElement.style.display = 'block';
+                }
+            } catch (error) {
+                errorElement.textContent = 'An error occurred. Please try again.';
+                errorElement.style.display = 'block';
+            }
+        });
+    }
+
+    if (userForm) {
+        userForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('user-email').value.trim();
+            const password = document.getElementById('user-password').value;
+            const errorElement = document.getElementById('user-error');
+
+            try {
+                const response = await fetch('/api/login/user', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('token', data.token);
+                    window.location.href = 'index.html'; // Redirect to homepage after login
+                } else {
+                    errorElement.textContent = data.message || 'Invalid email or password';
+                    errorElement.style.display = 'block';
+                }
+            } catch (error) {
+                errorElement.textContent = 'An error occurred. Please try again.';
+                errorElement.style.display = 'block';
+            }
+        });
+    }
+});
+
+function requestPasswordReset() {
+    const email = prompt('Enter your email to receive a password reset link:');
+    if (email) {
+        fetch('/api/reset-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message || 'If your email is registered, you will receive a reset link.');
+        })
+        .catch(error => {
+            alert('An error occurred. Please try again.');
+        });
+    }
 }
