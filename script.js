@@ -1,34 +1,28 @@
-function checkAnswer(id, correctAnswer) {
-    const input = document.getElementById(`input-${id}`).value.trim();
-    const feedback = document.getElementById(`feedback-${id}`);
-    const xhosaCell = document.querySelector(`#input-${id}`).parentElement.querySelector('.xhosa-cell');
-    const audio = document.getElementById(`audio-${id}`);
+const beginnerQuestions = [
+    { english: 'Hello', xhosa: 'Molo', source: 'vocabulary', id: 'molo' },
+    { english: 'Dog', xhosa: 'Inja', source: 'vocabulary', id: 'inja' },
+    { english: 'One', xhosa: 'Nye', source: 'numbers', id: 'nye' },
+    { english: 'Two', xhosa: 'Mbini', source: 'numbers', id: 'mbini' },
+    { english: 'Cat', xhosa: 'Ikati', source: 'vocabulary', id: 'ikati' },
+];
 
-    if (input.toLowerCase() === correctAnswer.toLowerCase()) {
-        feedback.textContent = "Congratulations!";
-        feedback.style.color = "green";
-    } else {
-        feedback.textContent = `Nice try! The correct word is ${correctAnswer}.`;
-        feedback.style.color = "red";
-    }
-    feedback.classList.add('visible');
-    xhosaCell.classList.add('visible');
-    audio.style.display = 'block';
-}
+const intermediateQuestions = [
+    { english: 'I love you', xhosa: 'Ndiyakuthanda', source: 'phrases', id: 'ndiyakuthanda' },
+    { english: 'How are you?', xhosa: 'Unjani?', source: 'phrases', id: 'unjani' },
+    { english: 'I’m hungry', xhosa: 'Ndilambile', source: 'phrases', id: 'ndilambile' },
+    { english: 'Goodbye', xhosa: 'Sala kakuhle', source: 'phrases', id: 'sala_kakuhle' },
+    { english: 'Come', xhosa: 'Yiza', source: 'phrases', id: 'yiza' },
+];
 
-function revealAnswer(id) {
-    const xhosaCell = document.querySelector(`#input-${id}`).parentElement.querySelector('.xhosa-cell');
-    const audio = document.getElementById(`audio-${id}`);
-    xhosaCell.classList.add('visible');
-    audio.style.display = 'block';
-}
+const expertQuestions = [
+    { english: 'Telling Folk Tales', xhosa: 'Ukuxoxa Iintsomi', source: 'activities', id: 'ukuxoxa_iintsomi' },
+    { english: 'Welcoming a Newborn', xhosa: 'Imbeleko', source: 'culture', id: 'imbeleko' },
+    { english: 'Skipping Rope', xhosa: 'Umgusha', source: 'activities', id: 'umgusha' },
+    { english: 'Respect', xhosa: 'Intlonipho', source: 'culture', id: 'intlonipho' },
+    { english: 'Mourning', xhosa: 'Ukuzila', source: 'culture', id: 'ukuzila' },
+];
 
-function showTab(tabId) {
-    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-    document.querySelector(`button[onclick="showTab('${tabId}')"]`).classList.add('active');
-}
+let currentQuestions = [];
 
 function toggleContent() {
     const intro = document.querySelector('.intro-content');
@@ -45,22 +39,96 @@ function toggleContent() {
     }
 }
 
-let currentIndex = 0;
-const items = document.querySelectorAll('.carousel-item');
-const totalItems = items.length;
-
-function moveCarousel(direction) {
-    currentIndex += direction;
-    if (currentIndex < 0) {
-        currentIndex = totalItems - 3; // Adjust for 3 items displayed
-    } else if (currentIndex > totalItems - 3) {
-        currentIndex = 0;
+function startQuickTest() {
+    const level = document.getElementById('knowledge-level').value;
+    if (!level) {
+        alert('Please select your Xhosa level!');
+        return;
     }
-    const offset = -currentIndex * (100 / 3);
-    document.querySelector('.carousel').style.transform = `translateX(${offset}%)`;
+
+    const testSection = document.getElementById('testSection');
+    const testQuestions = document.getElementById('testQuestions');
+    testSection.style.display = 'block';
+    testQuestions.innerHTML = '';
+
+    const questionPool = level === 'beginner' ? beginnerQuestions :
+                        level === 'intermediate' ? intermediateQuestions :
+                        expertQuestions;
+
+    currentQuestions = questionPool.sort(() => 0.5 - Math.random()).slice(0, 5);
+
+    currentQuestions.forEach((question, index) => {
+        const div = document.createElement('div');
+        div.className = 'test-question';
+        div.innerHTML = `
+            <span>What is "${question.english}" in Xhosa?</span>
+            <input type="text" id="test-input-${index}" placeholder="Type Xhosa answer">
+            <button onclick="checkTestAnswer(${index}, '${question.xhosa}')">Check</button>
+            <button onclick="revealTestAnswer(${index}, '${question.xhosa}')">Reveal</button>
+            <div id="test-feedback-${index}" class="test-feedback"></div>
+            <audio controls style="display:none;" id="test-audio-${index}">
+                <source src="/sazi/audio/${question.source}/all/${question.id}.mp3" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        `;
+        testQuestions.appendChild(div);
+    });
+
+    document.getElementById('startLearning').classList.remove('visible');
 }
 
-setInterval(() => moveCarousel(1), 5000);
+function checkTestAnswer(index, correctAnswer) {
+    const input = document.getElementById(`test-input-${index}`).value.trim();
+    const feedback = document.getElementById(`test-feedback-${index}`);
+    const audio = document.getElementById(`test-audio-${index}`);
+
+    if (input.toLowerCase() === correctAnswer.toLowerCase()) {
+        feedback.textContent = "Congratulations!";
+        feedback.style.color = "green";
+    } else {
+        feedback.textContent = `Nice try! The correct answer is ${correctAnswer}.`;
+        feedback.style.color = "red";
+    }
+    feedback.classList.add('visible');
+    audio.style.display = 'block';
+
+    checkAllAnswered();
+}
+
+function revealTestAnswer(index, correctAnswer) {
+    const feedback = document.getElementById(`test-feedback-${index}`);
+    const audio = document.getElementById(`test-audio-${index}`);
+    feedback.textContent = `The correct answer is ${correctAnswer}.`;
+    feedback.style.color = "blue";
+    feedback.classList.add('visible');
+    audio.style.display = 'block';
+
+    checkAllAnswered();
+}
+
+function revealAllAnswers() {
+    currentQuestions.forEach((question, index) => {
+        const input = document.getElementById(`test-input-${index}`);
+        const feedback = document.getElementById(`test-feedback-${index}`);
+        const audio = document.getElementById(`test-audio-${index}`);
+        input.value = question.xhosa;
+        feedback.textContent = `The correct answer is ${question.xhosa}.`;
+        feedback.style.color = "blue";
+        feedback.classList.add('visible');
+        audio.style.display = 'block';
+    });
+    document.getElementById('startLearning').classList.add('visible');
+}
+
+function checkAllAnswered() {
+    const allAnswered = currentQuestions.every((_, index) => {
+        const feedback = document.getElementById(`test-feedback-${index}`);
+        return feedback.classList.contains('visible');
+    });
+    if (allAnswered) {
+        document.getElementById('startLearning').classList.add('visible');
+    }
+}
 
 // Login Form Handling
 document.addEventListener('DOMContentLoaded', () => {
@@ -75,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const errorElement = document.getElementById('student-error');
 
             try {
-                const response = await fetch('/api/login/student', {
+                const response = await fetch('https://sazi.life/api/auth/login/student', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, code })
@@ -84,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     localStorage.setItem('token', data.token);
-                    window.location.href = 'index.html'; // Redirect to homepage after login
+                    window.location.href = 'dashboard.html';
                 } else {
                     errorElement.textContent = data.message || 'Invalid username or code';
                     errorElement.style.display = 'block';
@@ -104,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const errorElement = document.getElementById('user-error');
 
             try {
-                const response = await fetch('/api/login/user', {
+                const response = await fetch('https://sazi.life/api/auth/login/user', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
@@ -113,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     localStorage.setItem('token', data.token);
-                    window.location.href = 'index.html'; // Redirect to homepage after login
+                    window.location.href = 'dashboard.html';
                 } else {
                     errorElement.textContent = data.message || 'Invalid email or password';
                     errorElement.style.display = 'block';
@@ -124,22 +192,132 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Avatar Selection
+    const avatarOptions = document.querySelectorAll('.avatar-option');
+    avatarOptions.forEach(option => {
+        option.addEventListener('click', async () => {
+            const avatar = option.dataset.avatar;
+            const token = localStorage.getItem('token');
+            try {
+                const response = await fetch('https://sazi.life/api/profiles/update-avatar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ avatar })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    alert('Avatar updated successfully!');
+                    window.location.reload();
+                } else {
+                    alert(data.message || 'Failed to update avatar');
+                }
+            } catch (error) {
+                alert('An error occurred. Please try again.');
+            }
+        });
+    });
+
+    // Dashboard Data
+    const dashboard = document.querySelector('.dashboard');
+    if (dashboard) {
+        fetchDashboardData();
+    }
+
+    // Profile Data
+    const profile = document.querySelector('.profile');
+    if (profile) {
+        fetchProfileData();
+    }
+
+    // Chat Initialization
+    const chat = document.querySelector('.chat');
+    if (chat) {
+        initializeChat();
+    }
+
+    // Live Class Initialization
+    const liveClass = document.querySelector('.live-class');
+    if (liveClass) {
+        initializeLiveClass();
+    }
 });
 
-function requestPasswordReset() {
-    const email = prompt('Enter your email to receive a password reset link:');
-    if (email) {
-        fetch('/api/reset-password', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email })
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message || 'If your email is registered, you will receive a reset link.');
-        })
-        .catch(error => {
-            alert('An error occurred. Please try again.');
+async function fetchDashboardData() {
+    const token = localStorage.getItem('token');
+    try {
+        const response = await fetch('https://sazi.life/api/classes', {
+            headers: { 'Authorization': `Bearer ${token}` }
         });
+        const data = await response.json();
+        if (response.ok) {
+            // Placeholder: Display dashboard data
+            console.log('Dashboard data:', data);
+        } else {
+            alert(data.message || 'Failed to load dashboard data');
+        }
+    } catch (error) {
+        alert('An error occurred while loading dashboard data.');
     }
+}
+
+async function fetchProfileData() {
+    const token = localStorage.getItem('token');
+    try {
+        const response = await fetch('https://sazi.life/api/profiles', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await response.json();
+        if (response.ok) {
+            // Placeholder: Display profile data
+            console.log('Profile data:', data);
+        } else {
+            alert(data.message || 'Failed to load profile data');
+        }
+    } catch (error) {
+        alert('An error occurred while loading profile data.');
+    }
+}
+
+function initializeChat() {
+    const socket = io('https://sazi.life');
+    const classId = 'example-class-id'; // Replace with actual class ID
+    socket.emit('joinClass', classId);
+
+    socket.on('message', (data) => {
+        const messages = document.querySelector('.chat-messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'chat-message';
+        messageDiv.textContent = `${data.senderId}: ${data.message}`;
+        messages.appendChild(messageDiv);
+        messages.scrollTop = messages.scrollHeight;
+    });
+
+    const chatForm = document.querySelector('.chat-input');
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const messageInput = chatForm.querySelector('input');
+        const message = messageInput.value.trim();
+        if (message) {
+            socket.emit('chatMessage', { classId, senderId: 'user-id', message }); // Replace 'user-id'
+            messageInput.value = '';
+        }
+    });
+}
+
+function initializeLiveClass() {
+    const domain = 'meet.jit.si';
+    const options = {
+        roomName: 'SaziClassRoom', // Replace with dynamic room name
+        width: '100%',
+        height: '100%',
+        parentNode: document.querySelector('#jitsi-container'),
+        userInfo: {
+            displayName: 'Sazi User' // Replace with user name
+        }
+    };
+    const api = new JitsiMeetExternalAPI(domain, options);
 }
