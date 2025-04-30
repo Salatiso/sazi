@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saz' isiXhosa, no Sapho - Login</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1 class="site-title">Saz' isiXhosa, no Sapho</h1>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login.html" class="active">Login</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <div class="main-container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="age-levels.html">Age Levels</a></li>
+                <li><a href="vocabulary.html">Vocabulary</a></li>
+                <li><a href="phrases.html">Phrases</a></li>
+                <li><a href="numbers.html">Numbers</a></li>
+                <li><a href="time.html">Time</a></li>
+                <li><a href="grammar.html">Grammar</a></li>
+                <li><a href="culture.html">Culture</a></li>
+                <li><a href="activities.html">Activities</a></li>
+                <li><a href="ask-khulu.html">Ask Khulu</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div id="login" class="section">
+                <h2>Login</h2>
+                <div class="tabs">
+                    <button class="tab-button active" onclick="showTab('student-login')">Student Login</button>
+                    <button class="tab-button" onclick="showTab('user-login')">Teacher/Parent/Admin Login</button>
+                </div>
+                <div id="student-login" class="tab-content active">
+                    <form id="student-login-form">
+                        <label for="student-username">Username (First Name):</label>
+                        <input type="text" id="student-username" placeholder="e.g., Sazi" required>
+                        <label for="student-code">4-Digit Code:</label>
+                        <input type="text" id="student-code" placeholder="e.g., 1234" maxlength="4" required>
+                        <button type="submit">Login</button>
+                        <p id="student-error" class="error-message"></p>
+                    </form>
+                </div>
+                <div id="user-login" class="tab-content">
+                    <form id="user-login-form">
+                        <label for="user-email">Email:</label>
+                        <input type="email" id="user-email" placeholder="e.g., teacher@example.com" required>
+                        <label for="user-password">Password:</label>
+                        <input type="password" id="user-password" placeholder="Enter your password" required>
+                        <button type="submit">Login</button>
+                        <p><a href="#" onclick="requestPasswordReset()">Forgot Password?</a></p>
+                        <p id="user-error" class="error-message"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Mdeni Family</p>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
