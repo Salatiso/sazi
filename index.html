@@ -4,7 +4,189 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saz' isiXhosa, no Sapho</title>
-    <link rel="stylesheet" href="/style.css?v=1">
+    <style>
+        :root {
+            --primary-bg: #444;
+            --primary-color: white;
+            --secondary-bg: #f4f4f4;
+            --secondary-color: #333;
+            --hover-bg: #555;
+            --accent-color: #ffcc80;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            background-color: var(--secondary-bg);
+            color: var(--secondary-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .site-title {
+            text-align: center;
+            padding: 1rem;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        header {
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 2rem;
+        }
+
+        header nav ul li a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            flex: 0 0 200px;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .sidebar ul {
+            padding: 0;
+            margin: 1rem 0;
+            list-style: none;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--hover-bg);
+        }
+
+        .sidebar ul li a:hover {
+            background: var(--hover-bg);
+        }
+
+        .sidebar ul li a.active {
+            background: var(--hover-bg);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main-container {
+                flex-direction: column;
+            }
+        }
+
+        .content {
+            flex: 1;
+            padding: 2rem;
+            background: url('/sazi/img/Sazi_Grandma.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 1rem;
+            }
+        }
+
+        .section {
+            padding: 2rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: var(--secondary-color);
+        }
+
+        .section a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .section a:hover {
+            text-decoration: underline;
+        }
+
+        .section img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .intro-content {
+            display: block;
+        }
+
+        .full-content {
+            display: none;
+        }
+
+        .read-more {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        .read-more:hover {
+            background-color: #e6b800;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background: var(--primary-bg);
+            color: var(--primary-color);
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            header nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <h1 class="site-title">Saz' isiXhosa, no Sapho</h1>
@@ -37,8 +219,16 @@
         <div class="content">
             <div id="home" class="section">
                 <h2>Welcome to Saz’ isiXhosa, no Sapho</h2>
-                <p>Join Sazi and his cousins to learn Xhosa, the language of the Eastern Cape! Explore our lessons, activities, and cultural insights designed for learners of all ages.</p>
-                <img src="/img/Zazi_Mzantsi_Afrika.jpg" alt="Sazi and Family">
+                <div class="intro-content">
+                    <p>Join Sazi and his cousins to learn Xhosa, the language of the Eastern Cape! Explore our lessons, activities, and cultural insights designed for learners of all ages.</p>
+                    <button class="read-more" onclick="toggleContent()">Read More</button>
+                </div>
+                <div class="full-content">
+                    <p>Join Sazi and his cousins on a vibrant journey to learn Xhosa, the heart language of the Eastern Cape! At <em>Saz’ isiXhosa, no Sapho</em>, we invite learners of all ages to dive into our interactive lessons, engaging activities, and rich cultural insights. Whether you're a child discovering the rhythm of Xhosa words, a parent sharing traditions with your family, or an adult reconnecting with your roots, our site is a warm, welcoming space to explore.</p>
+                    <p>Discover the beauty of Xhosa through vocabulary, phrases, numbers, and grammar, all woven with stories and traditions from our multigenerational family. From the joy of <em>Ukuxoxa Iintsomi</em> (telling folk tales) to practical language skills, we blend heritage with modern learning. Explore our <a href="culture.html">Culture</a> section for tales of Transkei or try our <a href="activities.html">Activities</a> to make learning fun. Let’s keep Xhosa thriving together!</p>
+                    <button class="read-more" onclick="toggleContent()">Read Less</button>
+                </div>
+                <img src="/sazi/img/Zazi_Mzantsi_Afrika.jpg" alt="Sazi and Family">
             </div>
         </div>
     </div>
@@ -47,6 +237,21 @@
         <p>© 2025 Mdeni Family</p>
     </footer>
 
-    <script src="/script.js"></script>
+    <script>
+        function toggleContent() {
+            const intro = document.querySelector('.intro-content');
+            const full = document.querySelector('.full-content');
+            const button = document.querySelector('.read-more');
+            if (full.style.display === 'none' || full.style.display === '') {
+                intro.style.display = 'none';
+                full.style.display = 'block';
+                button.textContent = 'Read Less';
+            } else {
+                intro.style.display = 'block';
+                full.style.display = 'none';
+                button.textContent = 'Read More';
+            }
+        }
+    </script>
 </body>
 </html>
