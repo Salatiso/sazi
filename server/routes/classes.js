@@ -1,99 +1,80 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const router = express.Router();
-const { authenticateToken } = require('../middleware/auth');
+const Class = require('../models/Class');
+const User = require('../models/User');
+const auth = require('../middleware/auth');
+const validate = require('../middleware/validate');
 
-// Class Schema
-const classSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    teacherId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    lessons: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Lesson' }]
-});
-const Class = mongoose.model('Class', classSchema);
+const generateClassCode = () => {
+    const prefix = 'CLASS-';
+    const random = Math.random().toString(36).substr(2, 8).toUpperCase();
+    return `${prefix}${random}-${new Date().getFullYear()}`;
+};
 
-// User Schema (for reference)
-const User = mongoose.model('User');
+const generateStudentId = (index) => {
+    return `STUDENT${String(index + 1).padStart(3, '0')}`;
+};
 
-// Get Classes for User (Teacher/Admin see their classes, Students see their enrolled classes)
-router.get('/', authenticateToken, async (req, res) => {
+// Create a Class
+router.post('/create', auth, validate({
+    type: { type: 'string', enum: ['structured', 'unstructured'] },
+    location: { type: 'string', optional: true },
+    numStudents: { type: 'number', optional: true }
+}), async (req, res) => {
+    const { type, location, numStudents } = req.body;
+    if (req.user.role !== 'parent-teacher') return res.status(403).json({ message: 'Access denied' });
+
     try {
-        let classes;
-        if (req.user.role === 'teacher' || req.user.role === 'admin') {
-            classes = await Class.find({ teacherId: req.user.id }).populate('students', 'username avatar');
-        } else if (req.user.role === 'student') {
-            classes = await Class.find({ students: req.user.id }).populate('teacherId', 'profile');
-        } else if (req.user.role === 'parent') {
-            const child = await User.findOne({ parentId: req.user.id });
-            if (!child) return res.status(404).json({ message: 'Child not found' });
-            classes = await Class.find({ students: child._id }).populate('teacherId', 'profile');
-        } else {
-            return res.status(403).json({ message: 'Unauthorized' });
+        let classCode;
+        do {
+            classCode = generateClassCode();
+        } while (await Class.findOne({ classCode }));
+
+        const studentIds = [];
+        if (type === 'structured' && numStudents) {
+            for (let i = 0; i < numStudents; i++) {
+                studentIds.push({
+                    studentId: generateStudentId(i),
+                    progress: {},
+                    linkedParentEmail: null
+                });
+            }
         }
-
-        res.json(classes);
-    } catch (error) {
-        res.status(500).json({ message: 'Server error' });
-    }
-});
-
-// Create Class (Teacher/Admin only)
-router.post('/create', authenticateToken, async (req, res) => {
-    try {
-        if (req.user.role !== 'teacher' && req.user.role !== 'admin') {
-            return res.status(403).json({ message: 'Unauthorized' });
-        }
-
-        const { name } = req.body;
-        if (!name) return res.status(400).json({ message: 'Class name required' });
 
         const newClass = new Class({
-            name,
-            teacherId: req.user.id,
-            students: [],
-            lessons: []
+            classCode,
+            type,
+            createdBy: req.user._id,
+            location: type === 'structured' ? location : undefined,
+            studentIds: type === 'structured' ? studentIds : [],
+            isPrivate: type === 'structured'
         });
-
         await newClass.save();
-        res.json(newClass);
+
+        req.user.createdClasses.push(newClass._id);
+        await req.user.save();
+
+        res.status(201).json({ classCode, studentIds });
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
 });
 
-// Add Student to Class (Teacher/Admin only)
-router.post('/add-student', authenticateToken, async (req, res) => {
+// Join an Unstructured Class
+router.post('/join/:classCode', auth, async (req, res) => {
+    if (req.user.role !== 'student') return res.status(403).json({ message: 'Access denied' });
+
     try {
-        if (req.user.role !== 'teacher' && req.user.role !== 'admin') {
-            return res.status(403).json({ message: 'Unauthorized' });
-        }
-
-        const { username, code, classId } = req.body;
-        if (!username || !code || !classId) {
-            return res.status(400).json({ message: 'Username, code, and classId required' });
-        }
-
-        const student = await User.findOne({ role: 'student', username, code });
-        if (!student) return res.status(404).json({ message: 'Student not found' });
-
-        const classData = await Class.findById(classId);
+        const classData = await Class.findOne({ classCode: req.params.classCode });
         if (!classData) return res.status(404).json({ message: 'Class not found' });
-        if (classData.teacherId.toString() !== req.user.id && req.user.role !== 'admin') {
-            return res.status(403).json({ message: 'Unauthorized' });
+        if (classData.isPrivate) return res.status(403).json({ message: 'This class is private' });
+
+        if (!req.user.joinedClasses.includes(classData._id)) {
+            req.user.joinedClasses.push(classData._id);
+            await req.user.save();
         }
 
-        if (classData.students.length >= 25) {
-            return res.status(400).json({ message: 'Class is full (max 25 students)' });
-        }
-
-        if (classData.students.includes(student._id)) {
-            return res.status(400).json({ message: 'Student already in class' });
-        }
-
-        classData.students.push(student._id);
-        await classData.save();
-
-        res.json(classData);
+        res.json({ message: 'Joined class successfully' });
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
