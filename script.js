@@ -820,7 +820,15 @@ document.addEventListener('DOMContentLoaded', () => {
         initializeLiveClass();
     }
 });
-
+function highlightCategory(category) {
+    const items = document.querySelectorAll('.carousel-item');
+    items.forEach(item => {
+        item.style.background = '';
+        if (item.dataset.category === category) {
+            item.style.background = 'rgba(255, 204, 128, 0.5)';
+        }
+    });
+}
 async function fetchDashboardData() {
     const token = localStorage.getItem('token');
     try {
