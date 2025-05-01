@@ -253,6 +253,8 @@ let currentTimelineMonth = null;
 let currentTimelineAnswer = '';
 let currentSidebarQuestion = null;
 let booksCarouselIndex = 0;
+let booksItems = [];
+let totalBooksItems = 0;
 
 async function loadTranslations(lang) {
     try {
@@ -424,18 +426,55 @@ function moveTimeline(direction) {
     updateTimelineDetails();
 }
 
+function initializeBooksCarousel() {
+    const carousel = document.querySelector('#books-carousel .carousel');
+    if (!carousel) return;
+
+    booksItems = document.querySelectorAll('#books-carousel .carousel-item');
+    totalBooksItems = booksItems.length;
+
+    // Clone items for infinite scroll
+    booksItems.forEach(item => {
+        const clone = item.cloneNode(true);
+        carousel.appendChild(clone);
+    });
+
+    // Update total items after cloning
+    booksItems = document.querySelectorAll('#books-carousel .carousel-item');
+    totalBooksItems = booksItems.length;
+
+    // Start auto-scroll
+    setInterval(() => moveBooksCarousel(1), 5000);
+}
+
 function moveBooksCarousel(direction) {
-    const items = document.querySelectorAll('#books-carousel .carousel-item');
-    const totalItems = items.length;
+    const carousel = document.querySelector('#books-carousel .carousel');
+    if (!carousel) return;
+
+    const visibleItems = window.innerWidth <= 480 ? 1 : window.innerWidth <= 768 ? 2 : 3;
+    const itemWidth = 100 / visibleItems;
 
     booksCarouselIndex += direction;
+
+    // Seamless looping
     if (booksCarouselIndex < 0) {
-        booksCarouselIndex = totalItems - 3; // Adjust for 3 items displayed
-    } else if (booksCarouselIndex > totalItems - 3) {
+        booksCarouselIndex = totalBooksItems / 2 - visibleItems;
+        carousel.style.transition = 'none';
+        carousel.style.transform = `translateX(-${booksCarouselIndex * itemWidth}%)`;
+        // Force reflow to reset transition
+        carousel.offsetHeight;
+        carousel.style.transition = 'transform 0.5s ease-in-out';
+    } else if (booksCarouselIndex >= totalBooksItems / 2) {
         booksCarouselIndex = 0;
+        carousel.style.transition = 'none';
+        carousel.style.transform = `translateX(0%)`;
+        // Force reflow to reset transition
+        carousel.offsetHeight;
+        carousel.style.transition = 'transform 0.5s ease-in-out';
     }
-    const offset = -booksCarouselIndex * (100 / 3);
-    document.querySelector('#books-carousel .carousel').style.transform = `translateX(${offset}%)`;
+
+    const offset = -booksCarouselIndex * itemWidth;
+    carousel.style.transform = `translateX(${offset}%)`;
 }
 
 function updateTimelineDetails() {
@@ -891,7 +930,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Books Carousel (only on about.html)
     if (document.querySelector('#books-carousel')) {
-        setInterval(() => moveBooksCarousel(1), 5000);
+        initializeBooksCarousel();
     }
 
     // Initialize Sidebar Quiz (on all pages)
