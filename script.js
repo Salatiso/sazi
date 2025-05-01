@@ -252,6 +252,7 @@ let timelineIndex = 0;
 let currentTimelineMonth = null;
 let currentTimelineAnswer = '';
 let currentSidebarQuestion = null;
+let booksCarouselIndex = 0;
 
 async function loadTranslations(lang) {
     try {
@@ -421,6 +422,20 @@ function moveTimeline(direction) {
     const offset = -timelineIndex * (100 / 3);
     document.querySelector('.timeline').style.transform = `translateX(${offset}%)`;
     updateTimelineDetails();
+}
+
+function moveBooksCarousel(direction) {
+    const items = document.querySelectorAll('#books-carousel .carousel-item');
+    const totalItems = items.length;
+
+    booksCarouselIndex += direction;
+    if (booksCarouselIndex < 0) {
+        booksCarouselIndex = totalItems - 3; // Adjust for 3 items displayed
+    } else if (booksCarouselIndex > totalItems - 3) {
+        booksCarouselIndex = 0;
+    }
+    const offset = -booksCarouselIndex * (100 / 3);
+    document.querySelector('#books-carousel .carousel').style.transform = `translateX(${offset}%)`;
 }
 
 function updateTimelineDetails() {
@@ -776,29 +791,6 @@ function loginParentTeacher() {
     const mockToken = 'mock-jwt-token-parent-teacher';
     localStorage.setItem('token', mockToken);
     window.location.href = 'dashboard.html';
-
-    // Comment out the actual API call for now
-    /*
-    fetch('https://sazi.life/api/auth/login/user', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (response.ok) {
-            localStorage.setItem('token', data.token);
-            window.location.href = 'dashboard.html';
-        } else {
-            errorElement.textContent = data.message || 'Invalid email or password';
-            errorElement.style.display = 'block';
-        }
-    })
-    .catch(error => {
-        errorElement.textContent = 'An error occurred. Please try again.';
-        errorElement.style.display = 'block';
-    });
-    */
 }
 
 function registerParentTeacher() {
@@ -822,29 +814,6 @@ function registerParentTeacher() {
     const mockToken = 'mock-jwt-token-parent-teacher';
     localStorage.setItem('token', mockToken);
     window.location.href = 'dashboard.html';
-
-    // Comment out the actual API call for now
-    /*
-    fetch('https://sazi.life/api/auth/register/parent-teacher', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (response.ok) {
-            localStorage.setItem('token', data.token);
-            window.location.href = 'dashboard.html';
-        } else {
-            errorElement.textContent = data.message || 'Registration failed. Please try again.';
-            errorElement.style.display = 'block';
-        }
-    })
-    .catch(error => {
-        errorElement.textContent = 'An error occurred. Please try again.';
-        errorElement.style.display = 'block';
-    });
-    */
 }
 
 function loginStudent() {
@@ -862,29 +831,6 @@ function loginStudent() {
     const mockToken = 'mock-jwt-token-student';
     localStorage.setItem('token', mockToken);
     window.location.href = 'dashboard.html';
-
-    // Comment out the actual API call for now
-    /*
-    fetch('https://sazi.life/api/auth/login/student', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ classCode, studentId })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (response.ok) {
-            localStorage.setItem('token', data.token);
-            window.location.href = 'dashboard.html';
-        } else {
-            errorElement.textContent = data.message || 'Invalid class code or student ID';
-            errorElement.style.display = 'block';
-        }
-    })
-    .catch(error => {
-        errorElement.textContent = 'An error occurred. Please try again.';
-        errorElement.style.display = 'block';
-    });
-    */
 }
 
 function registerStudent() {
@@ -908,29 +854,6 @@ function registerStudent() {
     const mockToken = 'mock-jwt-token-student';
     localStorage.setItem('token', mockToken);
     window.location.href = 'dashboard.html';
-
-    // Comment out the actual API call for now
-    /*
-    fetch('https://sazi.life/api/auth/register/student', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (response.ok) {
-            localStorage.setItem('token', data.token);
-            window.location.href = 'dashboard.html';
-        } else {
-            errorElement.textContent = data.message || 'Registration failed. Please try again.';
-            errorElement.style.display = 'block';
-        }
-    })
-    .catch(error => {
-        errorElement.textContent = 'An error occurred. Please try again.';
-        errorElement.style.display = 'block';
-    });
-    */
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -966,6 +889,11 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(updateClock, 1000);
     }
 
+    // Books Carousel (only on about.html)
+    if (document.querySelector('#books-carousel')) {
+        setInterval(() => moveBooksCarousel(1), 5000);
+    }
+
     // Initialize Sidebar Quiz (on all pages)
     initializeSidebarQuiz();
 
@@ -976,27 +904,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const token = localStorage.getItem('token');
             // Mock response for avatar update
             alert('Avatar updated successfully (mock response)!');
-            /*
-            try {
-                const response = await fetch('https://sazi.life/api/profiles/update-avatar', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ avatar })
-                });
-                const data = await response.json();
-                if (response.ok) {
-                    alert('Avatar updated successfully!');
-                    fetchProfileData();
-                } else {
-                    alert(data.message || 'Failed to update avatar');
-                }
-            } catch (error) {
-                alert('An error occurred. Please try again.');
-            }
-            */
         });
     });
 
@@ -1034,219 +941,29 @@ document.addEventListener('DOMContentLoaded', () => {
 async function fetchDashboardData() {
     // Mock response for dashboard data
     alert('Dashboard data loaded (mock response)!');
-    /*
-    const token = localStorage.getItem('token');
-    try {
-        const response = await fetch('https://sazi.life/api/classes', {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
-        const classes = await response.json();
-        if (response.ok) {
-            const userRoleResponse = await fetch('https://sazi.life/api/profiles', {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            const user = await userRoleResponse.json();
-            if (!userRoleResponse.ok) throw new Error(user.message);
-
-            document.getElementById(`${user.role}-dashboard`).style.display = 'block';
-
-            if (user.role === 'student') {
-                const leaderboard = classes.length > 0 ? classes[0].students : [];
-            } else if (user.role === 'parent') {
-            }
-        } else {
-            alert(classes.message || 'Failed to load dashboard data');
-        }
-    } catch (error) {
-        alert('An error occurred while loading dashboard data.');
-    }
-    */
 }
 
 async function fetchProfileData() {
     // Mock response for profile data
     alert('Profile data loaded (mock response)!');
-    /*
-    const token = localStorage.getItem('token');
-    try {
-        const response = await fetch('https://sazi.life/api/profiles', {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
-        const user = await response.json();
-        if (response.ok) {
-            document.getElementById(`${user.role}-profile`).style.display = 'block';
-            const profileDetails = document.querySelector(`#${user.role}-profile .profile-details`);
-            if (user.role === 'student') {
-                profileDetails.querySelector('.avatar-img').src = `/sazi/img/avatars/${user.avatar || 'goat.jpg'}`;
-                profileDetails.querySelectorAll('p')[0].textContent = `${translations['name'] || 'Name'}: ${user.username}`;
-                profileDetails.querySelectorAll('p')[1].textContent = `${translations['hobbies'] || 'Hobbies'}: ${user.profile?.hobbies || 'Not set'}`;
-                profileDetails.querySelectorAll('p')[2].textContent = `${translations['favorite_animal'] || 'Favorite Animal'}: ${user.profile?.favoriteAnimal || 'Not set'}`;
-                profileDetails.querySelectorAll('p')[3].textContent = `${translations['favorite_color'] || 'Favorite Color'}: ${user.profile?.favoriteColor || 'Not set'}`;
-                profileDetails.querySelectorAll('p')[4].textContent = `${translations['fun_fact'] || 'Fun Fact'}: ${user.profile?.funFact || 'Not set'}`;
-            } else if (user.role === 'teacher') {
-                profileDetails.querySelectorAll('p')[0].textContent = `${translations['name'] || 'Name'}: ${user.profile?.name || 'Not set'}`;
-                profileDetails.querySelectorAll('p')[1].textContent = `${translations['subjects_taught'] || 'Subjects Taught'}: ${user.profile?.subjectsTaught || 'Not set'}`;
-                profileDetails.querySelectorAll('p')[2].textContent = `${translations['teaching_philosophy'] || 'Teaching Philosophy'}: ${user.profile?.teachingPhilosophy || 'Not set'}`;
-                profileDetails.querySelectorAll('p')[3].textContent = `${translations['aspirations'] || 'Aspirations'}: ${user.profile?.aspirations || 'Not set'}`;
-                profileDetails.querySelectorAll('p')[4].textContent = `${translations['fun_fact'] || 'Fun Fact'}: ${user.profile?.funFact || 'Not set'}`;
-            }
-        } else {
-            alert(user.message || 'Failed to load profile data');
-        }
-    } catch (error) {
-        alert('An error occurred while loading profile data.');
-    }
-    */
 }
 
 async function fetchClassData() {
     // Mock response for class data
     alert('Class data loaded (mock response)!');
-    /*
-    const token = localStorage.getItem('token');
-    try {
-        const response = await fetch('https://sazi.life/api/classes', {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
-        const classes = await response.json();
-        if (response.ok) {
-            const classList = document.querySelector('.class-list');
-            classList.innerHTML = `<h3 data-translate="my_classes">My Classes</h3>`;
-            classes.forEach(cls => {
-                const p = document.createElement('p');
-                p.textContent = `${cls.name} (Students: ${cls.students.length})`;
-                classList.appendChild(p);
-            });
-
-            if (classes.length > 0) {
-                const studentResponse = await fetch(`https://sazi.life/api/classes/${classes[0]._id}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                const classData = await studentResponse.json();
-                const studentList = document.querySelector('.student-list');
-                studentList.innerHTML = `<h3 data-translate="students_in_class">Students in ${classes[0].name}</h3>`;
-                classData.students.forEach(student => {
-                    const p = document.createElement('p');
-                    p.textContent = `${student.username} (Code: ${student.code})`;
-                    studentList.appendChild(p);
-                });
-            }
-        } else {
-            alert(classes.message || 'Failed to load class data');
-        }
-    } catch (error) {
-        alert('An error occurred while loading class data.');
-    }
-    */
 }
 
 async function fetchLessonsData() {
     // Mock response for lessons data
     alert('Lessons data loaded (mock response)!');
-    /*
-    const token = localStorage.getItem('token');
-    try {
-        const response = await fetch('https://sazi.life/api/lessons', {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
-        const lessons = await response.json();
-        if (response.ok) {
-            const lessonsContainer = document.querySelector('.lessons');
-            lessonsContainer.innerHTML = '<h2 data-translate="my_lessons">My Lessons</h2>';
-            lessons.forEach(lesson => {
-                const div = document.createElement('div');
-                div.className = 'lesson';
-                div.innerHTML = `
-                    <h3>${lesson.title}</h3>
-                    <p>${lesson.content?.description || 'No description available'}</p>
-                    <p><strong data-translate="progress">Progress:</strong> ${lesson.progress.completion}%</p>
-                    <p><strong data-translate="points">Points:</strong> ${lesson.progress.score}</p>
-                    <a href="${lesson.content?.url || '#'}" class="start-learning" data-translate="${lesson.progress.completion === 0 ? 'start' : 'continue'}_lesson">${lesson.progress.completion === 0 ? 'Start' : 'Continue'} Lesson</a>
-                `;
-                lessonsContainer.appendChild(div);
-            });
-        } else {
-            alert(lessons.message || 'Failed to load lessons');
-        }
-    } catch (error) {
-        alert('An error occurred while loading lessons.');
-    }
-    */
 }
 
 function initializeChat() {
     // Mock chat initialization
     alert('Chat initialized (mock response)!');
-    /*
-    const socket = io('https://sazi.life');
-    const classId = 'example-class-id';
-    socket.emit('joinClass', classId);
-
-    fetch(`https://sazi.life/api/chat/${classId}`, {
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-    })
-    .then(response => response.json())
-    .then(messages => {
-        const messagesDiv = document.querySelector('.chat-messages');
-        messages.forEach(msg => {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'chat-message';
-            messageDiv.textContent = `${msg.senderId}: ${msg.message}`;
-            messagesDiv.appendChild(messageDiv);
-        });
-        messagesDiv.scrollTop = messagesDiv.scrollHeight;
-    });
-
-    socket.on('message', (data) => {
-        const messages = document.querySelector('.chat-messages');
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'chat-message';
-        messageDiv.textContent = `${data.senderId}: ${data.message}`;
-        messages.appendChild(messageDiv);
-        messages.scrollTop = messages.scrollHeight;
-    });
-
-    const chatForm = document.querySelector('.chat-input');
-    chatForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const messageInput = chatForm.querySelector('input');
-        const message = messageInput.value.trim();
-        if (message) {
-            socket.emit('chatMessage', { classId, senderId: 'user-id', message });
-            messageInput.value = '';
-        }
-    });
-    */
 }
 
 function initializeLiveClass() {
     // Mock live class initialization
     alert('Live class initialized (mock response)!');
-    /*
-    const classId = 'example-class-id';
-    fetch(`https://sazi.life/api/live/${classId}`, {
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (response.ok) {
-            const domain = 'meet.jit.si';
-            const options = {
-                roomName: data.jitsiRoomId,
-                width: '100%',
-                height: '100%',
-                parentNode: document.querySelector('#jitsi-container'),
-                userInfo: {
-                    displayName: 'Sazi User'
-                }
-            };
-            const api = new JitsiMeetExternalAPI(domain, options);
-        } else {
-            alert(data.message || 'No active live session');
-        }
-    })
-    .catch(error => {
-        alert('An error occurred while joining the live class.');
-    });
-    */
 }
