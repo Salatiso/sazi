@@ -772,6 +772,13 @@ function loginParentTeacher() {
         return;
     }
 
+    // Mock successful login response
+    const mockToken = 'mock-jwt-token-parent-teacher';
+    localStorage.setItem('token', mockToken);
+    window.location.href = 'dashboard.html';
+
+    // Comment out the actual API call for now
+    /*
     fetch('https://sazi.life/api/auth/login/user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -791,6 +798,7 @@ function loginParentTeacher() {
         errorElement.textContent = 'An error occurred. Please try again.';
         errorElement.style.display = 'block';
     });
+    */
 }
 
 function registerParentTeacher() {
@@ -810,6 +818,13 @@ function registerParentTeacher() {
         return;
     }
 
+    // Mock successful registration response
+    const mockToken = 'mock-jwt-token-parent-teacher';
+    localStorage.setItem('token', mockToken);
+    window.location.href = 'dashboard.html';
+
+    // Comment out the actual API call for now
+    /*
     fetch('https://sazi.life/api/auth/register/parent-teacher', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -829,6 +844,7 @@ function registerParentTeacher() {
         errorElement.textContent = 'An error occurred. Please try again.';
         errorElement.style.display = 'block';
     });
+    */
 }
 
 function loginStudent() {
@@ -842,6 +858,13 @@ function loginStudent() {
         return;
     }
 
+    // Mock successful login response
+    const mockToken = 'mock-jwt-token-student';
+    localStorage.setItem('token', mockToken);
+    window.location.href = 'dashboard.html';
+
+    // Comment out the actual API call for now
+    /*
     fetch('https://sazi.life/api/auth/login/student', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -861,6 +884,7 @@ function loginStudent() {
         errorElement.textContent = 'An error occurred. Please try again.';
         errorElement.style.display = 'block';
     });
+    */
 }
 
 function registerStudent() {
@@ -880,6 +904,13 @@ function registerStudent() {
         return;
     }
 
+    // Mock successful registration response
+    const mockToken = 'mock-jwt-token-student';
+    localStorage.setItem('token', mockToken);
+    window.location.href = 'dashboard.html';
+
+    // Comment out the actual API call for now
+    /*
     fetch('https://sazi.life/api/auth/register/student', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -899,6 +930,7 @@ function registerStudent() {
         errorElement.textContent = 'An error occurred. Please try again.';
         errorElement.style.display = 'block';
     });
+    */
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -942,6 +974,9 @@ document.addEventListener('DOMContentLoaded', () => {
         option.addEventListener('click', async () => {
             const avatar = option.dataset.avatar;
             const token = localStorage.getItem('token');
+            // Mock response for avatar update
+            alert('Avatar updated successfully (mock response)!');
+            /*
             try {
                 const response = await fetch('https://sazi.life/api/profiles/update-avatar', {
                     method: 'POST',
@@ -961,6 +996,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 alert('An error occurred. Please try again.');
             }
+            */
         });
     });
 
@@ -996,6 +1032,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function fetchDashboardData() {
+    // Mock response for dashboard data
+    alert('Dashboard data loaded (mock response)!');
+    /*
     const token = localStorage.getItem('token');
     try {
         const response = await fetch('https://sazi.life/api/classes', {
@@ -1021,9 +1060,13 @@ async function fetchDashboardData() {
     } catch (error) {
         alert('An error occurred while loading dashboard data.');
     }
+    */
 }
 
 async function fetchProfileData() {
+    // Mock response for profile data
+    alert('Profile data loaded (mock response)!');
+    /*
     const token = localStorage.getItem('token');
     try {
         const response = await fetch('https://sazi.life/api/profiles', {
@@ -1053,9 +1096,13 @@ async function fetchProfileData() {
     } catch (error) {
         alert('An error occurred while loading profile data.');
     }
+    */
 }
 
 async function fetchClassData() {
+    // Mock response for class data
+    alert('Class data loaded (mock response)!');
+    /*
     const token = localStorage.getItem('token');
     try {
         const response = await fetch('https://sazi.life/api/classes', {
@@ -1090,9 +1137,13 @@ async function fetchClassData() {
     } catch (error) {
         alert('An error occurred while loading class data.');
     }
+    */
 }
 
 async function fetchLessonsData() {
+    // Mock response for lessons data
+    alert('Lessons data loaded (mock response)!');
+    /*
     const token = localStorage.getItem('token');
     try {
         const response = await fetch('https://sazi.life/api/lessons', {
@@ -1120,9 +1171,13 @@ async function fetchLessonsData() {
     } catch (error) {
         alert('An error occurred while loading lessons.');
     }
+    */
 }
 
 function initializeChat() {
+    // Mock chat initialization
+    alert('Chat initialized (mock response)!');
+    /*
     const socket = io('https://sazi.life');
     const classId = 'example-class-id';
     socket.emit('joinClass', classId);
@@ -1161,9 +1216,13 @@ function initializeChat() {
             messageInput.value = '';
         }
     });
+    */
 }
 
 function initializeLiveClass() {
+    // Mock live class initialization
+    alert('Live class initialized (mock response)!');
+    /*
     const classId = 'example-class-id';
     fetch(`https://sazi.life/api/live/${classId}`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
@@ -1189,4 +1248,5 @@ function initializeLiveClass() {
     .catch(error => {
         alert('An error occurred while joining the live class.');
     });
+    */
 }
