@@ -267,6 +267,24 @@ header nav ul li a.active {
     to { opacity: 1; transform: translate(-50%, -50%); }
 }
 
+.timeline-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--fun-yellow);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 3px solid var(--fun-red);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    display: none;
+    z-index: 1001; /* Increased z-index to ensure it appears above other popups */
+    animation: popupFadeIn 0.5s ease;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -931,53 +949,8 @@ footer {
         gap: 1rem;
     }
 }
-.sidebar-quiz {
-    background: var(--primary-bg);
-    padding: 1rem;
-    border-top: 1px solid var(--hover-bg);
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
 
-.sidebar-quiz h3 {
-    font-size: 1.2rem;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-    text-align: center;
-}
-
-#sidebar-quiz-question {
-    font-size: 1rem;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-    text-align: center;
-}
-
-#sidebar-quiz-answer {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-}
-
-.sidebar-quiz button {
-    background-color: var(--accent-color);
-    color: var(--secondary-color);
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    margin: 0.2rem;
-}
-
-.sidebar-quiz button:hover {
-    background-color: #e6b800;
-}
+/* Registration Section Styles */
 .registration-section {
     background: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
@@ -1042,4 +1015,53 @@ footer {
     50% { transform: translateX(-100%); }
     95% { transform: translateX(-100%); }
     100% { transform: translateX(0); }
+}
+
+/* Sidebar Quiz Styles */
+.sidebar-quiz {
+    background: var(--primary-bg);
+    padding: 1rem;
+    border-top: 1px solid var(--hover-bg);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.sidebar-quiz h3 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+#sidebar-quiz-question {
+    font-size: 1rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+#sidebar-quiz-answer {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.sidebar-quiz button {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 0.2rem;
+}
+
+.sidebar-quiz button:hover {
+    background-color: #e6b800;
 }
