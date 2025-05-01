@@ -33,6 +33,8 @@ let quickTestAttempts = parseInt(sessionStorage.getItem('quickTestAttempts')) ||
 let quickTestCorrect = parseInt(sessionStorage.getItem('quickTestCorrect')) || 0;
 let timelineAttempts = parseInt(sessionStorage.getItem('timelineAttempts')) || 0;
 let timelineCorrect = parseInt(sessionStorage.getItem('timelineCorrect')) || 0;
+let sidebarQuizAttempts = parseInt(sessionStorage.getItem('sidebarQuizAttempts')) || 0;
+let sidebarQuizCorrect = parseInt(sessionStorage.getItem('sidebarQuizCorrect')) || 0;
 
 // Leaderboard State (using sessionStorage for daily reset)
 let leaderboard = JSON.parse(sessionStorage.getItem('leaderboard')) || { nickname: null, score: 0 };
@@ -243,9 +245,13 @@ const numbersInXhosa = [
     "Shumi elinesithoba", "Amashumi amabini"
 ];
 
+// Combined Quiz Questions for Sidebar
+const allQuizQuestions = [...beginnerQuestions, ...intermediateQuestions, ...expertQuestions];
+
 let timelineIndex = 0;
 let currentTimelineMonth = null;
 let currentTimelineAnswer = '';
+let currentSidebarQuestion = null;
 
 async function loadTranslations(lang) {
     try {
@@ -283,6 +289,15 @@ function applyTranslations() {
     updateGamificationDisplay();
     updateTimelineDetails();
     updateClockText();
+    // Re-render sidebar quiz question in the new language
+    if (currentSidebarQuestion) {
+        const questionElement = document.getElementById('sidebar-quiz-question');
+        if (questionElement) {
+            questionElement.textContent = currentLanguage === 'xh' ? 
+                `Yintoni ethi "${currentSidebarQuestion.english}" ngesiXhosa?` : 
+                `What is "${currentSidebarQuestion.english}" in Xhosa?`;
+        }
+    }
 }
 
 function updateGamificationDisplay() {
@@ -325,6 +340,13 @@ function awardPoints(points, quizType) {
         }
         sessionStorage.setItem('timelineAttempts', timelineAttempts);
         sessionStorage.setItem('timelineCorrect', timelineCorrect);
+    } else if (quizType === 'sidebarQuiz') {
+        sidebarQuizAttempts++;
+        if (points > 0) {
+            sidebarQuizCorrect += points / 10;
+        }
+        sessionStorage.setItem('sidebarQuizAttempts', sidebarQuizAttempts);
+        sessionStorage.setItem('sidebarQuizCorrect', sidebarQuizCorrect);
     }
     updateGamificationDisplay();
 }
@@ -365,7 +387,7 @@ function showFunFact() {
     const index = (timestamp + randomOffset) % funFacts.length;
     const funFact = funFacts[index];
     const funFactText = document.getElementById('fun-fact-text');
-    funFactText.textContent = currentLanguage === 'en' ? funFact.en : funFact.xh;
+    funFactText.textContent = currentLanguage === 'xh' ? funFact.xh : funFact.en;
     document.getElementById('fun-fact-popup').style.display = 'block';
 }
 
@@ -412,6 +434,7 @@ function updateTimelineDetails() {
 }
 
 function openTimelinePopup(month) {
+    console.log('Opening timeline popup for month:', month); // Debug log
     currentTimelineMonth = month;
     const monthData = timelineData[month];
     document.getElementById('timeline-month').textContent = `${monthData.en.name} (${monthData.xh.name})`;
@@ -675,6 +698,209 @@ function displayQuickTestScore() {
     scoreDisplay.style.display = 'block';
 }
 
+function initializeSidebarQuiz() {
+    // Randomly select a question
+    const randomIndex = Math.floor(Math.random() * allQuizQuestions.length);
+    currentSidebarQuestion = allQuizQuestions[randomIndex];
+    const questionElement = document.getElementById('sidebar-quiz-question');
+    if (questionElement) {
+        questionElement.textContent = currentLanguage === 'xh' ? 
+            `Yintoni ethi "${currentSidebarQuestion.english}" ngesiXhosa?` : 
+            `What is "${currentSidebarQuestion.english}" in Xhosa?`;
+    }
+}
+
+function checkSidebarQuizAnswer() {
+    const input = document.getElementById('sidebar-quiz-answer').value.trim();
+    const feedback = document.getElementById('sidebar-quiz-feedback');
+    if (input.toLowerCase() === currentSidebarQuestion.xhosa.toLowerCase()) {
+        feedback.textContent = translations['congratulations'] || 'Congratulations!';
+        feedback.style.color = "green";
+        awardPoints(10, 'sidebarQuiz');
+    } else {
+        feedback.textContent = (translations['nice_try_correct_answer'] || 'Nice try! The correct answer is {{answer}}').replace('{{answer}}', currentSidebarQuestion.xhosa);
+        feedback.style.color = "red";
+        awardPoints(0, 'sidebarQuiz');
+    }
+    feedback.style.display = 'block';
+}
+
+function revealSidebarQuizAnswer() {
+    const feedback = document.getElementById('sidebar-quiz-feedback');
+    feedback.textContent = (translations['nice_try_correct_answer'] || 'Nice try! The correct answer is {{answer}}').replace('{{answer}}', currentSidebarQuestion.xhosa);
+    feedback.style.color = "blue";
+    feedback.style.display = 'block';
+}
+
+function highlightCategory(category) {
+    const items = document.querySelectorAll('.carousel-item');
+    items.forEach(item => {
+        item.style.background = '';
+        if (item.dataset.category === category) {
+            item.style.background = 'rgba(255, 204, 128, 0.5)';
+        }
+    });
+}
+
+function showTab(tabId) {
+    const tabs = document.querySelectorAll('.tab-content');
+    const buttons = document.querySelectorAll('.tab-button');
+    
+    tabs.forEach(tab => {
+        tab.style.display = 'none';
+        if (tab.id === tabId) {
+            tab.style.display = 'block';
+        }
+    });
+
+    buttons.forEach(button => {
+        button.classList.remove('active');
+        if (button.onclick.toString().includes(tabId)) {
+            button.classList.add('active');
+        }
+    });
+}
+
+function loginParentTeacher() {
+    const email = document.getElementById('parent-teacher-email').value.trim();
+    const password = document.getElementById('parent-teacher-password').value;
+    const errorElement = document.getElementById('parent-teacher-login-error');
+
+    if (!email || !password) {
+        errorElement.textContent = 'Please fill in all fields.';
+        errorElement.style.display = 'block';
+        return;
+    }
+
+    fetch('https://sazi.life/api/auth/login/user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (response.ok) {
+            localStorage.setItem('token', data.token);
+            window.location.href = 'dashboard.html';
+        } else {
+            errorElement.textContent = data.message || 'Invalid email or password';
+            errorElement.style.display = 'block';
+        }
+    })
+    .catch(error => {
+        errorElement.textContent = 'An error occurred. Please try again.';
+        errorElement.style.display = 'block';
+    });
+}
+
+function registerParentTeacher() {
+    const email = document.getElementById('parent-teacher-register-email').value.trim();
+    const password = document.getElementById('parent-teacher-register-password').value;
+    const errorElement = document.getElementById('parent-teacher-register-error');
+
+    if (!email || !password) {
+        errorElement.textContent = 'Please fill in all fields.';
+        errorElement.style.display = 'block';
+        return;
+    }
+
+    if (password.length < 8) {
+        errorElement.textContent = 'Password must be at least 8 characters long.';
+        errorElement.style.display = 'block';
+        return;
+    }
+
+    fetch('https://sazi.life/api/auth/register/parent-teacher', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (response.ok) {
+            localStorage.setItem('token', data.token);
+            window.location.href = 'dashboard.html';
+        } else {
+            errorElement.textContent = data.message || 'Registration failed. Please try again.';
+            errorElement.style.display = 'block';
+        }
+    })
+    .catch(error => {
+        errorElement.textContent = 'An error occurred. Please try again.';
+        errorElement.style.display = 'block';
+    });
+}
+
+function loginStudent() {
+    const classCode = document.getElementById('student-class-code').value.trim();
+    const studentId = document.getElementById('student-id').value.trim();
+    const errorElement = document.getElementById('student-login-error');
+
+    if (!classCode || !studentId) {
+        errorElement.textContent = 'Please fill in all fields.';
+        errorElement.style.display = 'block';
+        return;
+    }
+
+    fetch('https://sazi.life/api/auth/login/student', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ classCode, studentId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (response.ok) {
+            localStorage.setItem('token', data.token);
+            window.location.href = 'dashboard.html';
+        } else {
+            errorElement.textContent = data.message || 'Invalid class code or student ID';
+            errorElement.style.display = 'block';
+        }
+    })
+    .catch(error => {
+        errorElement.textContent = 'An error occurred. Please try again.';
+        errorElement.style.display = 'block';
+    });
+}
+
+function registerStudent() {
+    const email = document.getElementById('student-register-email').value.trim();
+    const password = document.getElementById('student-register-password').value;
+    const errorElement = document.getElementById('student-register-error');
+
+    if (!email || !password) {
+        errorElement.textContent = 'Please fill in all fields.';
+        errorElement.style.display = 'block';
+        return;
+    }
+
+    if (password.length < 8) {
+        errorElement.textContent = 'Password must be at least 8 characters long.';
+        errorElement.style.display = 'block';
+        return;
+    }
+
+    fetch('https://sazi.life/api/auth/register/student', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (response.ok) {
+            localStorage.setItem('token', data.token);
+            window.location.href = 'dashboard.html';
+        } else {
+            errorElement.textContent = data.message || 'Registration failed. Please try again.';
+            errorElement.style.display = 'block';
+        }
+    })
+    .catch(error => {
+        errorElement.textContent = 'An error occurred. Please try again.';
+        errorElement.style.display = 'block';
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     loadTranslations(currentLanguage);
 
@@ -686,82 +912,30 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTranslations(currentLanguage);
     });
 
-    // Show Fun Fact on Page Load
-    showFunFact();
+    // Show Fun Fact on Page Load (only on index.html)
+    if (document.querySelector('.content.index')) {
+        showFunFact();
+    }
 
-    // Timeline Carousel
-    document.querySelectorAll('.timeline-item').forEach(item => {
-        item.addEventListener('click', () => {
-            const month = item.dataset.month;
-            timelineIndex = Array.from(document.querySelectorAll('.timeline-item')).indexOf(item);
-            openTimelinePopup(month);
-        });
-    });
-
-    // Update Clock Every Second
-    updateClock();
-    setInterval(updateClock, 1000);
-
-    const studentForm = document.getElementById('student-login-form');
-    const userForm = document.getElementById('user-login-form');
-
-    if (studentForm) {
-        studentForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const username = document.getElementById('student-username').value.trim();
-            const code = document.getElementById('student-code').value.trim();
-            const errorElement = document.getElementById('student-error');
-
-            try {
-                const response = await fetch('https://sazi.life/api/auth/login/student', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, code })
-                });
-                const data = await response.json();
-
-                if (response.ok) {
-                    localStorage.setItem('token', data.token);
-                    window.location.href = 'dashboard.html';
-                } else {
-                    errorElement.textContent = data.message || 'Invalid username or code';
-                    errorElement.style.display = 'block';
-                }
-            } catch (error) {
-                errorElement.textContent = 'An error occurred. Please try again.';
-                errorElement.style.display = 'block';
-            }
+    // Timeline Carousel (only on index.html)
+    if (document.querySelector('.content.index')) {
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const month = item.dataset.month;
+                timelineIndex = Array.from(document.querySelectorAll('.timeline-item')).indexOf(item);
+                openTimelinePopup(month);
+            });
         });
     }
 
-    if (userForm) {
-        userForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('user-email').value.trim();
-            const password = document.getElementById('user-password').value;
-            const errorElement = document.getElementById('user-error');
-
-            try {
-                const response = await fetch('https://sazi.life/api/auth/login/user', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
-                });
-                const data = await response.json();
-
-                if (response.ok) {
-                    localStorage.setItem('token', data.token);
-                    window.location.href = 'dashboard.html';
-                } else {
-                    errorElement.textContent = data.message || 'Invalid email or password';
-                    errorElement.style.display = 'block';
-                }
-            } catch (error) {
-                errorElement.textContent = 'An error occurred. Please try again.';
-                errorElement.style.display = 'block';
-            }
-        });
+    // Update Clock Every Second (only on index.html)
+    if (document.querySelector('.content.index')) {
+        updateClock();
+        setInterval(updateClock, 1000);
     }
+
+    // Initialize Sidebar Quiz (on all pages)
+    initializeSidebarQuiz();
 
     const avatarOptions = document.querySelectorAll('.avatar-option');
     avatarOptions.forEach(option => {
@@ -820,15 +994,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initializeLiveClass();
     }
 });
-function highlightCategory(category) {
-    const items = document.querySelectorAll('.carousel-item');
-    items.forEach(item => {
-        item.style.background = '';
-        if (item.dataset.category === category) {
-            item.style.background = 'rgba(255, 204, 128, 0.5)';
-        }
-    });
-}
+
 async function fetchDashboardData() {
     const token = localStorage.getItem('token');
     try {
