@@ -3,316 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saz' isiXhosa, no Sapho - Login</title>
-    <style>
-        :root {
-            --primary-bg: #444;
-            --primary-color: white;
-            --secondary-bg: #f4f4f4;
-            --secondary-color: #333;
-            --hover-bg: #555;
-            --accent-color: #ffcc80;
-        }
-
-        body {
-            font-family: 'Quicksand', sans-serif;
-            margin: 0;
-            line-height: 1.6;
-            background-color: var(--secondary-bg);
-            color: var(--secondary-color);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        .site-title {
-            text-align: center;
-            padding: 1rem;
-            background: var(--primary-bg);
-            color: var(--primary-color);
-            margin: 0;
-            font-size: 2rem;
-        }
-
-        header {
-            background: var(--primary-bg);
-            color: var(--primary-color);
-            padding: 1rem;
-            display: flex;
-            justify-content: center;
-        }
-
-        header nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 2rem;
-        }
-
-        header nav ul li a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-size: 1.2rem;
-        }
-
-        header nav ul li a:hover {
-            text-decoration: underline;
-        }
-
-        .main-container {
-            display: flex;
-            flex: 1;
-        }
-
-        .sidebar {
-            flex: 0 0 200px;
-            background: var(--primary-bg);
-            color: var(--primary-color);
-            height: 100%;
-            overflow-y: auto;
-        }
-
-        .sidebar ul {
-            padding: 0;
-            margin: 1rem 0;
-            list-style: none;
-        }
-
-        .sidebar ul li a {
-            display: block;
-            padding: 0.8rem 1rem;
-            color: var(--primary-color);
-            text-decoration: none;
-            border-bottom: 1px solid var(--hover-bg);
-        }
-
-        .sidebar ul li a:hover {
-            background: var(--hover-bg);
-        }
-
-        .sidebar ul li a.active {
-            background: var(--hover-bg);
-            font-weight: bold;
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-            }
-
-            .main-container {
-                flex-direction: column;
-            }
-        }
-
-        .content {
-            flex: 1;
-            padding: 2rem;
-            background: url('/sazi/img/Sazi_Grandma.jpg') no-repeat center center;
-            background-size: cover;
-        }
-
-        @media (max-width: 768px) {
-            .content {
-                padding: 1rem;
-            }
-        }
-
-        .section {
-            padding: 2rem;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.9);
-            margin-bottom: 1rem;
-        }
-
-        .section h2 {
-            font-size: 1.5rem;
-            margin-top: 0;
-            color: var(--secondary-color);
-        }
-
-        .section a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        .section a:hover {
-            text-decoration: underline;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .tab-button {
-            padding: 0.5rem 1rem;
-            background-color: var(--primary-bg);
-            color: var(--primary-color);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .tab-button.active {
-            background-color: var(--accent-color);
-            color: var(--secondary-color);
-        }
-
-        .tab-button:hover {
-            background-color: var(--hover-bg);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-family: 'Quicksand', sans-serif;
-        }
-
-        .form-group button {
-            background-color: var(--accent-color);
-            color: var(--secondary-color);
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .form-group button:hover {
-            background-color: #e6b800;
-        }
-
-        .error-message {
-            color: red;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            display: none;
-            text-align: center;
-        }
-
-        footer {
-            text-align: center;
-            padding: 1rem 0;
-            background: var(--primary-bg);
-            color: var(--primary-color);
-            width: 100%;
-        }
-
-        @media (max-width: 768px) {
-            header nav ul {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .tabs {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-        }
-    </style>
+    <title>Saz' isiXhosa, no Sapho - Login or Register</title>
+    <link rel="stylesheet" href="/sazi/style.css">
 </head>
 <body>
     <h1 class="site-title">Saz' isiXhosa, no Sapho</h1>
     <header>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-                <li><a href="login.html" class="active">Login</a></li>
+                <li><a href="index.html" data-translate="home">Home</a></li>
+                <li><a href="about.html" data-translate="about_us">About Us</a></li>
+                <li><a href="contact.html" data-translate="contact_us">Contact Us</a></li>
+                <li><a href="login.html" class="active" data-translate="login">Login</a></li>
             </ul>
         </nav>
+        <select class="language-toggle">
+            <option value="" data-translate="translate">Translate</option>
+            <option value="en" data-translate-value="english">English</option>
+            <option value="xh" data-translate-value="xhosa">Xhosa</option>
+            <option value="zu" data-translate-value="zulu">Zulu</option>
+            <option value="af" data-translate-value="afrikaans">Afrikaans</option>
+            <option value="fr" data-translate-value="french">French</option>
+            <option value="st" data-translate-value="sotho">Sotho</option>
+            <option value="tn" data-translate-value="tswana">Tswana</option>
+            <option value="ped" data-translate-value="pedi">Pedi</option>
+            <option value="zh" data-translate-value="mandarin">Mandarin</option>
+            <option value="ve" data-translate-value="venda">Venda</option>
+            <option value="sn" data-translate-value="shona">Shona</option>
+            <option value="sw" data-translate-value="swahili">Swahili</option>
+            <option value="es" data-translate-value="spanish">Spanish</option>
+            <option value="pt" data-translate-value="portuguese">Portuguese</option>
+        </select>
     </header>
 
     <div class="main-container">
         <div class="sidebar">
             <ul>
-                <li><a href="age-levels.html">Age Levels</a></li>
-                <li><a href="vocabulary.html">Vocabulary</a></li>
-                <li><a href="phrases.html">Phrases</a></li>
-                <li><a href="numbers.html">Numbers</a></li>
-                <li><a href="time.html">Time</a></li>
-                <li><a href="grammar.html">Grammar</a></li>
-                <li><a href="culture.html">Culture</a></li>
-                <li><a href="activities.html">Activities</a></li>
-                <li><a href="ask-khulu.html">Ask Khulu</a></li>
+                <li><a href="age-levels.html" data-translate="age_levels">Age Levels</a></li>
+                <li><a href="vocabulary.html" data-translate="vocabulary">Vocabulary</a></li>
+                <li><a href="phrases.html" data-translate="phrases">Phrases</a></li>
+                <li><a href="numbers.html" data-translate="numbers">Numbers</a></li>
+                <li><a href="time.html" data-translate="time">Time</a></li>
+                <li><a href="grammar.html" data-translate="grammar">Grammar</a></li>
+                <li><a href="culture.html" data-translate="culture">Culture</a></li>
+                <li><a href="activities.html" data-translate="activities">Activities</a></li>
+                <li><a href="ask-khulu.html" data-translate="ask_khulu">Ask Khulu</a></li>
             </ul>
+            <div class="sidebar-quiz">
+                <h3>Quick Xhosa Quiz</h3>
+                <div id="sidebar-quiz-question"></div>
+                <input type="text" id="sidebar-quiz-answer" placeholder="Type your answer">
+                <button onclick="checkSidebarQuizAnswer()">Check</button>
+                <button onclick="revealSidebarQuizAnswer()">Reveal</button>
+                <div id="sidebar-quiz-feedback" class="test-feedback"></div>
+            </div>
         </div>
 
         <div class="content">
-            <div id="login" class="section">
-                <h2>Login</h2>
+            <h2>Login or Register</h2>
+
+            <!-- Parent/Teacher Section -->
+            <div class="login-section">
+                <h3>Parent/Teacher</h3>
+                <p>Create Structured classes for your group (ages 3–15), issue credentials, and manage a private learning environment. Monitor student progress and engage with parents. Ideal for homeschooling or small community groups.</p>
                 <div class="tabs">
-                    <button class="tab-button active" onclick="showTab('student-login')">Student Login</button>
-                    <button class="tab-button" onclick="showTab('user-login')">Teacher/Parent/Admin Login</button>
+                    <button class="tab-button active" onclick="showTab('parent-teacher-login')">Login</button>
+                    <button class="tab-button" onclick="showTab('parent-teacher-register')">Register</button>
                 </div>
-                <div id="student-login" class="tab-content active">
-                    <div class="contact-form">
-                        <form id="student-login-form">
-                            <div class="form-group">
-                                <label for="student-username">Username (First Name):</label>
-                                <input type="text" id="student-username" placeholder="e.g., Sazi" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="student-code">4-Digit Code:</label>
-                                <input type="text" id="student-code" placeholder="e.g., 1234" maxlength="4" required>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit">Login</button>
-                            </div>
-                            <p id="student-error" class="error-message"></p>
-                        </form>
+
+                <!-- Parent/Teacher Login -->
+                <div id="parent-teacher-login" class="tab-content">
+                    <div class="form-group">
+                        <label for="parent-teacher-email">Email:</label>
+                        <input type="email" id="parent-teacher-email" placeholder="Your Email" required>
                     </div>
+                    <div class="form-group">
+                        <label for="parent-teacher-password">Password:</label>
+                        <input type="password" id="parent-teacher-password" placeholder="Your Password" required>
+                    </div>
+                    <div class="form-group">
+                        <button onclick="loginParentTeacher()">Login</button>
+                    </div>
+                    <p id="parent-teacher-login-error" class="error-message"></p>
                 </div>
-                <div id="user-login" class="tab-content">
-                    <div class="contact-form">
-                        <form id="user-login-form">
-                            <div class="form-group">
-                                <label for="user-email">Email:</label>
-                                <input type="email" id="user-email" placeholder="e.g., teacher@example.com" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="user-password">Password:</label>
-                                <input type="password" id="user-password" placeholder="Enter your password" required>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit">Login</button>
-                            </div>
-                            <p><a href="#" onclick="requestPasswordReset()">Forgot Password?</a></p>
-                            <p id="user-error" class="error-message"></p>
-                        </form>
+
+                <!-- Parent/Teacher Register -->
+                <div id="parent-teacher-register" class="tab-content" style="display: none;">
+                    <div class="form-group">
+                        <label for="parent-teacher-register-email">Email:</label>
+                        <input type="email" id="parent-teacher-register-email" placeholder="Your Email" required>
                     </div>
+                    <div class="form-group">
+                        <label for="parent-teacher-register-password">Password:</label>
+                        <input type="password" id="parent-teacher-register-password" placeholder="Your Password (8+ characters)" required>
+                    </div>
+                    <div class="form-group">
+                        <button onclick="registerParentTeacher()">Register</button>
+                    </div>
+                    <p id="parent-teacher-register-error" class="error-message"></p>
+                </div>
+            </div>
+
+            <!-- Student Section -->
+            <div class="login-section">
+                <h3>Student</h3>
+                <p>If you have a class code from your teacher, log in below. Otherwise, register independently to join Unstructured classes, take recommended courses, or build your own curriculum. Ideal for self-directed learners.</p>
+                <div class="tabs">
+                    <button class="tab-button active" onclick="showTab('student-login')">Login</button>
+                    <button class="tab-button" onclick="showTab('student-register')">Register</button>
+                </div>
+
+                <!-- Student Login -->
+                <div id="student-login" class="tab-content">
+                    <p>Log in with your class code and student ID (provided by your teacher):</p>
+                    <div class="form-group">
+                        <label for="student-class-code">Class Code:</label>
+                        <input type="text" id="student-class-code" placeholder="e.g., CLASS-VILLAGE1-2025" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="student-id">Student ID:</label>
+                        <input type="text" id="student-id" placeholder="e.g., STUDENT001" required>
+                    </div>
+                    <div class="form-group">
+                        <button onclick="loginStudent()">Login</button>
+                    </div>
+                    <p id="student-login-error" class="error-message"></p>
+                </div>
+
+                <!-- Student Register -->
+                <div id="student-register" class="tab-content" style="display: none;">
+                    <p>Register independently (for self-directed learners):</p>
+                    <div class="form-group">
+                        <label for="student-register-email">Email:</label>
+                        <input type="email" id="student-register-email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="student-register-password">Password:</label>
+                        <input type="password" id="student-register-password" placeholder="Your Password (8+ characters)" required>
+                    </div>
+                    <div class="form-group">
+                        <button onclick="registerStudent()">Register</button>
+                    </div>
+                    <p id="student-register-error" class="error-message"></p>
                 </div>
             </div>
         </div>
@@ -322,94 +154,6 @@
         <p>© 2025 Mdeni Family</p>
     </footer>
 
-    <script>
-        function showTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-            document.querySelector(`button[onclick="showTab('${tabId}')"]`).classList.add('active');
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const studentForm = document.getElementById('student-login-form');
-            const userForm = document.getElementById('user-login-form');
-
-            if (studentForm) {
-                studentForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    const username = document.getElementById('student-username').value.trim();
-                    const code = document.getElementById('student-code').value.trim();
-                    const errorElement = document.getElementById('student-error');
-
-                    try {
-                        const response = await fetch('/api/login/student', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ username, code })
-                        });
-                        const data = await response.json();
-
-                        if (response.ok) {
-                            localStorage.setItem('token', data.token);
-                            window.location.href = 'index.html';
-                        } else {
-                            errorElement.textContent = data.message || 'Invalid username or code';
-                            errorElement.style.display = 'block';
-                        }
-                    } catch (error) {
-                        errorElement.textContent = 'An error occurred. Please try again.';
-                        errorElement.style.display = 'block';
-                    }
-                });
-            }
-
-            if (userForm) {
-                userForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    const email = document.getElementById('user-email').value.trim();
-                    const password = document.getElementById('user-password').value;
-                    const errorElement = document.getElementById('user-error');
-
-                    try {
-                        const response = await fetch('/api/login/user', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ email, password })
-                        });
-                        const data = await response.json();
-
-                        if (response.ok) {
-                            localStorage.setItem('token', data.token);
-                            window.location.href = 'index.html';
-                        } else {
-                            errorElement.textContent = data.message || 'Invalid email or password';
-                            errorElement.style.display = 'block';
-                        }
-                    } catch (error) {
-                        errorElement.textContent = 'An error occurred. Please try again.';
-                        errorElement.style.display = 'block';
-                    }
-                });
-            }
-        });
-
-        function requestPasswordReset() {
-            const email = prompt('Enter your email to receive a password reset link:');
-            if (email) {
-                fetch('/api/reset-password', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    alert(data.message || 'If your email is registered, you will receive a reset link.');
-                })
-                .catch(error => {
-                    alert('An error occurred. Please try again.');
-                });
-            }
-        }
-    </script>
+    <script src="/sazi/script.js"></script>
 </body>
 </html>
