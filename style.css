@@ -1159,3 +1159,7 @@ footer {
     margin-top: 0.5rem;
     display: none;
 }
+.content.about {
+    background: url('/sazi/img/Sazi_Grandma.jpg') no-repeat center center;
+    background-size: cover;
+}
