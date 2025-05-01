@@ -1065,3 +1065,97 @@ footer {
 .sidebar-quiz button:hover {
     background-color: #e6b800;
 }
+.login-section {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 2px solid var(--fun-blue);
+}
+
+.login-section h3 {
+    font-size: 1.5rem;
+    color: var(--fun-red);
+    margin-bottom: 0.5rem;
+}
+
+.login-section p {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.tab-button {
+    background: var(--hover-bg);
+    color: var(--primary-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tab-button.active {
+    background: var(--fun-blue);
+    color: white;
+}
+
+.tab-button:hover {
+    background: #666;
+}
+
+.tab-content {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--fun-blue);
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.form-group button {
+    background: var(--fun-blue);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.form-group button:hover {
+    background: #1c86ee;
+}
+
+.error-message {
+    color: var(--fun-red);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    display: none;
+}
