@@ -18,8 +18,21 @@
             </ul>
         </nav>
         <select class="language-toggle">
+            <option value="" data-translate="translate">Translate</option>
             <option value="en" data-translate-value="english">English</option>
             <option value="xh" data-translate-value="xhosa">Xhosa</option>
+            <option value="zu" data-translate-value="zulu">Zulu</option>
+            <option value="af" data-translate-value="afrikaans">Afrikaans</option>
+            <option value="fr" data-translate-value="french">French</option>
+            <option value="st" data-translate-value="sotho">Sotho</option>
+            <option value="tn" data-translate-value="tswana">Tswana</option>
+            <option value="ped" data-translate-value="pedi">Pedi</option>
+            <option value="zh" data-translate-value="mandarin">Mandarin</option>
+            <option value="ve" data-translate-value="venda">Venda</option>
+            <option value="sn" data-translate-value="shona">Shona</option>
+            <option value="sw" data-translate-value="swahili">Swahili</option>
+            <option value="es" data-translate-value="spanish">Spanish</option>
+            <option value="pt" data-translate-value="portuguese">Portuguese</option>
         </select>
     </header>
 
@@ -36,9 +49,39 @@
                 <li><a href="activities.html" data-translate="activities">Activities</a></li>
                 <li><a href="ask-khulu.html" data-translate="ask_khulu">Ask Khulu</a></li>
             </ul>
+            <div class="sidebar-quiz">
+                <h3>Quick Xhosa Quiz</h3>
+                <div id="sidebar-quiz-question"></div>
+                <input type="text" id="sidebar-quiz-answer" placeholder="Type your answer">
+                <button onclick="checkSidebarQuizAnswer()">Check</button>
+                <button onclick="revealSidebarQuizAnswer()">Reveal</button>
+                <div id="sidebar-quiz-feedback" class="test-feedback"></div>
+            </div>
         </div>
 
         <div class="content index">
+            <!-- Registration Category Selection -->
+            <div class="registration-section">
+                <h2>Join Our Learning Community</h2>
+                <select id="registration-category" onchange="highlightCategory(this.value)">
+                    <option value="">Select Your Category</option>
+                    <option value="parent-teacher">Parent/Teacher</option>
+                    <option value="student">Student</option>
+                </select>
+                <div class="registration-carousel">
+                    <div class="carousel-items">
+                        <div class="carousel-item" data-category="parent-teacher">
+                            <h3>Parent/Teacher</h3>
+                            <p>Create structured classes for your students, manage their progress, and issue unique credentials. Perfect for homeschooling or small community groups (ages 3–15). Your classes are private and tailored to your group.</p>
+                        </div>
+                        <div class="carousel-item" data-category="student">
+                            <h3>Student</h3>
+                            <p>Register independently to join unstructured classes, take recommended courses, or build your own curriculum. Ideal for self-directed learners who want to explore Xhosa at their own pace.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="gamification">
                 <p id="user-points">Points: 0</p>
                 <div class="points-progress">
