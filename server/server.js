@@ -1,74 +1,56 @@
+require('dotenv').config();
 const express = require('express');
-const http = require('http');
-const socketIo = require('socket.io');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 const authRoutes = require('./routes/auth');
 const classRoutes = require('./routes/classes');
+const contributionRoutes = require('./routes/contributions');
 const profileRoutes = require('./routes/profiles');
-const lessonRoutes = require('./routes/lessons');
+const lessonsRoutes = require('./routes/lessons');
 const chatRoutes = require('./routes/chat');
 const liveRoutes = require('./routes/live');
-const { rateLimitMiddleware } = require('./middleware/rateLimit');
-const { authenticateToken } = require('./middleware/auth');
-const { MONGODB_URI, PORT } = require('./config/env');
-const fs = require('fs');
-const path = require('path');
 
 const app = express();
-const server = http.createServer(app);
-const io = socketIo(server);
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
 // Middleware
+app.use(cors());
 app.use(express.json());
-app.use(rateLimitMiddleware); // Rate limiting for login attempts
+app.use(rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // Limit each IP to 100 requests per windowMs
+}));
 
 // MongoDB Connection
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.error('MongoDB connection error:', err));
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error('MongoDB connection error:', err));
+
+// Socket.io for Chat
+io.on('connection', (socket) => {
+    socket.on('joinClass', (classId) => {
+        socket.join(classId);
+    });
+
+    socket.on('chatMessage', (data) => {
+        io.to(data.classId).emit('message', data);
+    });
+});
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/classes', authenticateToken, classRoutes);
-app.use('/api/profiles', authenticateToken, profileRoutes);
-app.use('/api/lessons', authenticateToken, lessonRoutes);
-app.use('/api/chat', authenticateToken, chatRoutes);
-app.use('/api/live', authenticateToken, liveRoutes);
+app.use('/api/classes', classRoutes);
+app.use('/api/contributions', contributionRoutes);
+app.use('/api/profiles', profileRoutes);
+app.use('/api/lessons', lessonsRoutes);
+app.use('/api/chat', chatRoutes);
+app.use('/api/live', liveRoutes);
 
-// Socket.IO for Chat
-io.on('connection', (socket) => {
-    console.log('User connected:', socket.id);
-
-    socket.on('joinClass', (classId) => {
-        socket.join(classId);
-        console.log(`User ${socket.id} joined class ${classId}`);
-    });
-
-    socket.on('chatMessage', async (data) => {
-        const { classId, senderId, message } = data;
-        // Log message to chat.log
-        const logMessage = `${new Date().toISOString()} - Class ${classId} - User ${senderId}: ${message}\n`;
-        fs.appendFileSync(path.join(__dirname, 'logs/chat.log'), logMessage);
-
-        // Save to MongoDB (chatMessages collection)
-        const ChatMessage = mongoose.model('ChatMessage', new mongoose.Schema({
-            classId: String,
-            senderId: String,
-            message: String,
-            timestamp: { type: Date, default: Date.now }
-        }));
-        await new ChatMessage({ classId, senderId, message }).save();
-
-        // Broadcast message to class
-        io.to(classId).emit('message', { senderId, message, timestamp: new Date() });
-    });
-
-    socket.on('disconnect', () => {
-        console.log('User disconnected:', socket.id);
-    });
-});
-
-// Start Server
-server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
