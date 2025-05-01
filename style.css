@@ -1163,3 +1163,47 @@ footer {
     background: url('/sazi/img/Sazi_Grandma.jpg') no-repeat center center;
     background-size: cover;
 }
+#books-carousel .carousel {
+    display: flex;
+    flex-direction: row;
+    transition: transform 0.5s ease-in-out;
+}
+
+#books-carousel .carousel-item {
+    flex: 0 0 33.33%; /* Ensure 3 items are visible at a time */
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+#books-carousel .carousel-item img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 10px;
+}
+
+#books-carousel .carousel-item p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    #books-carousel .carousel-item {
+        flex: 0 0 50%; /* Show 2 items on smaller screens */
+    }
+
+    #books-carousel .carousel-item img {
+        max-width: 150px;
+    }
+
+    #books-carousel .carousel-item p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #books-carousel .carousel-item {
+        flex: 0 0 100%; /* Show 1 item on very small screens */
+    }
+}
